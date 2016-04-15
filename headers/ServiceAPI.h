@@ -1,3 +1,6 @@
+#ifndef __SERVICEAPI_H_
+#define __SERVICEAPI_H_
+
 #include <iostream>
 using namespace std;
 
@@ -54,3 +57,5 @@ public:
     // Returneaza latitudine si longitudine pentru locatia recomandata pentru un nou magazin
     pair<double, double> newStoreCoordinates();
 };
+
+#endif /* __CITIRE_H_ */
