@@ -1,0 +1,36 @@
+ANALIZA:
+
+Enunt:
+	Bun , din enunt ne e clar urmatoarele lucruri: Avem nevoie de cel putin 2 clase ( pana acum Utilizatori si Magazin ) . La clasa utilizatori avem urmatoarele atribute: id , locatie , invited_by ( un atribuit care ne zice cui i-a acceptat invitatia , ne va trebui la un task pentru a forma grafuri ) , magazin : id , locatie , 
+
+Task 1 : 
+	1 -1 :
+		Avem un interval de timp specificat ca input . Deocamdata nu am gasit o alta solutie mai eficienta decat sa parcurgem o lista de vizite de la start_time pana la end_time si sa iteram de fiecare data cand locatia utilizatorului corespunde cu locatia magazinului .
+	1 -2 :
+		La acest task propun atunci cand un utilizator foloseste un cod sa avem un mic subprogram care calculeaza repede la fata locului care este diferenta de pret de care a beneficiat utilizatorul si sa fie adaugata la o suma totala .
+	1 - 3 :
+		Nu inteleg cerinta .
+
+Task 2:
+	2 - 1 :
+		La fel ca la task 2 - 1 , avem un start_time si end_time , iteram la fiecare egalitate de coordonate , numai ca de data asta luam la fiecare magazin in parte .
+	2 - 2 :
+		O metoda ineficienta ar fi sa retinem fiecare discount intr-un sort of array , numai ca in loc sa adaugam in ordinea aparitiilor , incercam sa-l facem deja sortat , introducand discountul respectiv intre unul mai mic si unul mai mare . O alta metoda ar fi sa avem un arbore binar in care primul discount este primul nod , iar dupa adaugam in stanga daca urmatorul este mai mic , si in dreapta daca urmatorul este mai mare , astfel cel mai mare discount va fi cea mai din dreapta frunza .
+	2 - 3 :
+		Acelasi template de idei ca la task 2 -2 .
+	2 - 4 :
+		N-am idee . 
+
+Task 3 :
+	3 - 1 :
+		Identificarea grupurilor se poate determina afland distantele de la unul la altul . 
+	3 - 2 :
+		O idee a avut Paula de a folosi un graf orientat in sensul trimiterii invitatiei , astfel nodul cu cele mai multe orientari spre exterior este castigatorul .
+	3 - 3 :
+		Folosind ideea de la taskul anterior , cel mai lung drum va fi cel mai lung lant de invitatii .
+	3 - 4 :
+		Ma bate chestia cu identificarea de grupuri 
+	3 - 5 :
+		La fel 
+	3 - 6 :
+		Aflam in ce zone exista grupuri mari de oameni care au putine vizite si parcrug o distanta lunga .
