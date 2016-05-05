@@ -1,0 +1,68 @@
+
+Directorii executivi:
+	1. Vom parcurge graful de utilizatori si pentru fiecare utilizator vom verifica numarul
+	 de vizite facut in intervalul de timp specificat ca input. Din enunt inteleg ca se cere
+	 numarul total de vizite din toate magazinele, deci vom calcula suma tuturor vizitelor
+	 pentru fiecare utilizator.
+	
+	2. Pentru fiecare utilizator vom verifica vizitele facute in intervaul de timp specificat.
+	Asta presupune saparcurgem graful de utilizatori, si petru fiecare vizita vom aduna la suma
+	totala discount-ul corespunzator codului promotional.
+
+	3. Daca vrem sa calculam cel mai bun raport numarCumparaturi/discount, presupunem ca pentru
+	fiecare utilizator stim cate cumparaturi a facut sau daca nu, vom aduna cumparaturile la care
+	a folosit discountul si impartim la suma totala de discounturi oferite. Petru fiecare persoana
+	vom calcula acest raport si il alegem pe cel mai mic. (Daca discountul acordat e mare, teoretic
+	raportul este mic, nu?). Vom afisa toate persoanele care detin acel raport.
+
+Directorii de magazine:
+	1. Se da deci un un interval de timp. Parcurgem graful de utilizatori si pentru fiecare
+	vom parcurge lista de magazine pe care le-a vizitat. Deocamdata nu stim in ce consta un 
+	numele/id-ul unui magazin. Daca id-urile sunt nr intregi consecutive eventual, cosideram 
+	un vector sau mai bine matrice de frecventa cu id-uri si pentru fiecare vizita identificata
+	la un utilizator adunam 1. Daca	id-urile sunt string-uri, ghinion, folosim hashtable. La final
+	afisam pentru fiecare magazin numarul total de vizite. Cred ca mai degraba o sa folosim 
+	hashtable.
+	
+	2. Pentru fiecare utilizator se inregistreaza fiecare discount acordat. Se parcurge graful de 
+	utilizatori, si pentru fiecare utilizator se parcurge lista de magazine. Vom proceda asemanator
+	ca la punctul anterior, numai ca de data asta retinem pentru fiecare magazin cele mai mari X 
+	discount-uri. Deci in hasthable-ul de magazine, vom retine pentru fiecare magazin o lista 
+	ordonata de valori ale discount-urilor si pentru fiecare suma noua descoperita, descoperim
+	pozitia unde adaugam valoare, o stergem pe cea dinainte si o adaugam pe noua. La final pentru
+	fiecare magazin afisam cele x discount-uri.
+	
+	3. Putem aloca un vector de X elemente unde retinem distantele. Iarasi parcurgem graful si 
+	pentru fiecare utilizator parcurgem lista de magazine. Pentru fiecare magazin vizitat, 
+	calculam distanta de la adresa utilizatorului la adresa magazinului si verificam daca se
+	incadreaza in vectorul de distante maxime. Daca da, adaugam acolo noua distanta si o
+	eliminam pe cea mai mica. Avem  grija ca vectorul sa fie in permanenta ordonat.
+	
+	4. Putem considera o perioada de un an de zile, deci o sa avem o matrice de frecventa cu 2*365 p
+	pozitii.Parcurgem graful de utilizatori si pentru fiecare vizita facuta de un utilizator in fiecare
+	magazin, verificam data si pentru ziua respectiva din data, adunam 1 pe pozitia corespunzatoare
+	in matricea de frecventa. La final ordonam matricea dupa numarul de vizite facute si in acelasi timp
+	interschimbam si elementele corespunzatoare zilelor. Afisam primele K zile.
+
+Directorul de dezvolare:
+	1. Aici se pune o mare problema: definirea notiunilor de aproape si grup. Trebuie sa gasim o
+	modalitate de a gasi niste legaturi intre utilizatori cu distanta minima, nu sunt sigur.
+
+	2. Graful de utilizatori este unul orientat. Deci pentru o legatura a -> b, consideram ca b a
+	acceptat invitatia de la utilizatorul a. Deci pentru fiecare nod, calculam cate legaturi pornesc
+	de la el si retinem de fiecare data maximul. La final afisam numele utilizatorului.
+
+	3. Pentru a calcula cel mai lung lant de invitati trebuie sa caluculam lungimea celui mai lung
+	lant care contine muchii cu celasi sens.
+
+	4. Dupa ce identificam grupurile de utilizatori, vom parcurge fiecare grup in parte, care este
+	un graf conex si parcurgand toate nodurile din acestea, calculam numarul total de vizite
+	(ca mai sus).Retinem numarul de vizite pentru fiecare grup intr-o matrice de frecventa sau
+	hashtable, depinde cce identificatori avem pentru grupuri.
+
+	5. Procedam analog ca la pct anterior, numai ca pentru fiecare grup vom calcula si numarul 
+	de persoane si la final impartim numarul de vizite al grupului la numarul de persoane.
+
+	6. Trebuie sa verificam in ce zona sunt cei mai multi utilizatori care parcurg cea mai mare
+ 	distanta pana la magazin. In acelasi timp trebuie sa existe si un numar semnificativ de 
+	persoane in acea zona.
