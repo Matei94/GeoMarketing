@@ -3,14 +3,11 @@
 
 using namespace std;
 
-#define MAX_SIZE 100 // o dimensiune maxima prestabilita
- 
 ResizableArray::ResizableArray(){
  	this->array = NULL;
 	this->capacity = 0;
  	this->size = 0;
 }
-	
 	
 ResizableArray::ResizableArray(int capacity) {
 	this->capacity = capacity;
@@ -53,7 +50,6 @@ void ResizableArray::AddElement(int value) {
 	size++; // urmatorul element adaugat va fi adaugat la o urmatoarea pozitie
 }
 
-
 void ResizableArray::SortAscending() {
 	for ( int i = 0; i < size; ++i ) {
 		for ( int j = i + 1; j < size; ++j ) {
@@ -66,7 +62,6 @@ void ResizableArray::SortAscending() {
 	}
 }
 
-// Metoda care afiseaza elementele vectorului.
 void ResizableArray::PrintOnScreen() {
 	cout << "Continut: ";
 	for ( int i = 0; i < size; ++i ) {
@@ -74,8 +69,3 @@ void ResizableArray::PrintOnScreen() {
 	}
 	cout << '\n';
 }
-
-
- 
-
-

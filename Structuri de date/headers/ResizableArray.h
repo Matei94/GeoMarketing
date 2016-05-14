@@ -4,15 +4,13 @@
 using namespace std;
 
 class ResizableArray {
-
 	private:
 		int *array;
 		int capacity;
 		int size;
 
 	public:	
-
- 	// Constructor default
+	// Constructor default
 	ResizableArray();
 	
 	// Constructor	
