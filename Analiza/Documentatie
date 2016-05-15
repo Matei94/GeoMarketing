@@ -1,0 +1,104 @@
+Documentatie
+
+Task 1
+	
+	Citim din fisierul vizite.csv informatiile si stocam intr-un BST(echilibrat). 
+	
+	In fiecare nod al BST-ului o sa avem urmatoarele informatii: 
+		- timeStampul convertit in secunde( este necesara acesta conversie pentru taskuri, vezi API -> timpul de inceput si de sfarsit este un int; vezi si 	forum pentru mai multe detalii ); 
+		- numarul de vizite ce au fost efectuate la momentul respectiv; 
+		- cantitatea de discount ce a fost oferita la momentul respectiv.
+	
+	Pentru ca pentru taskurile urmatoare vom avea nevoie de ultimele doua informatii (numarul de vizite, respectiv discountul oferit), pentru fiecare magazin in parte, ne vom folosit de cate un resizable array, de dimensiune egala cu numarul magazinelor existente, in care vom stoca cate o structura ce contine cele doua informatii precizate anterior, aferente fiecarui magazin in parte, la un anumit moment de timp.
+
+	Pentru ca idMagazin e posibil sa fie o chestie random si noi vrem sa utilizam, asa cum am mentionat anterior un resizable array, ne vom folosi de o functie hash pentru a asocia fiecarui idMagazin intalnit un indice si un spatiu in acel resizable array. 
+
+	Q: De ce e mai bine sa folosim un hash pentru indice si un resizable array pentru acele informatii? 
+	A: Aplicatia noastra se presupune ca este una dinamica, deci daca vor mai aparea si alte magazine, noi vom modifica pur si simplu dimensiunea resizable array-ului si vom continua cu functia noastra de hash pentru a asocia indecsi in continuare in acel resizable array. 
+	Daca am fi folosit tot un resizable array si un  resizable array in care am fi stocat acesti indecsi, ar fi trebuit sa sortam dupa fiecare insertie de nou magazin si sa cautam binar la fiecare linie citita din fisier pentru a gasi indexul magazinului curent, in functie de idMagazin. E complet ineficient. Asa, in hashtable-ul asta, o sa avem si coliziuni, cel mai probabil, dar in cel mai rau caz, o sa avem de parcurs un bucket intreg pentru a descoperi care este indexul din resizable Array pentru idMagazin-ul curent. Si pentru ca o sa avem grija sa alegem o functie buna de hash, coliziunile vor fi decente, iar hashtable-ul "echilibrat", deci bucketurile destul de "egale". Asta ne asigura ca nu vom avea foarte multe elemente intr-un bucket si o parcurgere de bucket nu o sa coste nici pe departe la fel de mult ca o cautare binara si eventual si o sortare inainte.
+
+	Conditie de insertie in BST: verificarea existentei anterioare a timeStamp-ului ce se vrea inserat acum. Daca deja exista, informatiile se stackeaza in vectorul de la timeStamp-ul respectiv.
+
+	BST -> Node -> {
+				timeStamp, 
+				discount,
+				v[ hashMagazin[ idMagazin ] ] = { idMagazin, nrVizite };
+				v[0] = { randomIdMagazin, totalNrVizite };
+			}
+
+	hashMagazin[ idMagazin ] = { idMagazin, indexResizableArray, latitudine, longitudine };
+
+	Update: La citire, odata ce se updateaza pentru fiecare timeStamp in parte informatia pentru magazinul de la linia curenta, se aduna si la pozitia 0 din vector informatiile respective. Pe pozitia 0 vor fi sumele aferente timeStamp-ului curent. Si asta e de mare ajutor pentru primele doua subtask-uri de la task-ul 1.
+
+
+	Task 1.1. + 1.2. :
+
+	Utilizand informatiile deja stocate in BST, se pot rezolva cu usurinta cele doua cerinte.
+	Printr-o functie recursiva care merge si cauta toate momentele de timp ce apartin intervalului dat ca input, si extrage de la acele timeStamp-uri din vectorul din fiecare nod de la pozitia 0, informatia dorita: nr de vizite sau discountul acordat, se obtine rezultatul dorit pentru fiecare dintre cele doua task-uri.
+
+
+
+	Task 1.3.: Hashtable[ idUser ] = { idUser, numarDeCumparaturi, numarDeVizite, discountAcordat, longitudine, latitudine }. Se insereaza intr-un maxHeap fiecare raport pentru useri. Se extrag primele k elemente din heap. 
+
+
+
+Task 2:
+
+	Utilizam BST-ul construit deja la task-ul 1.
+
+	
+	Task 2.1. :
+
+	Aplicand logica de la Task 1.1. si 1.2., vom utiliza din nou o functie recursiva ce colecteaza toate informatiile necesare din intervalul de timp dat ca input. Pentru fiecare timeStamp care apartine intervalului in cauza, se vor aduna vizitele aferente magazinului curent din resizable array, de la pozitia aferenta idMagazinului curent.
+
+	
+	Task 2.2. : 
+
+	Vom avea cate un heap pentru fiecare magazin in parte, in care vom insera in timpul citirii fisierului "vizite.csv" discounturi intampinate.
+
+
+	Task 2.3. :
+
+	Din nou, acest task se bazeaza pe cate un heap pentru fiecare magazin in parte in care se vor insera discounturile intampinate in timpul citirii fisierului "vizite.csv", dar si pe hashtable-ul pe care l-am utilizat la taskul 1.3, din care se extrag coordonatele idUser ului curent, dar si a hastable-ului de la 1.1. si 1.2., din care se extrag coordonatele idMagazinului curent, pentru ca a calcula distanta curenta. Distanta curenta sa insereaza in hashtable.
+
+	Task 2.4. :
+
+	Vom avea un vector cu dimensiunea de 366, 366 de elemente corespunzatoare celor 366 de zile dintr-un an, in care vor precalcula din citire, pentru fiecare zi in parte cate vizite au avut loc. Toate aceste date vor fi introduse intr-un nou heap, cu tot cu ziua pe care o descriu. Se extrag primele k aparitii. 
+
+
+Task 3:
+
+	Vom retine toate informatiile despre graful de relatii dintre utilizatori intr-o lista de arbori. Fiecare arbore va descrie o componenta conexa. Fiecare radacina a unui arbore va fi un user care si-a creat singur contul, fara a fi primit sau acceptat anterior o invitatie de la un alt user. Ne vom baza pe o lista de adiacenta aferenta fiecarui arbore, pe baza caruia vom construi fiecare grup de utilizatori. 
+
+	Nod -> { idUser, numarDeUseriInvitati, nrDeVizite };
+
+
+	Task 3.1. :	
+
+	Numar de arbori din lista de arbori, care am stabilit ca va fi un linked list. LinkedList are size. Ala-i raspunsul la problema.
+
+
+	Task 3.2. :
+
+	Parcurgem fiecare arbore in parte si facem maxim pentru numarDeUseriInvitati. Metoda la AB.
+	Apoi facem maxim pe numarul rezultat din fiecare arbore in parte. Si voila: rezultatul. 
+
+
+	Task 3.3. :
+
+	DFS pentru fiecare arbore in parte. Maxim pe rezultate. Metoda la AB.
+
+
+	Task 3.4. :
+
+	Maxim pentru suma de vizite pentru fiecare arbore in parte. Metoda la AB, cred, dar variabila la LinkedList.
+
+
+	Task 3.5. : 
+
+	Raport (metoda de la 1.4. din AB de calcul a sumei de vizite) / (numarul de noduri din arborele curent);
+
+
+	Task 3.6. : 
+
+	???? Propuneri!!
