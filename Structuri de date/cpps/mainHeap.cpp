@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Heap.h"
+#include "../headers/Heap.h"
 
 using namespace std;
 
