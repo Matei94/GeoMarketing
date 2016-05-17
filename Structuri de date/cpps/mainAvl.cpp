@@ -1,6 +1,6 @@
 #include<iostream>
-#include "AvlTree.h"
-#include "AvlNode.h"
+#include "../headers/AvlTree.h"
+#include "../headers/AvlNode.h"
 
 int main( )
 {
@@ -17,10 +17,10 @@ int main( )
 	t.insert(6);
 
 
-	std::cout << "Printing balance: ";
+	std::cout << "Printing balance:\n";
 	t.printBalance();
 
-	std::cout<<"print inorder ";
+	std::cout<<"Printing inorder\n";
 	t.getRoot()->inorder();
 	return 0;
 }
