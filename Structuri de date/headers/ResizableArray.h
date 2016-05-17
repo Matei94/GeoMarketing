@@ -22,14 +22,32 @@ class ResizableArray {
 	/* Destructor */
 	~ResizableArray();
 
-	/* Functia de adaugare */
+	/* Copy-constructor */
+	ResizableArray( const ResizableArray& other );
+
+	/* Supraincarcarea operatorului de asignare */
+	void operator=( const ResizableArray& other );
+
+	/* Supraincarcarea operatorului de accesare */
+	T operator[]( unsigned long long position );
+
+	/* Functia de adaugare pe ultima pozitie */
 	void push_back( T value );
+
+	/* Functia de insertie la o anumita pozitie in vector */
+	void insert( unsigned long long position, T value );
 
 	/* Functia de extractie a capacity */
 	unsigned long long getCapacity();
 
 	/* Functia de extractie a size */
 	unsigned long long getSize();
+
+	/* Setter pentru array */
+	void setArray( T* newArray );
+
+	/* Functia de redimensionare */
+	void resize();
 
 	/* Metoda care returneaza valoare de pe pozitie */ 
 	T getValue( unsigned long long position );
@@ -38,7 +56,7 @@ class ResizableArray {
 	void sortAscending();
 
 	/* Metoda care afiseaza elementele vectorului */
-	void printOnScreen();
+	//void printOnScreen();
 };
 
 #endif /* __RESIZABLE_ARRAY_H_ */

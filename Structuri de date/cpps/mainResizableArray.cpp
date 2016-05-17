@@ -25,7 +25,7 @@ int main() {
 	}
  
 	// Afisare continut vector
-	ra.printOnScreen();
+	//ra.printOnScreen();
  
 	// Vom adauga in continuare inca m elemente;
 	int m;
@@ -42,12 +42,12 @@ int main() {
  
 	// Afisare continut vector
 	std::cout << "Inainte de sortare\n";
-	ra.printOnScreen();
+	//ra.printOnScreen();
  
 	// Vom sorta elementele apoi vom afisa din nou continutul.
 	//ra.sort();
 	std::cout << "Dupa sortare\n";
-	ra.printOnScreen();
+	//ra.printOnScreen();
  
 	// Eliberare memorie	
 	//ra.~ResizableArray();
