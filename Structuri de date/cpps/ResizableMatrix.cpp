@@ -209,6 +209,13 @@ void ResizableMatrix<T>::resizeLines( ) {
 	capacityCollumns = tmpCapacityCollumns;
 	capacityLines = 2 * capacityLines;	
 
+	/*
+	for ( unsigned long long i = 0; i < capacityLines; ++i )
+		delete[] tmpArray[i];
+
+	delete[] tmpArray;	
+	delete[] tmpCapacityCollumns;
+	*/
 }
 
 
@@ -226,6 +233,7 @@ void ResizableMatrix<T>::resizeCollumns( unsigned long long line ) {
 	array[line] = tmpArray;
 	capacityCollumns[line] *= 2;
 
+	//delete[] tmpArray;
 }
 
 
