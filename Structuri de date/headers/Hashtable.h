@@ -12,7 +12,6 @@ Logica Hashtable-ului nostru este in principiu exacta cu cea de la site-ul de su
 #define __Hashtable_H_
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
