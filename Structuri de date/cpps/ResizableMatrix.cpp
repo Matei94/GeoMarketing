@@ -57,6 +57,7 @@ ResizableMatrix<T>::~ResizableMatrix(){
 
 	/* De-Allocate memory for the matrix itself */
 	delete[] array;
+	delete[] capacityCollumns;
 
 	delete[] capacityCollumns;
 }
@@ -199,17 +200,20 @@ void ResizableMatrix<T>::resizeLines( ) {
 
 	/* Eliberez memoria ocupata de vechea matrice */
 	for ( unsigned long long i = 0; i < capacityLines; ++i )
-		delete[] array[i];
+		delete array[i];
 
 	delete[] array;
 	delete[] capacityCollumns;
 
-
 	/* Salvez matricea nou alocata in matricea veche, si fac update la capacity */
 	array = tmpArray;
 	capacityCollumns = tmpCapacityCollumns;
+<<<<<<< HEAD
+	capacityLines = 2 * capacityLines;		
+=======
 	capacityLines = 2 * capacityLines;
 	
+>>>>>>> 6ad955d8f1f2848299511f5c06f4f4e691c92524
 }
 
 
@@ -223,11 +227,19 @@ void ResizableMatrix<T>::resizeCollumns( unsigned long long line ) {
 	for ( unsigned long long i = 0; i < capacityCollumns[line]; ++i )
 		tmpArray[i] = array[line][i];
 
+<<<<<<< HEAD
+	delete[] array[line];
+	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
+	array[line] = tmpArray;
+	capacityCollumns[line] *= 2;
+
+=======
 		delete[] array[line];
 
 	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
 	array[line] = tmpArray;
 	capacityCollumns[line] *= 2;
+>>>>>>> 6ad955d8f1f2848299511f5c06f4f4e691c92524
 }
 
 
