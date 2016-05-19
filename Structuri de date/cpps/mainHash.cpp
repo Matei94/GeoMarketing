@@ -7,14 +7,15 @@ int Hash( int key ) {
 	return key;
 }
 
-int HashMag( int key ) {
-	return key;
-}
+int TEST( int& k ) {
+	if( k == 0 ) {
+		Hashtable<int,infoMagazin> map = Hashtable<int,infoMagazin>( 10, Hash );
+		Hashtable<int,infoUser> mapu = Hashtable<int, infoUser>( 10, HashMag );
+		k = 1;
+	}
 
-int main () {
-
-	Hashtable<int,infoMagazin> map = Hashtable<int,infoMagazin>( 10, Hash );
-	Hashtable<int,infoUser> mapu = Hashtable<int, infoUser>( 10, HashMag );
+	int k = 0;
+	test( k, map );
 
 	infoUser user;
 	infoMagazin mag;
@@ -46,6 +47,22 @@ int main () {
 
 	map.get( 5,mag );
 	cout << mag.indexRA << endl;
+
+}
+
+int test(  ) {
+
+}
+
+int HashMag( int key ) {
+	return key;
+}
+
+int main () {
+
+
+
+	test( k );
 
 	return 0;
 }
