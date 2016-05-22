@@ -23,9 +23,9 @@ AvlNode<T>::~AvlNode() {
 
 template< class T >
 void AvlNode<T>::insertie( T idStore ) {
-	std::cout<<"size: "<<ra.getSize()<<"\n";
-	std::cout<<"capacity: "<<ra.getCapacity()<<"\n";
-	std::cout<<ra[idStore]<<"\n un cacat\n";
+	//std::cout<<"size: "<<ra.getSize()<<"\n";
+	//std::cout<<"capacity: "<<ra.getCapacity()<<"\n";
+	//std::cout<<ra[idStore]<<"\n un cacat\n";
 	this->ra.insertInPlus( idStore, 1);
 	this->ra.insertInPlus( 0, 1);
 }

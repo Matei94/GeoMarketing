@@ -38,5 +38,12 @@ int main( )
 	int value = 0;
 	t.getRoot()->discountTotal(1, 7, value);
 	cout<<value<<"\n";
-	return 0;
+	value = 0;
+	t.getRoot()->nrVizite( 1, 7, value );
+	cout<<"nr de vizite "<<value<<"\n";
+	value = 0;
+	t.getRoot()->nrVizitePerMagazin( 1, 1, 7, value );
+	cout<<"vizitele pe magazinul 1 "<<value<<"\n";	
+
+
 }
