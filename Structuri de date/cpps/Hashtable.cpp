@@ -12,28 +12,15 @@ Logica Hashtable-ului nostru este in principiu exacta cu cea de la site-ul de su
 
 using namespace std;
 
-
-/* Hashtable() */
+/* Hashtable( ) */
 template<typename Tkey, typename Tvalue>
-Hashtable<Tkey,Tvalue>::Hashtable( int length, int ( *h ) ( Tkey ) ){
-	/* size = length = numarul de bucketuri pe care il va avea hashtableul */
-	size = length;
-
-	Hash = h;
-
-	/* Se aloca un hashtable nou, ce admite o cheie de tipul Tkey, o valoare de tipul Tvalue, cu size+1 bucketuri */
-	Bucket = new Hashnode<Tkey,Tvalue> *[ size ];
-
-	/* Se parcurge fiecare bucket declarat anterior si se initializeaza cu un element default  */
-	for (int i = 0; i < size; ++i) {
-		Bucket[ i ] = NULL;
-	}
+Hashtable<Tkey,Tvalue>::Hashtable( ) {
+	size = 0;
 }
 
-
-/* ~Hashtable() */
+/* ~Hashtable( ) */
 template<typename Tkey, typename Tvalue>
-Hashtable<Tkey,Tvalue>::~Hashtable ( ) {
+Hashtable<Tkey,Tvalue>::~Hashtable( ) {
 	/* Se parcurg bucketurile hashtable-ulului */
 	for( int i = 0; i < size; i++ ){
 
@@ -61,11 +48,28 @@ Hashtable<Tkey,Tvalue>::~Hashtable ( ) {
 	delete [] Bucket;
 }
 
+/* Initialize() */
+template<typename Tkey, typename Tvalue>
+void Hashtable<Tkey,Tvalue>::Initialize( int length, int ( *h ) ( Tkey ) ){
+	/* size = length = numarul de bucketuri pe care il va avea hashtableul */
+	size = length;
+
+	Hash = h;
+
+	/* Se aloca un hashtable nou, ce admite o cheie de tipul Tkey, o valoare de tipul Tvalue, cu size+1 bucketuri */
+	Bucket = new Hashnode<Tkey,Tvalue> *[ size ];
+
+	/* Se parcurge fiecare bucket declarat anterior si se initializeaza cu un element default  */
+	for (int i = 0; i < size; ++i) {
+		Bucket[ i ] = NULL;
+	}
+}
+
 
 /* Insert() */
 template<typename Tkey, typename Tvalue>
 void Hashtable<Tkey,Tvalue>::Insert( Tkey key, Tvalue value ){
-	
+
 	/* index - indicele indicele bucketului in care a fost distribuita valoarea corespunzatoare cheii key, dupa aplicarea functiei de hash */
 	unsigned int index = Hash( key );
 	
@@ -110,7 +114,6 @@ void Hashtable<Tkey,Tvalue>::Insert( Tkey key, Tvalue value ){
 		prev->next = first;
 	
 }
-
 
 /* get() */
 template<typename Tkey, typename Tvalue>
@@ -189,6 +192,11 @@ void Hashtable<Tkey,Tvalue>::remove( Tkey key ) {
 	}
 }
 
+/* GetSize() */ 
+template<typename Tkey, typename Tvalue>
+unsigned int Hashtable<Tkey,Tvalue>::getSize( ) {
+	return this->size;
+}
 
 /* printTable */
 template<typename Tkey, typename Tvalue>

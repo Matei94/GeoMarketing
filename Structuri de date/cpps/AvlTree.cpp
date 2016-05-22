@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "../headers/AvlTree.h"
 
 template <class T>

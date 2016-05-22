@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../headers/Hashtable.h"
+#include <string>
 using namespace std;
 
 int Hash( int key ) {
@@ -7,62 +8,21 @@ int Hash( int key ) {
 	return key;
 }
 
-int TEST( int& k ) {
-	if( k == 0 ) {
-		Hashtable<int,infoMagazin> map = Hashtable<int,infoMagazin>( 10, Hash );
-		Hashtable<int,infoUser> mapu = Hashtable<int, infoUser>( 10, HashMag );
-		k = 1;
+int sdbm( int key ) {
+	unsigned long hash = 0;
+
+	while( key ) {
+		hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
+		key = key / 10;
 	}
 
-	int k = 0;
-	test( k, map );
+	return hash % 65599;
 
-	infoUser user;
-	infoMagazin mag;
-
-	for (int i = 0; i < 10; ++i)
-	{
-
-		user.numarDeCumparaturi = i;
-		user.numarDeVizite = i;
-		user.discountAcordat = i;
-		user.userX = i;
-		user.userY = i;
-		mapu.Insert(i,user);
-
-		mag.indexRA = i;
-		mag.storeX = i;
-		mag.storeY = i;
-		map.Insert(i,mag);
-	}
-
-	mapu.Insert(0, user);
-	mapu.Insert(8, user);
-
-	map.Insert(0, mag);
-	map.Insert(8, mag);
-
-	mapu.printTable( );
-	map.printTable( );
-
-	map.get( 5,mag );
-	cout << mag.indexRA << endl;
-
-}
-
-int test(  ) {
-
-}
-
-int HashMag( int key ) {
-	return key;
 }
 
 int main () {
 
-
-
-	test( k );
+	cout << sdbm( 42687 ) << '\n';
 
 	return 0;
 }
