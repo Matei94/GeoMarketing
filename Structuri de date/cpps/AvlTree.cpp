@@ -174,7 +174,7 @@ void AvlTree<T>::printBalance( AvlNode<T> *n ) {
 	if (n != NULL) {
 		printBalance(n->left);
 		std::cout << n->balance << " \n";
-		std::cout<<n->ra[0]<<"\n ";
+		std::cout<<n->discount<<"\n ";
 		printBalance(n->right);
 	}
 }
@@ -191,26 +191,26 @@ AvlTree<T>::~AvlTree( ) {
 template< class T >
 void AvlTree<T>::insert( T timestamp, AvlNode<T>* node, T discount, T idStore ) {
 		if( node == NULL ) {
-			node = new AvlNode<T>( timestamp, NULL, discount, idStore );
-			//node->insertie( idStore );	
+			node = new AvlNode<T>( timestamp, NULL, discount );
+			node->insertie( idStore );	
 		}
 		else {
 			if( node-> timestamp == timestamp ) {
 			 	node->discount =  node->discount + discount;
-		//	node->insertie( idStore );	
+			node->insertie( idStore );	
 			}					
 			else if( node->timestamp > timestamp ) {
 					if( node->left == NULL ) {
-						node->left = new AvlNode<T>( timestamp, node, discount, idStore );
-					//	node->left->insertie( idStore ); 
+						node->left = new AvlNode<T>( timestamp, node, discount );
+						node->left->insertie( idStore ); 
 					}	
 					else 
 						insert( timestamp, node->left, discount, idStore );
 				}			
 				else {
 					if( node->right == NULL ) {
-						node->right = new AvlNode<T>(timestamp, node, discount, idStore );
-						//node->right->insertie( idStore ); 
+						node->right = new AvlNode<T>(timestamp, node, discount );
+						node->right->insertie( idStore ); 
 					}	
 					else
 			 			insert( timestamp, node->right, discount, idStore );

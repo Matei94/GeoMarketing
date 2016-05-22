@@ -2,27 +2,30 @@
 #include "../headers/AvlNode.h"
 
 template< class T >
-AvlNode<T>::AvlNode( T timestamp, AvlNode<T> *parinte, T discount, T capacity ) {
+AvlNode<T>::AvlNode( T timestamp, AvlNode<T> *parinte, T discount ) {
  this->timestamp = timestamp;
  this->balance = 0;
  this->parent = parent;
  this->left = NULL;
  this->right = NULL;
  this->discount = discount;
- ra = ResizableArray<T>(capacity); 
+ ResizableArray<T> ra();
+ //ra = ResizableArray<T>();
 }
 
 template< class T >
 AvlNode<T>::~AvlNode() {
-	delete left;
-	delete right;
+	if( left != NULL )
+		delete left;
+	if( right != NULL )
+		delete right;	
 }
 
 template< class T >
 void AvlNode<T>::insertie( T idStore ) {
-//	std::cout<<ra.getSize()<<"\n";
-//	std::cout<<ra.getCapacity()<<"\n";
-	std::cout<<ra[0]<<"\n un cacat\n";
+	std::cout<<"size: "<<ra.getSize()<<"\n";
+	std::cout<<"capacity: "<<ra.getCapacity()<<"\n";
+	std::cout<<ra[idStore]<<"\n un cacat\n";
 	this->ra.insertInPlus( idStore, 1);
 	this->ra.insertInPlus( 0, 1);
 }
@@ -39,35 +42,56 @@ void AvlNode<T>::inorder( ) {
 
 template< class T >
 void AvlNode<T>::nrVizite( T t1, T t2, int& nrVizite ) {
-	 nrVizite = 0;
-	if( t1 < this->timestamp )
+	if( t1 < this->timestamp ) {
+		if( left != NULL )
 		this->left->nrVizite( t1, t2, nrVizite );
+	}
+
 	if( t1 <= this->timestamp && t2 >= this->timestamp )
 		nrVizite += this->ra[0];
-	if( t2 > this->timestamp )
+	
+	if( t2 > this->timestamp ) {
+		if( right != NULL )
 		this->right->nrVizite( t1, t2, nrVizite );	
+	}
 }
 
 template< class T >
-void AvlNode<T>::discountTotal( T t1, T t2, int &discountTotal ) {
-	discountTotal = 0;
-	if( t1 < this->timestamp )
-		this->left->discountTotal( t1, t2, discountTotal );
+void AvlNode<T>::discountTotal( T t1, T t2, T &value ) {
+
+	if( t1 < this->timestamp ) {
+		if( left != NULL)
+		this->left->discountTotal( t1, t2, value );
+	}
+
 	if( t1 <= this->timestamp && t2 >= this->timestamp )
-		discountTotal += this->discount;
-	if( t2 > this->timestamp )
-		this->right->discountTotal( t1, t2, discountTotal );	
+		value += this->discount;
+	
+	if( t2 > this->timestamp ) {
+		if( right != NULL )
+		this->right->discountTotal( t1, t2, value );	
+	}
 }
 
 template< class T >
 void AvlNode<T>::nrVizitePerMagazin( T idStore, T t1, T t2, int &nrVizite ) {
-	nrVizite = 0;
-	if( t1 < this->timestamp )
-		this->left->nrVizitePerMagazin( idStore, t1, t2, nrVizite );
+	
+	if( t1 < this->timestamp ) {
+		if( left != NULL )
+			this->left->nrVizitePerMagazin( idStore, t1, t2, nrVizite );
+	}
+
 	if( t1 <= this->timestamp && t2 >= this->timestamp )
 		nrVizite += this->ra[ idStore ];
-	if( t2 > this->timestamp )
-		this->right->nrVizitePerMagazin( idStore, t1, t2, nrVizite );	
+	
+	if( t2 > this->timestamp ){
+		if( right != NULL )
+			this->right->nrVizitePerMagazin( idStore, t1, t2, nrVizite );	
+	}
 }
 
+template < class T>
+void AvlNode<T>::fii() {
+	cout<<left->timestamp<<" "<<right->timestamp<<" \n";
+}
 template class AvlNode< int >;

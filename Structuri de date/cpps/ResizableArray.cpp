@@ -7,7 +7,7 @@ using namespace std;
 
 template <typename T>
 ResizableArray<T>::ResizableArray() {
-	this->capacity = 0;
+	this->capacity = 1;
  	this->size = 0;
 	this->array = new T[ capacity ];
 	for( int i = 0; i < capacity; i++ )
@@ -101,6 +101,10 @@ void ResizableArray<T>::setArray( T* newArray ) {
 	this->array = newArray;
 }
 
+template< typename T>
+void ResizableArray<T>::setCapacity( T capacity ){
+	this->capacity = capacity;
+}
 
 template <typename T>
 void ResizableArray<T>::resize() {
