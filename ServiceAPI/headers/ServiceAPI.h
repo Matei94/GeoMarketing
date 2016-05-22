@@ -5,6 +5,7 @@
 
 #include "../../Structuri de date/headers/AvlTree.h"
 #include "../../Structuri de date/headers/Hashtable.h"
+#include "../../Structuri de date/headers/Heap.h"
 
 using namespace std;
 
