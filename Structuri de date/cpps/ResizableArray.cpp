@@ -8,8 +8,9 @@ using namespace std;
 template <typename T>
 ResizableArray<T>::ResizableArray() {
 	this->capacity = 1;
- 	this->size = 0;
+ 	this->size = 1;
 	this->array = new T[ capacity ];
+	array[0] = 0;
 }
 
 
@@ -69,7 +70,6 @@ T ResizableArray<T>::operator[]( unsigned long long position ) {
 
 	return array[ position ];
 }
-
 
 template <typename T>
 T ResizableArray<T>::getValue( unsigned long long position ) {
@@ -134,7 +134,6 @@ void ResizableArray<T>::insert( unsigned long long position, T value ) {
 
 	if (position >= capacity)
 		this->resize();
-
 	array[ position ] = value;
 }
 

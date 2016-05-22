@@ -29,6 +29,7 @@ class ResizableArray {
 	/* Supraincarcarea operatorului de asignare */
 	void operator=( const ResizableArray& other );
 
+
 	/* Supraincarcarea operatorului de accesare */
 	T operator[]( unsigned long long position );
 

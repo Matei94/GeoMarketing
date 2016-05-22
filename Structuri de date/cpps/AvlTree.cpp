@@ -186,26 +186,35 @@ template< class T >
 AvlTree<T>::~AvlTree( ) {
 	delete root;
 }
-
+ 
 template< class T >
-void AvlTree<T>::insert( T key, AvlNode<T>* node ) {
+void AvlTree<T>::insert( T timestamp, AvlNode<T>* node, T discount, T idStore ) {
 		if( node == NULL ) {
-			node = new AvlNode<T>( key, NULL );	
+			node = new AvlNode<T>( timestamp, NULL, discount, 1 );
+			//node->insertie( idStore );	
 		}
-		else {					
-		if( node->key > key ) {
-			if( node->left == NULL )
-				node->left = new AvlNode<T>( key, node );
-			else 
-				insert( key, node->left );
-		}		
 		else {
-			if( node->right == NULL ) 
-				node->right = new AvlNode<T>(key, node );
-			else
-			 	insert( key, node->right );
-		}
-		}
+			if( node-> timestamp == timestamp ) {
+			 	node->discount =  node->discount + discount;
+			//node->insertie( idStore );	
+			}					
+			else if( node->timestamp > timestamp ) {
+					if( node->left == NULL ) {
+						node->left = new AvlNode<T>( timestamp, node, discount, 1 );
+						//node->left->insertie( idStore ); 
+					}	
+					else 
+						insert( timestamp, node->left, discount, idStore );
+				}			
+				else {
+					if( node->right == NULL ) {
+						node->right = new AvlNode<T>(timestamp, node, discount, 1 );
+						//node->right->insertie( idStore ); 
+					}	
+					else
+			 			insert( timestamp, node->right, discount, idStore );
+				}
+			}	
 	rebalance(node);
 	}	
 
