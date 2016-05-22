@@ -14,7 +14,7 @@ Heap<T>::Heap( int length ) {
     size = 0;
 
     /* Se aloca vectorul numit anterior */
-    hip = new T[size];
+    hip = new T[ capacity + 1 ];
 }
 
 
@@ -34,7 +34,7 @@ Heap<T>::Heap( const Heap<T>& other ) {
 
 	if( hip ) {
 
-		for( int i = 0; i < size; ++i ) 
+		for( int i = 0; i <= size; ++i ) 
 			hip[i] = other.hip[i];
 
 	}
@@ -51,7 +51,7 @@ void Heap<T>::operator=( const Heap<T>& other ) {
 
 	if( hip ) {
 
-		for( int i = 0; i < size; ++i ) 
+		for( int i = 0; i <= size; ++i ) 
 			hip[i] = other.hip[i];
 
 	}
