@@ -7,11 +7,7 @@ using namespace std;
 
 template <typename T>
 ResizableArray<T>::ResizableArray() {
-	this->capacity = 1;
  	this->size = 0;
-	this->array = new T[ capacity ];
-	for( int i = 0; i < capacity; i++ )
-		array[i] = 0;
 }
 
 
