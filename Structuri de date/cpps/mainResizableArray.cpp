@@ -18,7 +18,8 @@ int main() {
 	for ( int i = 0; i < n; ++i ) {
 		int x; // al i-lea element citit de la tastatura
 		std::cin >> x;
-		ra.push_back(x);
+		ra.insertInPlus(x, x);
+		cout<<ra[x]<<'\n';
  
 		// Observatie: Capacitatea vectorului intern nu se modifica.
 		std::cout << "Dimensiune: " << ra.getSize() << " Capacitate " << ra.getCapacity() << '\n';
@@ -34,8 +35,8 @@ int main() {
 	for ( int i = 0; i < m; ++i ) {
 		int x; // al i-lea element citit de la tastatura
 		std::cin >> x;
-		ra.push_back(x);
- 
+		ra.insertInPlus(x, x);
+ 		cout<<ra[x]<<"\n";
 		// Observatie: Se poate modifica capacitatea vectorului intern!
 		std::cout << "Dimensiune: " << ra.getSize() << " Capacitate " << ra.getCapacity() << '\n';
 	}

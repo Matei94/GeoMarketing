@@ -8,9 +8,10 @@ using namespace std;
 template <typename T>
 ResizableArray<T>::ResizableArray() {
 	this->capacity = 1;
- 	this->size = 1;
+ 	this->size = 0;
 	this->array = new T[ capacity ];
-	array[0] = 0;
+	for( int i = 0; i < capacity; i++ )
+		array[i] = 0;
 }
 
 
@@ -19,6 +20,8 @@ ResizableArray<T>::ResizableArray( unsigned long long capacity ) {
 	this->capacity = capacity;
 	this->size = 0;
 	this->array = new T[ capacity ];
+	for( int i = 0; i < capacity; i++ )
+		array[i] = 0;
 }
 
 
@@ -39,6 +42,8 @@ ResizableArray<T>::ResizableArray( const ResizableArray& other ) {
 		for( unsigned long long i = 0; i < size; ++i ) {
 			array[i] = other.array[i];
 		}
+		for( int i = size; i < capacity; i++ )
+			array[i] = 0;
 	}
 
 }
@@ -55,6 +60,8 @@ void ResizableArray<T>::operator=( const ResizableArray& other ) {
 		for( unsigned long long i = 0; i < size; ++i ) {
 			array[i] = other.array[i];
 		}
+		for( int i = size; i < capacity; i++ )
+			array[i] = 0;
 	}
 
 }
@@ -94,6 +101,10 @@ void ResizableArray<T>::setArray( T* newArray ) {
 	this->array = newArray;
 }
 
+template< typename T>
+void ResizableArray<T>::setCapacity( T capacity ){
+	this->capacity = capacity;
+}
 
 template <typename T>
 void ResizableArray<T>::resize() {
@@ -111,7 +122,9 @@ void ResizableArray<T>::resize() {
 
 	/* Salvez vectorul nou alocat in vectorul vechi, si fac update la capacity */
 	array = tmpArray;
-	capacity = 2 * capacity;	
+	capacity = 2 * capacity;
+	for( int i = size; i < capacity; i++ )
+		array[i] = 0;	
 
 }
 
@@ -133,16 +146,35 @@ template <typename T>
 void ResizableArray<T>::insert( unsigned long long position, T value ) {
 
 	if (position >= capacity)
-		this->resize();
+		{this->resize();
+		size = position;
+		}	
 	array[ position ] = value;
 }
-
+template< typename T >
+void ResizableArray<T>::insertInPlus( unsigned long long position, T value ){
+	if( position >= capacity ) {
+		this->resize();
+		size = position;
+	}
+	if( size < position )
+		size = position;
+	array[ position ] = array[ position ] + value;
+}
 
 template <typename T>
 void ResizableArray<T>::sortAscending() {
 	/* Nu cred ca avem nevoie de asta, deocamdata */
 }
 
+template <typename T> 
+void ResizableArray<T>::initialize() {
+	this->capacity = 1;
+ 	this->size = 0;
+	this->array = new T[ capacity ];
+	for( int i = 0; i < capacity; i++ )
+		array[i] = 0;
+}
 /*
 template <typename T>
 void ResizableArray<T>::printOnScreen() {
@@ -160,4 +192,4 @@ void ResizableArray<T>::printOnScreen() {
 
 /* Lista de template-uri acceptate */
 template class ResizableArray< int >;
-template class ResizableArray< NodeArbore >;
+//template class ResizableArray< NodeArbore >;
