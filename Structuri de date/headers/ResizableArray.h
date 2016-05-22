@@ -39,6 +39,7 @@ class ResizableArray {
 	/* Functia de insertie la o anumita pozitie in vector */
 	void insert( unsigned long long position, T value );
 
+	 void insertInPlus( unsigned long long position, T value );
 	/* Functia de extractie a capacity */
 	unsigned long long getCapacity();
 

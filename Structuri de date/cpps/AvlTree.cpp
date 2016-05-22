@@ -173,7 +173,8 @@ void AvlTree<T>::printBalance( AvlNode<T> *n ) {
 	/* parcurge graful in inordine si afiseaza gradul de echilibru al fiecarui nod */
 	if (n != NULL) {
 		printBalance(n->left);
-		std::cout << n->balance << " ";
+		std::cout << n->balance << " \n";
+		std::cout<<n->ra[0]<<"\n ";
 		printBalance(n->right);
 	}
 }
@@ -190,25 +191,25 @@ AvlTree<T>::~AvlTree( ) {
 template< class T >
 void AvlTree<T>::insert( T timestamp, AvlNode<T>* node, T discount, T idStore ) {
 		if( node == NULL ) {
-			node = new AvlNode<T>( timestamp, NULL, discount, 1 );
+			node = new AvlNode<T>( timestamp, NULL, discount, idStore );
 			//node->insertie( idStore );	
 		}
 		else {
 			if( node-> timestamp == timestamp ) {
 			 	node->discount =  node->discount + discount;
-			//node->insertie( idStore );	
+		//	node->insertie( idStore );	
 			}					
 			else if( node->timestamp > timestamp ) {
 					if( node->left == NULL ) {
-						node->left = new AvlNode<T>( timestamp, node, discount, 1 );
-						//node->left->insertie( idStore ); 
+						node->left = new AvlNode<T>( timestamp, node, discount, idStore );
+					//	node->left->insertie( idStore ); 
 					}	
 					else 
 						insert( timestamp, node->left, discount, idStore );
 				}			
 				else {
 					if( node->right == NULL ) {
-						node->right = new AvlNode<T>(timestamp, node, discount, 1 );
+						node->right = new AvlNode<T>(timestamp, node, discount, idStore );
 						//node->right->insertie( idStore ); 
 					}	
 					else

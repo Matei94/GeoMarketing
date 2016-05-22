@@ -22,11 +22,11 @@ Task 1
 	BST -> Node -> {
 				timeStamp, 
 				discount,
-				v[ hashMagazin[ idMagazin ] ] = { idMagazin, nrVizite };
+				v[ hashMagazin[ idMagazin ] ] = {nrVizite };
 				v[0] = { randomIdMagazin, totalNrVizite };
 			}
 
-	hashMagazin[ idMagazin ] = { idMagazin, indexResizableArray, latitudine, longitudine };
+	hashMagazin[ idMagazin ] = {indexResizableArray, latitudine, longitudine };
 
 	Update: La citire, odata ce se updateaza pentru fiecare timeStamp in parte informatia pentru magazinul de la linia curenta, se aduna si la pozitia 0 din vector informatiile respective. Pe pozitia 0 vor fi sumele aferente timeStamp-ului curent. Si asta e de mare ajutor pentru primele doua subtask-uri de la task-ul 1.
 

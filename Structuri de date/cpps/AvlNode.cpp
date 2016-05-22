@@ -20,14 +20,11 @@ AvlNode<T>::~AvlNode() {
 
 template< class T >
 void AvlNode<T>::insertie( T idStore ) {
-	if( this->ra.getSize() < idStore ) {
-		this->ra.insert( idStore, 1 );
-		this->ra.insert(0, 1);
-	}
-	else {
-		this->ra.insert( idStore, ra[idStore] + 1 );
-		this->ra.insert( 0, this->ra[0] + 1 );
-	}	
+//	std::cout<<ra.getSize()<<"\n";
+//	std::cout<<ra.getCapacity()<<"\n";
+	std::cout<<ra[0]<<"\n un cacat\n";
+	this->ra.insertInPlus( idStore, 1);
+	this->ra.insertInPlus( 0, 1);
 }
 
 template< class T >
