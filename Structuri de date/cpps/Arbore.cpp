@@ -1,4 +1,5 @@
 #include "../headers/Arbore.h"
+#include "../headers/ResizableArray.h"
 
 
 using namespace std;
@@ -7,10 +8,10 @@ using namespace std;
 void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacenta ) {
 
 	/* Nodes - numarul de useri din graf */
-	Nodes = listaDeAdiacenta->sizeLines;
+	unsigned long long Nodes = listaDeAdiacenta->sizeLines;
 
 	/* numberOfTrees - numarul de arbori pe care i-am gasit */
-	numberOfTrees = 0;
+	unsigned long long numberOfTrees = 0;
 
 	/* visited - vectorul de vizite; 0 - nodul nu a fost vizitat, 1 - nodul a fost vizitat deja */
 	ResizableArray< bool > visited( Nodes );
@@ -30,7 +31,7 @@ void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacen
 			DFS( nod, visited, currentArbore );
 		
 			/* Adaugam arborele in lista */
-			this->ResizableArray::insert( numberOfTrees, currentArbore );
+			this->ResizableArray< unsigned long long >::insert( numberOfTrees, currentArbore );
 
 		}
 

@@ -14,14 +14,19 @@ Heap<T>::Heap( int length ) {
     size = 0;
 
     /* Se aloca vectorul numit anterior */
+<<<<<<< HEAD
     hip = new T[ capacity + 1 ];
+=======
+    hip = new T[capacity + 1];
+>>>>>>> 91c8dbf8fb734663a292eb363b944ee78ecfd5cd
 }
 
 
 template <typename T>
 Heap<T>::~Heap( ) {
 	/* Se dezaloca zona de memorie ce retinea heap-ul */
-    delete[] hip;
+	if( size > 1 )
+	    delete[] hip;
 }
 
 
