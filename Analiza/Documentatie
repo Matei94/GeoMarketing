@@ -17,7 +17,7 @@ Task 1
 	A: Aplicatia noastra se presupune ca este una dinamica, deci daca vor mai aparea si alte magazine, noi vom modifica pur si simplu dimensiunea resizable array-ului si vom continua cu functia noastra de hash pentru a asocia indecsi in continuare in acel resizable array. 
 	Daca am fi folosit tot un resizable array si un  resizable array in care am fi stocat acesti indecsi, ar fi trebuit sa sortam dupa fiecare insertie de nou magazin si sa cautam binar la fiecare linie citita din fisier pentru a gasi indexul magazinului curent, in functie de idMagazin. E complet ineficient. Asa, in hashtable-ul asta, o sa avem si coliziuni, cel mai probabil, dar in cel mai rau caz, o sa avem de parcurs un bucket intreg pentru a descoperi care este indexul din resizable Array pentru idMagazin-ul curent. Si pentru ca o sa avem grija sa alegem o functie buna de hash, coliziunile vor fi decente, iar hashtable-ul "echilibrat", deci bucketurile destul de "egale". Asta ne asigura ca nu vom avea foarte multe elemente intr-un bucket si o parcurgere de bucket nu o sa coste nici pe departe la fel de mult ca o cautare binara si eventual si o sortare inainte.
 
-	Conditie de insertie in BST: verificarea existentei anterioare a timeStamp-ului ce se vrea inserat acum. Daca deja exista, informatiile se stackeaza in vectorul de la timeStamp-ul respectiv.
+	Conditie de insertie in BST: verificarea existentei anterioare a timeStamp-ului ce se vrea inserat acum. Daca dej eaxista, informatiile se stackeaza in vectorul de la timeStamp-ul respectiv.
 
 	BST -> Node -> {
 				timeStamp, 
