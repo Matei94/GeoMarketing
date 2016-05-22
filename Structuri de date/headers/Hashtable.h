@@ -72,16 +72,21 @@ class Hashtable {
 	/* size = numarul de bucketuri
 	**Bucket - pointer la inceputul hashtable-ului */
 	private:
-		int size;
+		
+		unsigned int size;
 		int ( *Hash ) ( Tkey );
 		Hashnode<Tkey,Tvalue> **Bucket;
 
 	public:
-		/* Constructorul ce primeste ca parametru numarul de bucketuri pe care il va avea hashtableul */
-		Hashtable( int length, int ( *h ) ( Tkey ) );
+
+		/* Constructor default*/
+		Hashtable( );
 
 		/* Destructor */
 		~Hashtable();
+
+		/* Initializeaza Hashtable-ul cu bucket-uri si functia de hash */
+		void Initialize( int length, int ( *h ) ( Tkey ) );
 
 		/* Functia de insertie a unui nou element in Hashtable, la cheia key si valoarea value */
 		void Insert( Tkey key, Tvalue value );
@@ -92,6 +97,9 @@ class Hashtable {
 
 		/* Elimina primul element din bucketul aferent cheii "key" */
 		void remove( Tkey key );
+
+		/* Returneaza size-ul */
+		unsigned int getSize( );
 
 		/* Afiseaza hashtable-ul  */
 		void printTable( );

@@ -2,6 +2,10 @@
 #define __SERVICEAPI_H_
 
 #include <iostream>
+
+#include "../../Structuri de date/headers/AvlTree.h"
+#include "../../Structuri de date/headers/Hashtable.h"
+
 using namespace std;
 
 template<typename T>
@@ -13,7 +17,27 @@ struct Array {
         resultSize(resultSize), resultData(resultData) {}
 };
 
+    inline int sdbm( int key ) {
+        unsigned long hash = 0;
+
+        while( key ) {
+            hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
+            key = key / 10;
+        }
+
+        return hash % 65599;
+
+    }
+
+
 class Service {
+
+private:
+
+    AvlTree<int> t;
+    Hashtable<int, infoMagazin> mapMagazine;
+    Hashtable<int, infoUser> mapUsers;
+
 public:
     void createUser(int id, double homeX, double homeY);
     void createStore(int id, double storeX, double storeY);
