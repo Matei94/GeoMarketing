@@ -19,6 +19,12 @@ class Heap {
     /* Destructor */
     ~Heap( );
 
+    /* Copy-Constructor */
+    Heap( const Heap<T>& other );
+
+    /* Suprascrierea operatorului = */
+    void operator=( const Heap<T>& other );
+
     /* Adauga un element in heap */
     void insert( T value );
 

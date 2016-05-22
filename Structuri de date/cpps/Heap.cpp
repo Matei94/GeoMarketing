@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 template <typename T>
 Heap<T>::Heap( int length ) {
 	/* Se retine ce dimensiune va avea vectorul in care vom retine heap-ul */
@@ -16,11 +17,48 @@ Heap<T>::Heap( int length ) {
     hip = new T[size];
 }
 
+
 template <typename T>
 Heap<T>::~Heap( ) {
 	/* Se dezaloca zona de memorie ce retinea heap-ul */
     delete[] hip;
 }
+
+
+template <typename T>
+Heap<T>::Heap( const Heap<T>& other ) {
+	
+	this->capacity = other.capacity;
+	this->size = other.size;
+	this->hip = other.hip;
+
+	if( hip ) {
+
+		for( int i = 0; i < size; ++i ) 
+			hip[i] = other.hip[i];
+
+	}
+
+}
+
+
+template <typename T>
+void Heap<T>::operator=( const Heap<T>& other ) {
+	
+	this->capacity = other.capacity;
+	this->size = other.size;
+	this->hip = other.hip;
+
+	if( hip ) {
+
+		for( int i = 0; i < size; ++i ) 
+			hip[i] = other.hip[i];
+
+	}
+
+}
+
+
 
 template <typename T>
 void Heap<T>::insert( T value ) {
@@ -30,6 +68,7 @@ void Heap<T>::insert( T value ) {
 	/* Ne asiguram ca ajunge pe pozitia care trebuie in hip */
 	moveUp( size );
 }
+
 
 template <typename T>
 void Heap<T>::moveUp( int currentIndex ) {
@@ -46,6 +85,7 @@ void Heap<T>::moveUp( int currentIndex ) {
 	/* Se reapeleaza functia curenta, pentru verificarea corectitudinii oridinii in heap */
 	moveUp( parentIndex );
 }
+
 
 template <typename T>
 void Heap<T>::moveDown( int currentIndex ) {
@@ -72,12 +112,14 @@ void Heap<T>::moveDown( int currentIndex ) {
 
 }
 
+
 template <typename T>
 void Heap<T>::swapValues( int index1, int index2 ) {
 	T aux = hip[ index1 ];
 	hip[ index1 ] = hip[ index2 ];
 	hip[ index2 ] = aux;
 }
+
 
 template <typename T>
 bool Heap<T>::getMaxim( T& hipMaxim ) {
