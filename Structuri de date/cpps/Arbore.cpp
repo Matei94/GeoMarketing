@@ -37,4 +37,7 @@ void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacen
 
 	}
 
+	/* Pe pozitia 0 va fi retinut numarul de elemente din lista, deci numarul de arbori din lista */
+	this->ResizableArray::insert( 0, numberOfTrees );
+
 }
