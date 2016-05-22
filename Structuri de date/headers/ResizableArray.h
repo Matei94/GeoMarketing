@@ -64,6 +64,10 @@ class ResizableArray {
 	void sortAscending();
 
 	/* Metoda care afiseaza elementele vectorului */
+
+	/* un fel de constructor */
+	void initialize();
+
 	//void printOnScreen();
 };
 

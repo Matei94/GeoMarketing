@@ -9,8 +9,8 @@ AvlNode<T>::AvlNode( T timestamp, AvlNode<T> *parinte, T discount ) {
  this->left = NULL;
  this->right = NULL;
  this->discount = discount;
- ResizableArray<T> ra();
- //ra = ResizableArray<T>();
+ //ResizableArray<T> ra();
+ ra.initialize( );
 }
 
 template< class T >

@@ -167,6 +167,14 @@ void ResizableArray<T>::sortAscending() {
 	/* Nu cred ca avem nevoie de asta, deocamdata */
 }
 
+template <typename T> 
+void ResizableArray<T>::initialize() {
+	this->capacity = 1;
+ 	this->size = 0;
+	this->array = new T[ capacity ];
+	for( int i = 0; i < capacity; i++ )
+		array[i] = 0;
+}
 /*
 template <typename T>
 void ResizableArray<T>::printOnScreen() {
