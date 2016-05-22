@@ -188,53 +188,26 @@ AvlTree<T>::~AvlTree( ) {
 }
 
 template< class T >
-bool AvlTree<T>::insert( T key ) {
-
-	/* daca radacina este goala, alocam meomorie si inseram cheia in radacina */
-	if( root == NULL ) {
-		root = new AvlNode<T>( key, NULL );
-	}
-
-	/* daca nu, n va fi root */
-	else {
-		AvlNode<T> *n = root, *parent;
-
-		while( true ) {
-
-			/*  daca acceasi cheie exista in AVL returnam false */
-			if( n->key == key ) 
-				return false;
-
-			/* facem o copie a lui n, si o notam cu parinte */
-			parent = n;
-
-			/* vedem daca mergem in stanga sau dreapta */
-			bool goLeft = n->key > key;
-			n = goLeft ? n->left : n->right;
-
-			/* daca nu avem nimic */
-			if( n == NULL ) {
-
-				/* daca goLeft este true atunci am mers in stanga, daca nu am mers in dreapta */
-				if( goLeft ) {
-
-					/* fiului stang ii este alocata memorie si ii este atribuita cheia si este facuta legatura cu parintele lui( parent = fostul n ) */
-					parent->left = new AvlNode<T>( key, parent );
-				}
-				else {
-					/* acelasi lucru doar ca pt fiul drept */
-					parent->right = new AvlNode<T>( key, parent );
-				}
-
-				/* apelam functia de echilibrare a arborelui pornind din nodul parent, adica fostul n */
-				rebalance( parent );
-				break;
-			}
+void AvlTree<T>::insert( T key, AvlNode<T>* node ) {
+		if( node == NULL ) {
+			node = new AvlNode<T>( key, NULL );	
 		}
-	}
-
-	return true;
-}
+		else {					
+		if( node->key > key ) {
+			if( node->left == NULL )
+				node->left = new AvlNode<T>( key, node );
+			else 
+				insert( key, node->left );
+		}		
+		else {
+			if( node->right == NULL ) 
+				node->right = new AvlNode<T>(key, node );
+			else
+			 	insert( key, node->right );
+		}
+		}
+	rebalance(node);
+	}	
 
 template< class T >
 void AvlTree<T>::printBalance() {

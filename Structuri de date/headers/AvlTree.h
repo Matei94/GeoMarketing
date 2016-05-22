@@ -45,7 +45,7 @@ class AvlTree {
 		~AvlTree( );
 
 		/* functia de inserare a unei chei */
-		bool insert( T key );
+		void insert( T key, AvlNode<T>* node );
 
 		/* functie care afiseaza factorul de echilibru al fiecarui nod din arbore, pornind de la radacina */
 		void printBalance();
