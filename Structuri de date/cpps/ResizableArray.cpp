@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "../headers/NodeArbore.h"
 #include "../headers/ResizableArray.h"
 
 using namespace std;
@@ -159,5 +160,5 @@ void ResizableArray<T>::printOnScreen() {
 
 
 /* Lista de template-uri acceptate */
-template class ResizableArray<int>;
-template class ResizableArray< ResizableArray<int> >;
+template class ResizableArray< int >;
+template class ResizableArray< NodeArbore >;

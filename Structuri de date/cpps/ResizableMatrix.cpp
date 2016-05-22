@@ -1,6 +1,10 @@
 #include <iostream>
 
+
+#include "../headers/Hashtable.h"
+#include "../headers/NodeArbore.h"
 #include "../headers/ResizableMatrix.h"
+
 
 using namespace std;
 
@@ -58,6 +62,8 @@ ResizableMatrix<T>::~ResizableMatrix(){
 	/* De-Allocate memory for the matrix itself */
 	delete[] array;
 
+
+	delete[] capacityCollumns;
 }
 
 
@@ -209,18 +215,12 @@ void ResizableMatrix<T>::resizeLines( ) {
 	capacityCollumns = tmpCapacityCollumns;
 	capacityLines = 2 * capacityLines;	
 
-	/*
-	for ( unsigned long long i = 0; i < capacityLines; ++i )
-		delete[] tmpArray[i];
-
-	delete[] tmpArray;	
-	delete[] tmpCapacityCollumns;
-	*/
 }
 
 
 template <typename T>
 void ResizableMatrix<T>::resizeCollumns( unsigned long long line ) {
+	//std::cout<<"gogonel"<<' ';
 
 	/* Aloc o linie cu numar dublu de coloane */
 	T *tmpArray = new T[ 2*capacityCollumns[ line ] ];
@@ -233,7 +233,7 @@ void ResizableMatrix<T>::resizeCollumns( unsigned long long line ) {
 	array[line] = tmpArray;
 	capacityCollumns[line] *= 2;
 
-	//delete[] tmpArray;
+	delete[] tmpArray;
 }
 
 
@@ -255,5 +255,46 @@ void ResizableMatrix<T>::printOnScreen() {
 }
 
 
+template <typename T>
+void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore ) {
+
+	/* Crestem contorul pentru elemente deja vizitate din arborele curent */
+	currentArbore.setNumberOfElements( currentArbore.getNumberOfElements() + 1 );
+
+	/* Facem update la numarul maxim de invitatii trimise */
+	currentArbore.setMaxInvites( max( currentArbore.getMaxInvites(), array[ currentNode ][ 0 ] ) );
+
+	/* Structura auxiliara in care vom retine informatiile din hash pentru userul cu id-ul currentNode */
+	infoUser auxiliar;
+
+	/* Aflam idUser */
+	unsigned long long userID = reverseIdUser[ currentNode ];
+
+	/* Extragem in structura auxiliar informatii despre userul curent */
+	mapUsers.get( userID, auxiliar );
+
+	/* Adunam numarul de vizite ale userului curent la total */
+	currentArbore.setSumVisits( currentArbore.getSumVisits() + auxiliar.numarDeVizite );
+
+	/* Marcam nodul curent din arbore ca fiind vizitat */
+	visited[ currentNode ] = true;
+
+
+	/* Parcurgem lista de copii ai nodului curent */
+	for ( unsigned long long i = 1; i <= array[ currentNode ][ 0 ]; ++i ) {
+
+		/* son - fiu al nodului curent */
+		son = array[ currentNode ][ i ];
+
+		/* Daca intalnim unul ce nu a fost deja vizitat, apelam DFS-ul pentru el */
+		if( !visited[ son ] )
+			DFS( son, count, visited );
+
+	}
+
+}
+
+
 /* Lista de template-uri acceptate */
-template class ResizableMatrix<int>;
+template class ResizableArray< int >;
+template class ResizableMatrix< unsigned long long >;

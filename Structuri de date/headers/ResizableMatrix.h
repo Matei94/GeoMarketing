@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "../headers/ResizableArray.h"
+
 using namespace std;
 
 template <typename T>
@@ -75,6 +77,9 @@ class ResizableMatrix {
 
 	/* Functia de afisare a matricei */
 	void printOnScreen();
+
+	/* DFS - Parcurgerea in adancime implementata recursiv */
+	void DFS( unsigned long long currentNode, ResizableArray< bool >& visited, NodeArbore& currentArbore );
    	
 };
 
