@@ -193,6 +193,7 @@ void ResizableArray<T>::printOnScreen() {
 
 
 /* Lista de template-uri acceptate */
+template class ResizableArray< bool >;
 template class ResizableArray< int >;
 template class ResizableArray< NodeArbore >;
 //template class ResizableArray< Heap<int> >;

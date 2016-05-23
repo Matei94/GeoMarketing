@@ -92,7 +92,7 @@ void Service::visit(int timestamp, int clientId, int storeId, int discount) {
 
     /* Extragem informatiile aferente magazinului curent din hashtable */
     infoMagazin currentStore;
-    mapMagazine.Hashtable< int, infoMagazin >::getValue( storeId, currentStore );
+    mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
 
     /* Extragem indexul aferent magazinului curent */
     int indexMagazin = currentStore.indexRA;
@@ -106,15 +106,14 @@ void Service::invite(int userWhichInvites, int invitedUser) {
 
     /* Extragem valoarea obiectului user care invita */
     infoUser value;
-    mapUsers.Hashtable< int, infoUser >::getValue( userWhichInvites, value );
+    mapUsers.Hashtable< int, infoUser >::get( userWhichInvites, value );
     
     /* Extragem valoarea indexului asociat userului care face invitatia */
     int indexUserWhichInvites = value.indexUser;
 
 
     /* Extragem valoarea obiectului user care invita */
-    infoUser value;
-    mapUsers.Hashtable< int, infoUser >::getValue( invitedUser, value );
+    mapUsers.Hashtable< int, infoUser >::get( invitedUser, value );
     
     /* Extragem valoarea indexului asociat userului care face invitatia */
     int indexInvitedUser = value.indexUser;    

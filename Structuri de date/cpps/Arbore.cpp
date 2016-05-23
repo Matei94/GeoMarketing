@@ -1,6 +1,7 @@
 #include "../headers/Arbore.h"
+#include "../headers/Hashtable.h"
 #include "../headers/NodeArbore.h"
-#include "../headers/RA.h"
+#include "../headers/ResizableArray.h"
 #include "../headers/ResizableMatrix.h"
 
 
@@ -20,7 +21,7 @@ void Arbore::setNumberOfTrees( int value ) {
 	this->numberOfTrees = value;
 }
 
-void Arbore::findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUser ) {
+void Arbore::findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser >& mapUsers ) {
 
 	/* Nodes - numarul de useri din graf */
 	int numberOfUsers = listaDeAdiacenta.ResizableMatrix< int >::getSizeLines();
@@ -43,7 +44,7 @@ void Arbore::findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableAr
 			++numberOfTrees;
 
 			/* Apelam DFS-ul pentru nodul curent */
-			listaDeAdiacenta.ResizableMatrix< int >::DFS( nod, visited, currentArbore, reverseIdUser );
+			listaDeAdiacenta.ResizableMatrix< int >::DFS( nod, visited, currentArbore, reverseIdUser, mapUsers );
 		
 			/* Adaugam arborele in lista */
 			listaDeArbori.ResizableArray< NodeArbore >::push_back( currentArbore );

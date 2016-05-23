@@ -1,6 +1,8 @@
 #ifndef __Arbore_H_
 #define __Arbore_H_
 
+#include "../headers/Arbore.h"
+#include "../headers/Hashtable.h"
 #include "../headers/NodeArbore.h"
 #include "../headers/ResizableArray.h"
 #include "../headers/ResizableMatrix.h"
@@ -29,7 +31,7 @@ class Arbore {
   	void setNumberOfTrees( int value );
 
   	/* Functia ce gaseste toate radacinile arborilor si returneaza o lista cu toti acestia */
-  	void findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers );
+  	void findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers, Hashtable< int, infoUser >& mapUsers );
 
 };
 

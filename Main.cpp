@@ -17,8 +17,15 @@ int main () {
 	mata.createUser( 4, 5, 10 );
 	mata.createUser( 5, 10, 11 );
 	mata.createUser( 6, 9, 1 );
-	mata.visit(1,1,1,1);
+	
+	mata.visit( 1, 1, 1, 1);
+	mata.visit( 2, 4, 358, -1 );
+	mata.visit( 1, 3, 1, 43);
 
+	mata.invite( 1, 2 );
+	mata.invite( 2, 3 );
+
+	mata.distinctGroupsOfUsers();
 
 
 	return 0;

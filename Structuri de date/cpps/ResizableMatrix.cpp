@@ -251,7 +251,7 @@ void ResizableMatrix<T>::printOnScreen() {
 
 
 template <typename T>
-void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser ) {
+void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser>& mapUsers ) {
 
 	/* Crestem contorul pentru elemente deja vizitate din arborele curent */
 	currentArbore.NodeArbore::setNumberOfElements( currentArbore.NodeArbore::getNumberOfElements() + 1 );
@@ -283,7 +283,7 @@ void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, No
 
 		/* Daca intalnim unul ce nu a fost deja vizitat, apelam DFS-ul pentru el */
 		if( !visited[ son ] )
-			DFS( son, visited, currentArbore, reverseIdUser );
+			DFS( son, visited, currentArbore, reverseIdUser, mapUsers );
 
 	}
 
@@ -291,4 +291,4 @@ void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, No
 
 
 /* Lista de template-uri acceptate */
-template class ResizableArray< int >;
+template class ResizableMatrix< int >;

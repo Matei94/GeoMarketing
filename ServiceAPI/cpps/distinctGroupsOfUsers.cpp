@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Array<int> Service::distinctGroupsOfUsers() {
+inline Array<int> Service::distinctGroupsOfUsers() {
 
 	/* numberOfTrees - numarul de arbori din lista */
 	int numberOfTrees = listOfTrees.Arbore::getNumberOfTrees();
@@ -22,6 +22,10 @@ Array<int> Service::distinctGroupsOfUsers() {
 		/* Inseram valoarea obtinuta la pozitia curenta */
 		result.insert( i, numberOfElements );
 
+		cout << i << ' ' << numberOfElements << '\n';
+
 	}
+
+	cout << '\n';
 
 }

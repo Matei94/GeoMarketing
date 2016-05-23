@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "../headers/ResizableArray.h"
+#include "../headers/Hashtable.h"
 
 using namespace std;
 
@@ -79,7 +80,7 @@ class ResizableMatrix {
 	void printOnScreen();
 
 	/* DFS - Parcurgerea in adancime implementata recursiv */
-	void DFS( int currentNode, ResizableArray< bool >& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser );
+	void DFS( int currentNode, ResizableArray< bool >& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser >& mapUsers );
    	
 };
 
