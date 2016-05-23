@@ -169,12 +169,22 @@ template <typename T>
 void ResizableMatrix<T>::push_back( int line, T value ) {
 	//cout<<"intra in push\n";
 	/* Verific daca mai am spatiu alocat pentru insertia curenta */
+<<<<<<< HEAD
 	if (array[line][0] >= capacityCollumns[line]) {
  		this->resizeCollumns( line );
 	}
  	cout<<"momentul crucial\n";
  	cout<<array[line][0]<<"\n";
  	array[line][0] += 1;
+=======
+	if (array[line][0] > capacityCollumns[line]) {
+		cout << "Apeleaza resizeCollumns?\n";
+ 		this->resizeCollumns( line );
+	}
+
+	cout << "Se intoarce din bucatarie.\n";
+ 
+>>>>>>> b7e46e67a984813ac8899c1b6cd6db3e75dca534
 	/* Adaug elementul la finalul vectorului si incrementez size-ul de coloane pentru linia curenta */
 	array[ line ][ array[line][0] ] = value;
 }
@@ -185,10 +195,20 @@ void ResizableMatrix<T>::insert( int line, T value ) {
 
 	/* Daca linia la care vreau sa inserez nu exista deja, maresc numarul de linii al matricei */
 	if (line >= capacityLines) {
+<<<<<<< HEAD
 		cout << "Se apeleaza resize lines.\n";
 		this->resizeLines();
 	}
 
+=======
+		cout << "Se apeleaza resize collumns.\n";
+		this->resizeLines();
+	}
+
+	/* Daca coloana la care vreau sa inserez nu exista deja, maresc numarul de coloane de la linia curenta din matrice */
+	if (array[line][0] >= capacityCollumns[line])
+		this->resizeCollumns( line );
+>>>>>>> b7e46e67a984813ac8899c1b6cd6db3e75dca534
 
 	/* Insertia efectiva */
 	this->push_back( line, value );
@@ -198,7 +218,11 @@ void ResizableMatrix<T>::insert( int line, T value ) {
 template <typename T>
 void ResizableMatrix<T>::resizeLines( ) {
 
+<<<<<<< HEAD
 //	cout << "Resize Line. O intrat.\n";
+=======
+	cout << "Resize Line. O intrat.\n";
+>>>>>>> b7e46e67a984813ac8899c1b6cd6db3e75dca534
 
 	/* Aloc o matrice noua cu numar dublu de linii */
 	T **tmpArray = new T*[ 2*capacityLines ];
@@ -215,6 +239,11 @@ void ResizableMatrix<T>::resizeLines( ) {
 		tmpArray[ i ] = new T[ tmpCapacityCollumns[i] ];
 	}
 
+	/* Alocam numarul de coloane pentru fiecare linie in parte */
+	for( int i = 0; i < 2*capacityLines; ++i ) {
+		tmpArray[ i ] = new T[ tmpCapacityCollumns[i] ];
+	}
+
 	/* Copiez elementele din matricea veche in cea temporara */
 	for ( int i = 0; i < sizeLines; ++i ) {
 		for ( int j = 0; j <= array[i][0]; ++j )
@@ -223,7 +252,11 @@ void ResizableMatrix<T>::resizeLines( ) {
 
 	/* Eliberez memoria ocupata de vechea matrice */
 	for ( int i = 0; i < capacityLines; ++i )
+<<<<<<< HEAD
 		delete[] array[i];
+=======
+		delete array[i];
+>>>>>>> b7e46e67a984813ac8899c1b6cd6db3e75dca534
 
 	delete[] array;
 	delete[] capacityCollumns;
@@ -246,7 +279,11 @@ void ResizableMatrix<T>::resizeCollumns( int line ) {
 	cout<<"array[line][0]: "<<array[line][0]<<"\n";
 	cout<<"capacitycollums[line]: "<<capacityCollumns[line]<<"\n";
 	/* Copiez valorile din vechea linie in noua linie */
+<<<<<<< HEAD
 	for ( int i = 0; i <= capacityCollumns[line]; ++i ) {
+=======
+	for ( int i = 0; i < capacityCollumns[line]; ++i )
+>>>>>>> b7e46e67a984813ac8899c1b6cd6db3e75dca534
 		tmpArray[i] = array[line][i];
 		//cout<<tmpArray[i]<<"\n";
 	}
