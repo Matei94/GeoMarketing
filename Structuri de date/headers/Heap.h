@@ -20,6 +20,8 @@ class Heap {
     /* Constructor */
     Heap( int length );
 
+    void Initialize();
+
     /* Destructor */
     ~Heap( );
 
