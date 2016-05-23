@@ -25,6 +25,9 @@ void Service::createUser( int id, double homeX, double homeY ) {
 
     /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
     if( mapUsers.Hashtable< int, infoUser >::getSize( ) == 0 ) {
+
+        nrUsers = 0;
+
         mapUsers.Hashtable< int, infoUser >::Initialize( 65599, sdbm );
         
         cout << "Intra in initialize pentru mapUsers.\n";
@@ -80,7 +83,7 @@ void Service::createUser( int id, double homeX, double homeY ) {
     /* Initializam in lista de adiacenta linia de vecini corespunzatoare userului tocmai creat */
     adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
 
-    cout << adjacencyList.ResizableMatrix< int >::getValue( user.indexUser, 1 ) << '\n';
+    cout << adjacencyList[ user.indexUser ][ 1 ] << '\n';
 
 }
 

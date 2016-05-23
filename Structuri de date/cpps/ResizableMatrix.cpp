@@ -13,11 +13,11 @@ template <typename T>
 ResizableMatrix<T>::ResizableMatrix() {
 	
 	/* Set capacity for both lines and collumns */
-	this->capacityLines = 0;
+	this->capacityLines = 1;
 	this->capacityCollumns = NULL;
 
 	/* Set initial size for both lines and collumns */
- 	this->sizeLines = 0;
+ 	this->sizeLines = 1;
 
  	/* Allocate memory for all lines */
 	this->array = NULL;
@@ -29,17 +29,17 @@ template <typename T>
 ResizableMatrix<T>::ResizableMatrix( int capacityLines ) {
 
 	/* Set capacity for both lines and collumns */
-	this->capacityLines = capacityLines;
+	this->capacityLines = capacityLines + 1;
 	this->capacityCollumns = new int[ capacityLines ];
 
 	/* Set initial size for both lines and collumns */
- 	this->sizeLines = 0;
+ 	this->sizeLines = 1;
 
  	/* Allocate memory for all lines */
 	this->array = new T*[ capacityLines ];
 
 	/* Allocate memory for all collumns */
-	for( int i = 0; i < capacityLines; ++i ) {
+	for( int i = 0; i <= capacityLines; ++i ) {
 
 		/* Aloc un vector de cate un element pentru fiecare linie */
 		array[i] = new T[1];
@@ -57,7 +57,7 @@ template <typename T>
 ResizableMatrix<T>::~ResizableMatrix(){
 
 	/* De-Allocate memory for collumns */
-	for ( int i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i <= capacityLines; ++i )
 		delete[] array[i];
 
 	/* De-Allocate memory for the matrix itself */
@@ -72,7 +72,7 @@ ResizableMatrix<T>::ResizableMatrix( const ResizableMatrix& other ) {
 	this->capacityLines = other.capacityLines;
 
 	this->capacityCollumns = other.capacityCollumns;
-	for ( int i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i <= capacityLines; ++i )
 		capacityCollumns[i] = other.capacityCollumns[i];
 
 	this->sizeLines = other.sizeLines;
@@ -80,7 +80,7 @@ ResizableMatrix<T>::ResizableMatrix( const ResizableMatrix& other ) {
 	this->array = other.array;
 
 	if( array ) {
-		for( int i = 0; i < sizeLines; ++i ) {
+		for( int i = 0; i <= sizeLines; ++i ) {
 			for( int j = 0; j <= array[i][0]; ++j )
 				array[i][j] = other.array[i][j];
 		}
@@ -95,7 +95,7 @@ void ResizableMatrix<T>::operator=( const ResizableMatrix& other ) {
 	this->capacityLines = other.capacityLines;
 
 	this->capacityCollumns = other.capacityCollumns;
-	for ( int i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i <= capacityLines; ++i )
 		capacityCollumns[i] = other.capacityCollumns[i];
 
 	this->sizeLines = other.sizeLines;
@@ -103,7 +103,7 @@ void ResizableMatrix<T>::operator=( const ResizableMatrix& other ) {
 	this->array = other.array;
 
 	if( array ) {
-		for( int i = 0; i < sizeLines; ++i ) {
+		for( int i = 0; i <= sizeLines; ++i ) {
 			for( int j = 0; j <= array[i][0]; ++j )
 				array[i][j] = other.array[i][j];
 		}
@@ -123,12 +123,11 @@ T* ResizableMatrix<T>::operator[]( int line ) {
 	return array[ line ];
 }
 
-/*
+
 template <typename T>
 T ResizableMatrix<T>::getValue( int line, int collumn ) {
 	return array[ line ][ collumn ];
 }
-*/
 
 
 template <typename T>
@@ -159,7 +158,7 @@ template <typename T>
 void ResizableMatrix<T>::push_back( int line, T value ) {
 
 	/* Verific daca mai am spatiu alocat pentru insertia curenta */
-	if (array[line][0] == capacityCollumns[line]) {
+	if (array[line][0] > capacityCollumns[line]) {
  		this->resizeCollumns( line );
 	}
  
@@ -172,11 +171,11 @@ template <typename T>
 void ResizableMatrix<T>::insert( int line, T value ) {
 
 	/* Daca linia la care vreau sa inserez nu exista deja, maresc numarul de linii al matricei */
-	if (line >= capacityLines)
+	if (line > capacityLines)
 		this->resizeLines();
 
 	/* Daca coloana la care vreau sa inserez nu exista deja, maresc numarul de coloane de la linia curenta din matrice */
-	if (array[line][0] + 1 >= capacityCollumns[line])
+	if (array[line][0] + 1 > capacityCollumns[line])
 		this->resizeCollumns( line );
 
 	/* Insertia efectiva */
@@ -192,17 +191,17 @@ void ResizableMatrix<T>::resizeLines( ) {
 	int *tmpCapacityCollumns = new int[ 2*capacityLines ];
 
 	/* Copiez capacityCollumns din vechea matrice in cea noua */
-	for ( int i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i <= capacityLines; ++i )
 		tmpCapacityCollumns[i] = capacityCollumns[i];
 
 	/* Copiez elementele din matricea veche in cea temporara */
-	for ( int i = 0; i < sizeLines; ++i ) {
+	for ( int i = 0; i <= sizeLines; ++i ) {
 		for ( int j = 0; j <= array[i][0]; ++j )
 			tmpArray[ i ][ j ] = array[ i ][ j ];
 	}
 
 	/* Eliberez memoria ocupata de vechea matrice */
-	for ( int i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i <= capacityLines; ++i )
 		delete array[i];
 
 	delete[] array;
@@ -223,7 +222,7 @@ void ResizableMatrix<T>::resizeCollumns( int line ) {
 	T *tmpArray = new T[ 2*capacityCollumns[ line ] ];
 
 	/* Copiez valorile din vechea linie in noua linie */
-	for ( int i = 0; i < capacityCollumns[line]; ++i )
+	for ( int i = 0; i <= capacityCollumns[line]; ++i )
 		tmpArray[i] = array[line][i];
 
 	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
@@ -237,7 +236,7 @@ void ResizableMatrix<T>::printOnScreen() {
 	
 	cout << "Continut:\n";
 
-	for ( int i = 0; i < capacityLines; ++i ) {
+	for ( int i = 0; i <= capacityLines; ++i ) {
 		
 		for ( int j = 1; j <= array[i][0]; ++j ) {
 			cout << array[i][j] << ' ';
