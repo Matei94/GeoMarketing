@@ -29,8 +29,9 @@ class Heap {
     /* Suprascrierea operatorului = */
     void operator=( const Heap<T>& other );
 
-    /* Pseudo-supraincarcarea operatorului + */
-    void operator+( const Heap<T>& other );
+    bool operator>=( const Heap<T>& other );
+
+    bool operator<( const Heap<T>& other );
 
     /* Adauga un element in heap */
     void insert( T value );

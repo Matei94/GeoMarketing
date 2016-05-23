@@ -39,7 +39,6 @@ Heap<T>::~Heap( ) {
 	    delete[] hip;
 }
 
-
 template <typename T>
 Heap<T>::Heap( const Heap<T>& other ) {
 	
@@ -73,12 +72,18 @@ void Heap<T>::operator=( const Heap<T>& other ) {
 
 }
 
-
 template <typename T>
-void Heap<T>::operator+=( const Heap<T>& other ) {
-	return;
+bool Heap<T>::operator>=( const Heap<T>& other ) {
+	return 1;
+
 }
 
+template <typename T>
+bool Heap<T>::operator<( const Heap<T>& other ) {
+	
+	return 1;
+
+}
 
 template <typename T>
 void Heap<T>::insert( T value ) {
@@ -88,7 +93,6 @@ void Heap<T>::insert( T value ) {
 	/* Ne asiguram ca ajunge pe pozitia care trebuie in hip */
 	moveUp( size );
 }
-
 
 template <typename T>
 void Heap<T>::moveUp( int currentIndex ) {
@@ -164,3 +168,4 @@ bool Heap<T>::getMaxim( T& hipMaxim ) {
 
 
 template class Heap<int>;
+template class Heap< Heap<int> >;
