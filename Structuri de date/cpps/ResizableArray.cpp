@@ -109,7 +109,7 @@ void ResizableArray<T>::resize() {
 	T *tmpArray = new T[ 2*capacity ];
 
 	/* Copiez elementele din vectorul curent in cel temporar */
-	for ( unsigned long long i = 0; i < size; ++i ) {
+	for ( unsigned long long i = 0; i <= size; ++i ) {
 		tmpArray[ i ] = array[ i ];
 	}
 
@@ -119,7 +119,7 @@ void ResizableArray<T>::resize() {
 	/* Salvez vectorul nou alocat in vectorul vechi, si fac update la capacity */
 	array = tmpArray;
 	capacity = 2 * capacity;
-	for( int i = size; i < capacity; i++ )
+	for( int i = size + 1; i < capacity; i++ )
 		array[i] = 0;	
 
 }

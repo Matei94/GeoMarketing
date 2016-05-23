@@ -8,6 +8,7 @@
     ha.numarDeCumparaturi = 1;
     ha.numarDeVizite = 4;
     ha.discountAcordat = 5;
+    ha.indexUser = 3;
     ha.userX = 6;
     ha.userY = 7;
 
@@ -15,7 +16,7 @@
         mapUsers.Initialize( 65599, sdbm );
     }
     mapUsers.Insert( 2, ha );
-    mapUsers.printTable( );
+  //  mapUsers.printTable( );
     std::cout << "Inserting integer values 1 to 10" << std::endl; 
 //  for (int i = 1; i <= 10; ++i)
     t.insert(4, t.getRoot(), 5, 1 );
@@ -60,21 +61,23 @@
 
     void Service::createStore(int id, double storeX, double storeY) {
 
-        infoMagazin ha;
-        ha.indexRA = 1;
-        ha.storeX = 6;
-        ha.storeY = 7;
-
         if( mapMagazine.getSize() == 0 ) {
             mapMagazine.Initialize( 65599, sdbm );            
         }
 
-        mapMagazine.Insert( 4, ha );
+        nrMagazine++;
+
+        infoMagazin mag;
+        mag.indexRA = nrMagazine;
+        mag.storeX = storeX;
+        mag.storeY = storeY;
+
+        mapMagazine.Insert( id, mag );
 
     }
 
     void Service::visit(int timestamp, int clientId, int storeId, int discount) {
-        mapUsers.printTable( );
+       // mapUsers.printTable( );
         mapMagazine.printTable( );
     }
 

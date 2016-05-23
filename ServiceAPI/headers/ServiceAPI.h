@@ -18,17 +18,17 @@ struct Array {
         resultSize(resultSize), resultData(resultData) {}
 };
 
-    inline int sdbm( int key ) {
-        unsigned long hash = 0;
+inline int sdbm( int key ) {
+    unsigned long hash = 0;
 
-        while( key ) {
-            hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
-            key = key / 10;
-        }
-
-        return hash % 65599;
-
+    while( key ) {
+        hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
+        key = key / 10;
     }
+
+    return hash % 65599;
+
+}
 
 
 class Service {
@@ -38,6 +38,8 @@ private:
     AvlTree<int> t;
     Hashtable<int, infoMagazin> mapMagazine;
     Hashtable<int, infoUser> mapUsers;
+    unsigned long long nrUsers = 0;
+    unsigned long long nrMagazine = 0;
 
 public:
     void createUser(int id, double homeX, double homeY);

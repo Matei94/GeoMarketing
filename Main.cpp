@@ -9,8 +9,10 @@ int main () {
 
 	mata.createUser( 1, 1, 1 );
 	mata.createStore( 1, 1, 1);
-	mata.visit(1,1,1,1);
-	mata.createStore( 1, 1, 1);
+	mata.createStore( 4, 1, 1);
+	mata.createStore( 4786157, 1, 1);
+	mata.createStore( 358, 1, 1);
+		mata.visit(1,1,1,1);
 
 	cout << "std\n";
 	return 0;
