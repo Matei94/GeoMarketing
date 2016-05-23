@@ -1,112 +1,178 @@
 #include "../headers/ServiceAPI.h"
 
-	void Service::createUser( int id, double homeX, double homeY ) {
 
-        /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
-        if( mapUsers.getSize( ) == 0 ) {
-            mapUsers.Initialize( 65599, sdbm );
-        }
+int Service::getNrUsers() {
+    return this->nrUsers;
+}
 
-        if( reverseIdUsers.getSize( ) == 0 ) {
-            reverseIdUsers.initialize();
-            reverseIdUsers.push_back( 0 );
-            nrUsers++;
-        }
+int Service::getNrMagazine() {
+    return this->nrMagazine;
+}
 
-        cout<<id<<'\n';
-        reverseIdUsers.push_back( id );
+void Service::setNrUsers( int value ) {
+    this->nrUsers = value;
+}
+
+void Service::setNrMagazine( int value ) {
+    this->nrMagazine = value;
+}
+
+
+
+void Service::createUser( int id, double homeX, double homeY ) {
+
+    /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
+    if( mapUsers.Hashtable< int, infoUser >::getSize( ) == 0 ) {
+        mapUsers.Hashtable< int, infoUser >::Initialize( 65599, sdbm );
+    }
+
+    /* Daca nu a fost deja initializat, initializam reverseIdUser */
+    if( reverseIdUsers.ResizableArray< int >::getSize( ) == 0 ) {
+        reverseIdUsers.ResizableArray< int >::initialize();
+        reverseIdUsers.ResizableArray< int >::push_back( 0 );
         nrUsers++;
+    }
 
-        infoUser user;
-        /* Initializare informatii pe care le punem in hashatble-ul mapUsers*/
-        user.numarDeCumparaturi = 0;
-        user.numarDeVizite = 0;
-        user.discountAcordat = 0;
-        user.indexUser = nrUsers;
-        user.userX = homeX;
-        user.userY = homeY;
+    cout<<id<<'\n';
 
-        /* inserez in mapUsers la cheia id, informatia din user */
-        mapUsers.Insert( id, user );
+    /* Aplicam "functia inversa de hash" */
+    reverseIdUsers.ResizableArray< int >::push_back( id );
+
+    /* Incrementam numarul de useri inregistrati */
+    nrUsers++;
+
+    infoUser user;
+
+    /* Initializare informatii pe care le punem in hashatble-ul mapUsers*/
+    user.numarDeCumparaturi = 0;
+    user.numarDeVizite = 0;
+    user.discountAcordat = 0;
+    user.indexUser = nrUsers;
+    user.userX = homeX;
+    user.userY = homeY;
+
+    /* inserez in mapUsers la cheia id, informatia din user */
+    mapUsers.Insert( id, user );
+
+    /* Initializam in lista de adiacenta linia de vecini corespunzatoare userului tocmai creat */
+    adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
 
 }
 
-    void Service::createStore(int id, double storeX, double storeY) {
+void Service::createStore(int id, double storeX, double storeY) {
 
-        if( mapMagazine.getSize() == 0 ) {
-            mapMagazine.Initialize( 65599, sdbm );            
-        }
-
-        nrMagazine++;
-
-        infoMagazin mag;
-        mag.indexRA = nrMagazine;
-        mag.storeX = storeX;
-        mag.storeY = storeY;
-
-        mapMagazine.Insert( id, mag );
-
+    /* Intializam hashtable-ul pentru magazine, in cazul in care nu s-a facut asta deja */
+    if( mapMagazine.getSize() == 0 ) {
+        mapMagazine.Initialize( 65599, sdbm );            
     }
 
-    void Service::visit(int timestamp, int clientId, int storeId, int discount) {
-        mapUsers.printTable( );
-        mapMagazine.printTable( );
-        reverseIdUsers.printOnScreen( );
-        cout<<reverseIdUsers.getValue( 3 );
-    }
+    /* Incrementam numarul de magazine inregistrate */
+    nrMagazine++;
 
-    void Service::invite(int userWhichInvites, int invitedUser) {
+    infoMagazin mag;
 
-    }
+    /* Initializam informatiile pe care le punem in hashtbale-ul mapMagazine */
+    mag.indexRA = nrMagazine;
+    mag.storeX = storeX;
+    mag.storeY = storeY;
 
-    int Service::visitsInTimeframe(int startTime, int endTime) {
+    /* Inseram in hashtable-ul de magazine, magazinul curent; cheia fiind id-ul magazinul, iar valoarea, "obiectul" mag(azin) */
+    mapMagazine.Insert( id, mag );
 
-    }
+}
 
-    int Service::totalDiscountInTimeframe(int startTime, int endTime) {
+void Service::visit(int timestamp, int clientId, int storeId, int discount) {
+    
+    /*
+    mapUsers.printTable( );
+    mapMagazine.printTable( );
+    reverseIdUsers.printOnScreen( );
+    cout<<reverseIdUsers.getValue( 3 );
+    */
 
-    }
+    /* Extragem informatiile aferente magazinului curent din hashtable */
+    infoMagazin currentStore;
+    mapMagazine.Hashtable< int, infoMagazin >::getValue( storeId, currentStore );
 
-    Array<int> Service::usersWithBestBuyToDiscountRate() {
+    /* Extragem indexul aferent magazinului curent */
+    int indexMagazin = currentStore.indexRA;
 
-    }
+    /* Inseram in AVL magazinul curent cu informatiile aferente */
+    t.AvlTree< int >::insert( timestamp, t.getRoot(), discount, indexMagazin );
 
-    int Service::visitsInTimeframeOfStore(int startTime, int endTime, int storeId) {
+}
 
-    }
+void Service::invite(int userWhichInvites, int invitedUser) {
 
-    Array<int> Service::biggestKDiscounts(int K, int storeId) {
+    /* Extragem valoarea obiectului user care invita */
+    infoUser value;
+    mapUsers.Hashtable< int, infoUser >::getValue( userWhichInvites, value );
+    
+    /* Extragem valoarea indexului asociat userului care face invitatia */
+    int indexUserWhichInvites = value.indexUser;
 
-    }
 
-    Array<double> Service::biggestKClientDistances(int K, int storeId) {
+    /* Extragem valoarea obiectului user care invita */
+    infoUser value;
+    mapUsers.Hashtable< int, infoUser >::getValue( invitedUser, value );
+    
+    /* Extragem valoarea indexului asociat userului care face invitatia */
+    int indexInvitedUser = value.indexUser;    
 
-    }
 
-    Array<pair<int, int> > Service::mostCrowdedKTimeFrames(int K, int storeId) {
+    /* Adaug relatia in lista de adiacenta */
+    adjacencyList.ResizableMatrix< int >::insert( indexUserWhichInvites, indexInvitedUser );
 
-    }
+}
 
-    Array<int> Service::distinctGroupsOfUsers() {
+int Service::visitsInTimeframe(int startTime, int endTime) {
 
-    }
+}
 
-    int Service::userWithMostInvites() {
+int Service::totalDiscountInTimeframe(int startTime, int endTime) {
 
-    }
+}
 
-    int Service::longestInvitesChainSize() {
+Array<int> Service::usersWithBestBuyToDiscountRate() {
 
-    }
+}
 
-    Array<int> Service::topKGroupsWithMostVisitsOverall(int K) {
+int Service::visitsInTimeframeOfStore(int startTime, int endTime, int storeId) {
 
-    }
+}
 
-    Array<pair<int, double> > Service::averageVisitsPerUser() {
+Array<int> Service::biggestKDiscounts(int K, int storeId) {
 
-    }
+}
 
-    pair<double, double> Service::newStoreCoordinates() {
+Array<double> Service::biggestKClientDistances(int K, int storeId) {
 
-    }
+}
+
+Array<pair<int, int> > Service::mostCrowdedKTimeFrames(int K, int storeId) {
+
+}
+
+Array<int> Service::distinctGroupsOfUsers() {
+
+}
+
+int Service::userWithMostInvites() {
+
+}
+
+int Service::longestInvitesChainSize() {
+
+}
+
+Array<int> Service::topKGroupsWithMostVisitsOverall(int K) {
+
+}
+
+Array<pair<int, double> > Service::averageVisitsPerUser() {
+
+}
+
+pair<double, double> Service::newStoreCoordinates() {
+
+}

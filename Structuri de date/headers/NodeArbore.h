@@ -5,16 +5,16 @@
 class NodeArbore {
 
 	/* root - radacina arborelui curent */
-	unsigned long long root;
+	int root;
 
 	/* numberOfElements - numarul de elemente al arborelui curent */
-	unsigned long long numberOfElements;
+	int numberOfElements;
 
 	/* maxInvites - numarul maxim de invitatii pe care l-a trimis unul dintre userii din arborele curent */
-	unsigned long long maxInvites;
+	int maxInvites;
 
 	/* sumVisitis - numarul total de vizite pe care le-au facut userii din arborele curent */
-	unsigned long long sumVisits;
+	int sumVisits;
 
 
   public:
@@ -34,29 +34,32 @@ class NodeArbore {
 	/* Suprascrierea operatorului + */
 	void operator+( const NodeArbore& other );
 
+	/* Suprascrierea operatorului += */
+	void operator+=( const NodeArbore& other );
+
 	/* Returneaza valoarea lui root */
-	unsigned long long getRoot();
+	int getRoot();
 
 	/* Returneaza valoarea lui numberOfElements */
-	unsigned long long getNumberOfElements();
+	int getNumberOfElements();
 
 	/* Returneaza valoarea lui maxInvites */
-	unsigned long long getMaxInvites();
+	int getMaxInvites();
 
 	/* Returneaza valoarea lui sumVisits */
-	unsigned long long getSumVisits();
+	int getSumVisits();
 
 	/* Atribuie lui root o noua valoare */
-	void setRoot( unsigned long long value );
+	void setRoot( int value );
 
 	/* Atribuie lui numberOfElements o noua valoare */
-	void setNumberOfElements( unsigned long long value );
+	void setNumberOfElements( int value );
 
 	/* Atribuie lui maxInvites o noua valoare */
-	void setMaxInvites( unsigned long long value );
+	void setMaxInvites( int value );
 
 	/* Atribuie lui sumVisits o noua valoare */
-	void setSumVisits( unsigned long long value );
+	void setSumVisits( int value );
 
 };
 

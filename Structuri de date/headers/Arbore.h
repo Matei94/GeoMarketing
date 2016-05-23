@@ -15,18 +15,21 @@ class Arbore {
 	ResizableArray< NodeArbore > listaDeArbori;
 
 	/* numberOfTrees - numarul de arbori retinuti in lista */
-	unsigned long long numberOfTrees;
+	int numberOfTrees;
 
   public:
 
+    /* Functia care returneaza continutul listaDeArbori */
+    ResizableArray< NodeArbore > getListaDeArbori();
+
   	/* Functia care extrage numarul de arbori din lista */
-  	unsigned long long getNumberOfTrees();
+  	int getNumberOfTrees();
 
   	/* Functia care schimba valoarea numarului de arbori din lista */
-  	void setNumberOfTrees( unsigned long long value );
+  	void setNumberOfTrees( int value );
 
   	/* Functia ce gaseste toate radacinile arborilor si returneaza o lista cu toti acestia */
-  	void findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers );
+  	void findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers );
 
 };
 
