@@ -63,7 +63,7 @@ public:
     Array<double> biggestKClientDistances(int K, int storeId);
 
     // Returneaza un array cu intervalele de timp. Fiecare pair contine startTime, endTime
-    Array<pair<int, int>> mostCrowdedKTimeFrames(int K, int storeId);
+    Array<pair<int, int> > mostCrowdedKTimeFrames(int K, int storeId);
 
     // Returneaza un array cu dimensiunile grupurilor de utilizatori
     Array<int> distinctGroupsOfUsers();
@@ -79,7 +79,7 @@ public:
 
     // O lista de perechi de forma (idGrup, numarMediuDeVizite)
     // Id-ul unui grup se considera minimul id-urilor utilizatorilor din acel grup
-    Array<pair<int, double>> averageVisitsPerUser();
+    Array<pair<int, double> > averageVisitsPerUser();
 
     // Returneaza latitudine si longitudine pentru locatia recomandata pentru un nou magazin
     pair<double, double> newStoreCoordinates();

@@ -29,6 +29,11 @@ int main( )
 			t.insert(6, t.getRoot(), 5, 2 );
 
 
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 3 );
 	std::cout << "Afiseaza factorul de echilibru si discountul pentru fiecare nod:\n";
 //	t.printBalance();
 
@@ -50,6 +55,7 @@ int main( )
 
 	cout<<t.getRoot()->ra.getValue( 6 )<<'\n';
 	cout<<t.getRoot()->ra.getSize()<<'\n';
+	cout<<t.getRoot()->right->ra[1]<<"\n";
 
 
 }

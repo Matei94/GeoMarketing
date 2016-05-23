@@ -1,8 +1,20 @@
 #include "../headers/ServiceAPI.h"
 
-	void Service::createUser(int id, double homeX, double homeY) {
+	void Service::createUser( int id, double homeX, double homeY ) {
+        /* clasa user pentru utilizatorul dat */
+        infoUser user;
 
-    std::cout << "Inserting integer values 1 to 10" << std::endl;
+        /* Initializare informatii pe care le punem in hashatble-ul mapUsers*/
+        user.numarDeCumparaturi = 0;
+        user.numarDeVizite = 0;
+        user.discountAcordat = 0;
+        user.userX = homeX;
+        user.userY = homeY;
+
+        /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
+        if( mapUsers.getSize() == 0 ) {
+            mapUsers.Initialize( 65599, sdbm );
+        }
 
     infoUser ha;
     ha.numarDeCumparaturi = 1;
@@ -58,6 +70,12 @@
 
 
 	}
+        /* inserez in mapUsers la cheia id, informatia din user */
+        mapUsers.Insert( id, user );
+
+        /* afisez hashtable ul*/
+        mapUsers.printTable( );
+}
 
     void Service::createStore(int id, double storeX, double storeY) {
 
@@ -78,8 +96,9 @@
 
     void Service::visit(int timestamp, int clientId, int storeId, int discount) {
        // mapUsers.printTable( );
+   /*     mapUsers.printTable( );
         mapMagazine.printTable( );
-    }
+    */}
 
     void Service::invite(int userWhichInvites, int invitedUser) {
 
@@ -109,7 +128,7 @@
 
     }
 
-    Array<pair<int, int>> Service::mostCrowdedKTimeFrames(int K, int storeId) {
+    Array<pair<int, int> > Service::mostCrowdedKTimeFrames(int K, int storeId) {
 
     }
 
@@ -129,7 +148,7 @@
 
     }
 
-    Array<pair<int, double>> Service::averageVisitsPerUser() {
+    Array<pair<int, double> > Service::averageVisitsPerUser() {
 
     }
 
