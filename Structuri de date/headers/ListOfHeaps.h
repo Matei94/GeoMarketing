@@ -21,17 +21,11 @@ class ListOfHeaps {
 
   public:
 
-    /* Constructor */
-    ListOfHeaps();
-
   	/* Functia de extragere a numarului de heap-uri */
   	unsigned long long getNumberOfHeaps();
 
   	/* Functia de schimbare a valorii numarului de heap-uri */
   	void setNumberOfHeaps( unsigned long long value );  	
-
-  	/*  */
-    
 
 };
 

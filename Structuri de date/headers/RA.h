@@ -1,7 +1,6 @@
 #ifndef __RESIZABLE_ARRAY_H_
 #define __RESIZABLE_ARRAY_H_
 
-
 using namespace std;
 
 template <typename T>
@@ -29,7 +28,6 @@ class ResizableArray {
 	/* Supraincarcarea operatorului de asignare */
 	void operator=( const ResizableArray& other );
 
-
 	/* Supraincarcarea operatorului de accesare */
 	T operator[]( unsigned long long position );
 
@@ -39,9 +37,6 @@ class ResizableArray {
 	/* Functia de insertie la o anumita pozitie in vector */
 	void insert( unsigned long long position, T value );
 
-	/* functia de adaugare cu value( aduna)*/
-	void insertInPlus( unsigned long long position, T value );
-	
 	/* Functia de extractie a capacity */
 	unsigned long long getCapacity();
 
@@ -50,9 +45,6 @@ class ResizableArray {
 
 	/* Setter pentru array */
 	void setArray( T* newArray );
-
-	/* setter pentru capacity */
-	void setCapacity( T capacity );
 
 	/* Functia de redimensionare */
 	void resize();
@@ -65,10 +57,6 @@ class ResizableArray {
 
 	/* Metoda care afiseaza elementele vectorului */
 	//void printOnScreen();
-
-	/* un fel de constructor */
-	void initialize();
-
 };
 
 #endif /* __RESIZABLE_ARRAY_H_ */

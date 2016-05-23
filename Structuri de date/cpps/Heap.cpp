@@ -5,6 +5,20 @@
 using namespace std;
 
 
+
+template <typename T>
+Heap<T>::Heap() {
+	/* Se retine ce dimensiune va avea vectorul in care vom retine heap-ul */
+    capacity = 0;
+
+    /* size - pozitia curenta din heap */
+    size = 0;
+
+    /* Se aloca vectorul numit anterior */
+    hip = new T[ capacity + 1 ];	
+}
+
+
 template <typename T>
 Heap<T>::Heap( int length ) {
 	/* Se retine ce dimensiune va avea vectorul in care vom retine heap-ul */
@@ -14,11 +28,7 @@ Heap<T>::Heap( int length ) {
     size = 0;
 
     /* Se aloca vectorul numit anterior */
-<<<<<<< HEAD
     hip = new T[ capacity + 1 ];
-=======
-    hip = new T[capacity + 1];
->>>>>>> 91c8dbf8fb734663a292eb363b944ee78ecfd5cd
 }
 
 
@@ -63,6 +73,11 @@ void Heap<T>::operator=( const Heap<T>& other ) {
 
 }
 
+
+template <typename T>
+void Heap<T>::operator+=( const Heap<T>& other ) {
+	return;
+}
 
 
 template <typename T>

@@ -1,6 +1,6 @@
 #include "../headers/Arbore.h"
 #include "../headers/NodeArbore.h"
-#include "../headers/ResizableArray.h"
+#include "../headers/RA.h"
 #include "../headers/ResizableMatrix.h"
 
 
@@ -40,7 +40,7 @@ void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacen
 			ResizableMatrix<T>::DFS( nod, visited, currentArbore, reverseIdUser );
 		
 			/* Adaugam arborele in lista */
-			listaDeArbori.ResizableArray< unsigned long long >::insert( numberOfTrees, currentArbore );
+			listaDeArbori.ResizableArray< unsigned long long >::push_back( currentArbore );
 
 		}
 

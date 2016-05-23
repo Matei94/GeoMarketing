@@ -31,6 +31,9 @@ class NodeArbore {
 	/* Suprascrierea operatorului de asignare */
 	void operator=( const NodeArbore& other );
 
+	/* Suprascrierea operatorului + */
+	void operator+( const NodeArbore& other );
+
 	/* Returneaza valoarea lui root */
 	unsigned long long getRoot();
 

@@ -37,6 +37,11 @@ void NodeArbore::operator=( const NodeArbore& other ) {
 }
 
 
+void NodeArbore::operator+=( const NodeArbore& other ) {
+	return ;
+}
+
+
 unsigned long long NodeArbore::getRoot() {
 	return this->root;
 }

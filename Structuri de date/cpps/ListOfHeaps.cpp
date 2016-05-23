@@ -1,14 +1,8 @@
 #include "../headers/ListOfHeaps.h"
-#include "../headers/ResizableArray.h"
+#include "../headers/RA.h"
 #include "../headers/Heap.h"
 
 using namespace std;
-
-
-template<typename T>
-ListOfHeaps<T>::ListOfHeaps<T>() {
-	
-}
 
 
 template <typename T>
