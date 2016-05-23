@@ -25,8 +25,8 @@ int main( )
 	t.insert(6, t.getRoot(), 5, 1 );
 	t.insert(6, t.getRoot(), 5, 1 );
 	t.insert(6, t.getRoot(), 5, 1 );
-		t.insert(6, t.getRoot(), 5, 2 );
-			t.insert(6, t.getRoot(), 5, 2 );
+	t.insert(6, t.getRoot(), 5, 2 );
+	t.insert(6, t.getRoot(), 5, 2 );
 
 
 	t.insert(6, t.getRoot(), 5, 1 );
@@ -51,7 +51,7 @@ int main( )
 	cout<<"nr de vizite "<<value<<"\n";
 	value = 0;
 	t.getRoot()->nrVizitePerMagazin( 2, 1, 7, value );
-	cout<<"vizitele pe magazinul 1 "<<value<<"\n";	
+	cout<<"vizitele pe magazinul 2 "<<value<<"\n";	
 
 	cout<<t.getRoot()->ra.getValue( 6 )<<'\n';
 	cout<<t.getRoot()->ra.getSize()<<'\n';
