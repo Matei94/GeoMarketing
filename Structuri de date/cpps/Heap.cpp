@@ -36,7 +36,19 @@ template <typename T>
 Heap<T>::~Heap( ) {
 	/* Se dezaloca zona de memorie ce retinea heap-ul */
 	if( size > 1 )
-	    delete[] hip;
+		delete[] hip;
+}
+
+template <typename T>
+void Heap<T>::Initialize( ) {
+	/* Se retine ce dimensiune va avea vectorul in care vom retine heap-ul */
+    capacity = 0;
+
+    /* size - pozitia curenta din heap */
+    size = 0;
+
+    /* Se aloca vectorul numit anterior */
+    hip = new T[ capacity + 1 ];
 }
 
 template <typename T>
@@ -74,13 +86,12 @@ void Heap<T>::operator=( const Heap<T>& other ) {
 
 template <typename T>
 bool Heap<T>::operator>=( const Heap<T>& other ) {
-	return 1;
+	return 0;
 
 }
 
 template <typename T>
 bool Heap<T>::operator<( const Heap<T>& other ) {
-	
 	return 1;
 
 }
@@ -98,6 +109,7 @@ template <typename T>
 void Heap<T>::moveUp( int currentIndex ) {
 	/* Indexul parintelui nodului curent din heap */
 	int parentIndex = currentIndex / 2;
+	cout<<"halajpeafa "<<currentIndex<<'\n';
 
 	/* Daca se ajunge in varful heap-ului sau valoarea curenta e bine pozitionata in heap, gata */
 	if ( currentIndex == 1 || hip[ parentIndex ] >= hip[ currentIndex ] )
@@ -147,12 +159,12 @@ void Heap<T>::swapValues( int index1, int index2 ) {
 
 template <typename T>
 bool Heap<T>::getMaxim( T& hipMaxim ) {
-	hipMaxim = hip[1];
-
 	if ( size == 0 ) {
 		cout << "Heap-ul este gol. Nu se poate extrage niciun maxim. Scz pls...\n";
 		return false;
 	}
+
+	hipMaxim = hip[1];
 
 	/* Se muta maximul pe ultima pozitie in heap */
 	hip[1] = hip[size];
@@ -165,7 +177,6 @@ bool Heap<T>::getMaxim( T& hipMaxim ) {
 
 	return true;
 }
-
 
 template class Heap<int>;
 template class Heap< Heap<int> >;
