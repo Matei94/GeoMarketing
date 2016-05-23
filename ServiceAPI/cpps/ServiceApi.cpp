@@ -1,56 +1,58 @@
 #include "../headers/ServiceAPI.h"
 
-	void Service::createUser(int id, double homeX, double homeY) {
+	void Service::createUser( int id, double homeX, double homeY ) {
 
-    std::cout << "Inserting integer values 1 to 10" << std::endl;
+        /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
+        if( mapUsers.getSize( ) == 0 ) {
+            mapUsers.Initialize( 65599, sdbm );
+        }
 
-    infoUser ha;
-    ha.numarDeCumparaturi = 1;
-    ha.numarDeVizite = 4;
-    ha.discountAcordat = 5;
-    ha.userX = 6;
-    ha.userY = 7;
+        if( reverseIdUsers.getSize( ) == 0 ) {
+            reverseIdUsers.initialize();
+            reverseIdUsers.push_back( 0 );
+            nrUsers++;
+        }
 
-    if( mapUsers.getSize() == 0 ) {
-        mapUsers.Initialize( 65599, sdbm );
-    }
-    mapUsers.Insert( 2, ha );
-    mapUsers.printTable( );
+        cout<<id<<'\n';
+        reverseIdUsers.push_back( id );
+        nrUsers++;
 
-    t.insert(4, t.getRoot());
-    t.insert(5, t.getRoot());
-    t.insert(7, t.getRoot());
-    t.insert(2, t.getRoot());
-    t.insert(1, t.getRoot());
-    t.insert(3, t.getRoot());
-    t.insert(6, t.getRoot());
+        infoUser user;
+        /* Initializare informatii pe care le punem in hashatble-ul mapUsers*/
+        user.numarDeCumparaturi = 0;
+        user.numarDeVizite = 0;
+        user.discountAcordat = 0;
+        user.indexUser = nrUsers;
+        user.userX = homeX;
+        user.userY = homeY;
 
+        /* inserez in mapUsers la cheia id, informatia din user */
+        mapUsers.Insert( id, user );
 
-    std::cout << "Printing balance:\n";
-    t.printBalance();
-
-    std::cout<<"Printing inorder\n";
-    t.getRoot()->inorder();
-	}
+}
 
     void Service::createStore(int id, double storeX, double storeY) {
-
-        infoMagazin ha;
-        ha.indexRA = 1;
-        ha.storeX = 6;
-        ha.storeY = 7;
 
         if( mapMagazine.getSize() == 0 ) {
             mapMagazine.Initialize( 65599, sdbm );            
         }
 
-        mapMagazine.Insert( 1, ha );
+        nrMagazine++;
+
+        infoMagazin mag;
+        mag.indexRA = nrMagazine;
+        mag.storeX = storeX;
+        mag.storeY = storeY;
+
+        mapMagazine.Insert( id, mag );
 
     }
 
     void Service::visit(int timestamp, int clientId, int storeId, int discount) {
         mapUsers.printTable( );
         mapMagazine.printTable( );
+        reverseIdUsers.printOnScreen( );
+        cout<<reverseIdUsers.getValue( 3 );
     }
 
     void Service::invite(int userWhichInvites, int invitedUser) {
@@ -81,7 +83,7 @@
 
     }
 
-    Array<pair<int, int>> Service::mostCrowdedKTimeFrames(int K, int storeId) {
+    Array<pair<int, int> > Service::mostCrowdedKTimeFrames(int K, int storeId) {
 
     }
 
@@ -101,7 +103,7 @@
 
     }
 
-    Array<pair<int, double>> Service::averageVisitsPerUser() {
+    Array<pair<int, double> > Service::averageVisitsPerUser() {
 
     }
 

@@ -68,7 +68,7 @@ class ResizableArray {
 	/* un fel de constructor */
 	void initialize();
 
-	//void printOnScreen();
+	void printOnScreen();
 };
 
 #endif /* __RESIZABLE_ARRAY_H_ */

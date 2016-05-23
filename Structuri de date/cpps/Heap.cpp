@@ -14,7 +14,11 @@ Heap<T>::Heap( int length ) {
     size = 0;
 
     /* Se aloca vectorul numit anterior */
+<<<<<<< HEAD
+    hip = new T[ capacity + 1 ];
+=======
     hip = new T[capacity + 1];
+>>>>>>> 91c8dbf8fb734663a292eb363b944ee78ecfd5cd
 }
 
 

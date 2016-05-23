@@ -7,11 +7,7 @@ using namespace std;
 
 template <typename T>
 ResizableArray<T>::ResizableArray() {
-	this->capacity = 1;
  	this->size = 0;
-	this->array = new T[ capacity ];
-	for( int i = 0; i < capacity; i++ )
-		array[i] = 0;
 }
 
 
@@ -113,7 +109,7 @@ void ResizableArray<T>::resize() {
 	T *tmpArray = new T[ 2*capacity ];
 
 	/* Copiez elementele din vectorul curent in cel temporar */
-	for ( unsigned long long i = 0; i < size; ++i ) {
+	for ( unsigned long long i = 0; i <= size; ++i ) {
 		tmpArray[ i ] = array[ i ];
 	}
 
@@ -123,7 +119,7 @@ void ResizableArray<T>::resize() {
 	/* Salvez vectorul nou alocat in vectorul vechi, si fac update la capacity */
 	array = tmpArray;
 	capacity = 2 * capacity;
-	for( int i = size; i < capacity; i++ )
+	for( int i = size + 1; i < capacity; i++ )
 		array[i] = 0;	
 
 }
@@ -175,7 +171,7 @@ void ResizableArray<T>::initialize() {
 	for( int i = 0; i < capacity; i++ )
 		array[i] = 0;
 }
-/*
+
 template <typename T>
 void ResizableArray<T>::printOnScreen() {
 	
@@ -187,9 +183,10 @@ void ResizableArray<T>::printOnScreen() {
 	
 	cout << '\n';
 }
-*/
+
 
 
 /* Lista de template-uri acceptate */
 template class ResizableArray< int >;
+template class ResizableArray< unsigned long long >;
 //template class ResizableArray< NodeArbore >;
