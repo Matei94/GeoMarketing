@@ -171,7 +171,7 @@ void ResizableArray<T>::initialize() {
 	for( int i = 0; i < capacity; i++ )
 		array[i] = 0;
 }
-/*
+
 template <typename T>
 void ResizableArray<T>::printOnScreen() {
 	
@@ -183,9 +183,10 @@ void ResizableArray<T>::printOnScreen() {
 	
 	cout << '\n';
 }
-*/
+
 
 
 /* Lista de template-uri acceptate */
 template class ResizableArray< int >;
+template class ResizableArray< unsigned long long >;
 //template class ResizableArray< NodeArbore >;

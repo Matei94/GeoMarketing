@@ -6,6 +6,7 @@
 #include "../../Structuri de date/headers/AvlTree.h"
 #include "../../Structuri de date/headers/Hashtable.h"
 #include "../../Structuri de date/headers/Heap.h"
+#include "../../Structuri de date/headers/ResizableArray.h"
 
 using namespace std;
 
@@ -40,6 +41,8 @@ private:
     Hashtable<int, infoUser> mapUsers;
     unsigned long long nrUsers = 0;
     unsigned long long nrMagazine = 0;
+    ResizableArray<unsigned long long> reverseIdUsers;
+
 
 public:
     void createUser(int id, double homeX, double homeY);
