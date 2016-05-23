@@ -7,8 +7,8 @@ template <typename T>
 class ResizableArray {
 	
 	T *array;
-	unsigned long long capacity;
-	unsigned long long size;
+	int capacity;
+	int size;
 
 	
   public:
@@ -17,7 +17,7 @@ class ResizableArray {
 	ResizableArray();
 	
 	/* Constructor */
-	ResizableArray( unsigned long long capacity );
+	ResizableArray( int capacity );
 
 	/* Destructor */
 	~ResizableArray();
@@ -29,19 +29,19 @@ class ResizableArray {
 	void operator=( const ResizableArray& other );
 
 	/* Supraincarcarea operatorului de accesare */
-	T operator[]( unsigned long long position );
+	T operator[]( int position );
 
 	/* Functia de adaugare pe ultima pozitie */
 	void push_back( T value );
 
 	/* Functia de insertie la o anumita pozitie in vector */
-	void insert( unsigned long long position, T value );
+	void insert( int position, T value );
 
 	/* Functia de extractie a capacity */
-	unsigned long long getCapacity();
+	int getCapacity();
 
 	/* Functia de extractie a size */
-	unsigned long long getSize();
+	int getSize();
 
 	/* Setter pentru array */
 	void setArray( T* newArray );
@@ -50,7 +50,7 @@ class ResizableArray {
 	void resize();
 
 	/* Metoda care returneaza valoare de pe pozitie */ 
-	T getValue( unsigned long long position );
+	T getValue( int position );
    	
    	/* Metoda care sorteaza crescator elementele vectorului */
 	void sortAscending();

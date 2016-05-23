@@ -5,12 +5,9 @@
 
 #include "../../Structuri de date/headers/AvlTree.h"
 #include "../../Structuri de date/headers/Hashtable.h"
-<<<<<<< HEAD
 #include "../../Structuri de date/headers/Arbore.h"
-=======
 #include "../../Structuri de date/headers/Heap.h"
 #include "../../Structuri de date/headers/ResizableArray.h"
->>>>>>> a905826244d4c52ba29ed9c3429fdc54ecb4db28
 
 using namespace std;
 
@@ -19,10 +16,18 @@ struct Array {
     int resultSize;
     T* resultData;
 
+    Array() {
+        resultSize = 0;
+        resultData = NULL;
+    }
+
+    Array( int resultSize ) {
+        this->resultSize = resultSize;
+    }
+
     Array(int resultSize, T* resultData) :
         resultSize(resultSize), resultData(resultData) {}
 
-<<<<<<< HEAD
     void insert( int position, T value ) {
         resultData[ position ] = value;
     }
@@ -36,19 +41,6 @@ inline int sdbm( int key ) {
         hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
         key = key / 10;
     }
-=======
-inline int sdbm( int key ) {
-    unsigned long hash = 0;
-
-    while( key ) {
-        hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
-        key = key / 10;
-    }
-
-    return hash % 65599;
-
-}
->>>>>>> a905826244d4c52ba29ed9c3429fdc54ecb4db28
 
     return hash % 65599;
 
@@ -62,17 +54,27 @@ class Service {
     AvlTree<int> t;
     Hashtable<int, infoMagazin> mapMagazine;
     Hashtable<int, infoUser> mapUsers;
-<<<<<<< HEAD
     Arbore listOfTrees;
-    ResizableMatrix<unsigned long long> adjacencyList;
-=======
-    unsigned long long nrUsers = 0;
-    unsigned long long nrMagazine = 0;
-    ResizableArray<unsigned long long> reverseIdUsers;
-
->>>>>>> a905826244d4c52ba29ed9c3429fdc54ecb4db28
+    ResizableMatrix< int > adjacencyList;
+    int nrUsers;
+    int nrMagazine;
+    ResizableArray< int > reverseIdUsers;
 
   public:
+
+    /* Extragerea valorii nrUsers */
+    int getNrUsers();
+
+    /* Extragerea valorii nrMagazine */
+    int getNrMagazine();
+
+    /* Setarea valorii nrUsers */
+    void setNrUsers( int value );
+
+    /* Setarea valorii nrMagazine */
+    void setNrMagazine( int );
+
+
     void createUser(int id, double homeX, double homeY);
     void createStore(int id, double storeX, double storeY);
 

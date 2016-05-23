@@ -1,10 +1,10 @@
 #ifndef __ListOfHeaps_H_
 #define __ListOfHeaps_H_
 
-#include "../../Structuri de date/headers/Arbore.h"
-#include "../../Structuri de date/headers/NodeArbore.h"
-#include "../../Structuri de date/headers/ResizableArray.h"
-#include "../../Structuri de date/headers/ServiceAPI.h"
+#include "../headers/Arbore.h"
+#include "../headers/NodeArbore.h"
+#include "../headers/ResizableArray.h"
+#include "../headers/ServiceAPI.h"
 
 
 using namespace std;
@@ -16,16 +16,16 @@ class ListOfHeaps {
 	ResizableArray< Heap<T> > lista;
 
 	/* numberOfHeaps - numarul de heap-uri */
-	unsigned long long numberOfHeaps;
+	int numberOfHeaps;
 
 
   public:
 
   	/* Functia de extragere a numarului de heap-uri */
-  	unsigned long long getNumberOfHeaps();
+  	int getNumberOfHeaps();
 
   	/* Functia de schimbare a valorii numarului de heap-uri */
-  	void setNumberOfHeaps( unsigned long long value );  	
+  	void setNumberOfHeaps( int value );  	
 
 };
 

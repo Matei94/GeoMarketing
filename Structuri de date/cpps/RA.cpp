@@ -13,7 +13,7 @@ ResizableArray<T>::ResizableArray() {
 
 
 template <typename T>	
-ResizableArray<T>::ResizableArray( unsigned long long capacity ) {
+ResizableArray<T>::ResizableArray( int capacity ) {
 	this->capacity = capacity;
 	this->size = 0;
 	this->array = new T[ capacity ];
@@ -34,7 +34,7 @@ ResizableArray<T>::ResizableArray( const ResizableArray& other ) {
 	array = other.array;
 
 	if( array ) {
-		for( unsigned long long i = 0; i < size; ++i ) {
+		for( int i = 0; i < size; ++i ) {
 			array[i] = other.array[i];
 		}
 	}
@@ -50,7 +50,7 @@ void ResizableArray<T>::operator=( const ResizableArray& other ) {
 	array = other.array;
 
 	if( array ) {
-		for( unsigned long long i = 0; i < size; ++i ) {
+		for( int i = 0; i < size; ++i ) {
 			array[i] = other.array[i];
 		}
 	}
@@ -59,7 +59,7 @@ void ResizableArray<T>::operator=( const ResizableArray& other ) {
 
 
 template <typename T>
-T ResizableArray<T>::operator[]( unsigned long long position ) {
+T ResizableArray<T>::operator[]( int position ) {
 
 	if(position >= capacity) {
 		cout << "Boss, nu esti in zona de memorie buna\n";
@@ -71,19 +71,19 @@ T ResizableArray<T>::operator[]( unsigned long long position ) {
 
 
 template <typename T>
-T ResizableArray<T>::getValue( unsigned long long position ) {
+T ResizableArray<T>::getValue( int position ) {
 	return array[ position ];
 }
 
 
 template <typename T>
-unsigned long long ResizableArray<T>::getCapacity() {
+int ResizableArray<T>::getCapacity() {
 	return capacity;
 }
 
 
 template <typename T>
-unsigned long long ResizableArray<T>::getSize() {
+int ResizableArray<T>::getSize() {
 	return size;
 }
 
@@ -101,7 +101,7 @@ void ResizableArray<T>::resize() {
 	T *tmpArray = new T[ 2*capacity ];
 
 	/* Copiez elementele din vectorul curent in cel temporar */
-	for ( unsigned long long i = 0; i < size; ++i ) {
+	for ( int i = 0; i < size; ++i ) {
 		tmpArray[ i ] = array[ i ];
 	}
 
@@ -129,7 +129,7 @@ void ResizableArray<T>::push_back( T value ) {
 
 
 template <typename T>
-void ResizableArray<T>::insert( unsigned long long position, T value ) {
+void ResizableArray<T>::insert( int position, T value ) {
 
 	if (position >= capacity)
 		this->resize();

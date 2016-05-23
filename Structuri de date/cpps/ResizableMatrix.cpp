@@ -26,11 +26,11 @@ ResizableMatrix<T>::ResizableMatrix() {
 
 
 template <typename T>	
-ResizableMatrix<T>::ResizableMatrix( unsigned long long capacityLines ) {
+ResizableMatrix<T>::ResizableMatrix( int capacityLines ) {
 
 	/* Set capacity for both lines and collumns */
 	this->capacityLines = capacityLines;
-	this->capacityCollumns = new unsigned long long[ capacityLines ];
+	this->capacityCollumns = new int[ capacityLines ];
 
 	/* Set initial size for both lines and collumns */
  	this->sizeLines = 0;
@@ -39,7 +39,7 @@ ResizableMatrix<T>::ResizableMatrix( unsigned long long capacityLines ) {
 	this->array = new T*[ capacityLines ];
 
 	/* Allocate memory for all collumns */
-	for( unsigned long long i = 0; i < capacityLines; ++i ) {
+	for( int i = 0; i < capacityLines; ++i ) {
 
 		/* Aloc un vector de cate un element pentru fiecare linie */
 		array[i] = new T[1];
@@ -57,7 +57,7 @@ template <typename T>
 ResizableMatrix<T>::~ResizableMatrix(){
 
 	/* De-Allocate memory for collumns */
-	for ( unsigned long long i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i < capacityLines; ++i )
 		delete[] array[i];
 
 	/* De-Allocate memory for the matrix itself */
@@ -72,7 +72,7 @@ ResizableMatrix<T>::ResizableMatrix( const ResizableMatrix& other ) {
 	this->capacityLines = other.capacityLines;
 
 	this->capacityCollumns = other.capacityCollumns;
-	for ( unsigned long long i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i < capacityLines; ++i )
 		capacityCollumns[i] = other.capacityCollumns[i];
 
 	this->sizeLines = other.sizeLines;
@@ -80,8 +80,8 @@ ResizableMatrix<T>::ResizableMatrix( const ResizableMatrix& other ) {
 	this->array = other.array;
 
 	if( array ) {
-		for( unsigned long long i = 0; i < sizeLines; ++i ) {
-			for( unsigned long long j = 0; j <= array[i][0]; ++j )
+		for( int i = 0; i < sizeLines; ++i ) {
+			for( int j = 0; j <= array[i][0]; ++j )
 				array[i][j] = other.array[i][j];
 		}
 	}
@@ -95,7 +95,7 @@ void ResizableMatrix<T>::operator=( const ResizableMatrix& other ) {
 	this->capacityLines = other.capacityLines;
 
 	this->capacityCollumns = other.capacityCollumns;
-	for ( unsigned long long i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i < capacityLines; ++i )
 		capacityCollumns[i] = other.capacityCollumns[i];
 
 	this->sizeLines = other.sizeLines;
@@ -103,8 +103,8 @@ void ResizableMatrix<T>::operator=( const ResizableMatrix& other ) {
 	this->array = other.array;
 
 	if( array ) {
-		for( unsigned long long i = 0; i < sizeLines; ++i ) {
-			for( unsigned long long j = 0; j <= array[i][0]; ++j )
+		for( int i = 0; i < sizeLines; ++i ) {
+			for( int j = 0; j <= array[i][0]; ++j )
 				array[i][j] = other.array[i][j];
 		}
 	}
@@ -113,7 +113,7 @@ void ResizableMatrix<T>::operator=( const ResizableMatrix& other ) {
 
 
 template <typename T>
-T* ResizableMatrix<T>::operator[]( unsigned long long line ) {
+T* ResizableMatrix<T>::operator[]( int line ) {
 
 	if(line >= capacityLines) {
 		cout << "Boss, nu esti in zona de memorie buna.\n";
@@ -125,38 +125,38 @@ T* ResizableMatrix<T>::operator[]( unsigned long long line ) {
 
 /*
 template <typename T>
-T ResizableMatrix<T>::getValue( unsigned long long line, unsigned long long collumn ) {
+T ResizableMatrix<T>::getValue( int line, int collumn ) {
 	return array[ line ][ collumn ];
 }
 */
 
 
 template <typename T>
-unsigned long long ResizableMatrix<T>::getCapacityLines() {
+int ResizableMatrix<T>::getCapacityLines() {
 	return capacityLines;
 }
 
 
 template <typename T>
-unsigned long long ResizableMatrix<T>::getCapacityCollumns( unsigned long long line ) {
+int ResizableMatrix<T>::getCapacityCollumns( int line ) {
 	return capacityCollumns[ line ];
 }
 
 
 template <typename T>
-unsigned long long ResizableMatrix<T>::getSizeLines() {
+int ResizableMatrix<T>::getSizeLines() {
 	return sizeLines;
 }
 
 
 template <typename T>
-unsigned long long ResizableMatrix<T>::getSizeCollumns( unsigned long long line ) {
+int ResizableMatrix<T>::getSizeCollumns( int line ) {
 	return array[line][0];
 }
 
 
 template <typename T>
-void ResizableMatrix<T>::push_back( unsigned long long line, T value ) {
+void ResizableMatrix<T>::push_back( int line, T value ) {
 
 	/* Verific daca mai am spatiu alocat pentru insertia curenta */
 	if (array[line][0] == capacityCollumns[line]) {
@@ -169,7 +169,7 @@ void ResizableMatrix<T>::push_back( unsigned long long line, T value ) {
 
 
 template <typename T>
-void ResizableMatrix<T>::insert( unsigned long long line, T value ) {
+void ResizableMatrix<T>::insert( int line, T value ) {
 
 	/* Daca linia la care vreau sa inserez nu exista deja, maresc numarul de linii al matricei */
 	if (line >= capacityLines)
@@ -189,20 +189,20 @@ void ResizableMatrix<T>::resizeLines( ) {
 
 	/* Aloc o matrice noua cu numar dublu de linii */
 	T **tmpArray = new T*[ 2*capacityLines ];
-	unsigned long long *tmpCapacityCollumns = new unsigned long long[ 2*capacityLines ];
+	int *tmpCapacityCollumns = new int[ 2*capacityLines ];
 
 	/* Copiez capacityCollumns din vechea matrice in cea noua */
-	for ( unsigned long long i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i < capacityLines; ++i )
 		tmpCapacityCollumns[i] = capacityCollumns[i];
 
 	/* Copiez elementele din matricea veche in cea temporara */
-	for ( unsigned long long i = 0; i < sizeLines; ++i ) {
-		for ( unsigned long long j = 0; j <= array[i][0]; ++j )
+	for ( int i = 0; i < sizeLines; ++i ) {
+		for ( int j = 0; j <= array[i][0]; ++j )
 			tmpArray[ i ][ j ] = array[ i ][ j ];
 	}
 
 	/* Eliberez memoria ocupata de vechea matrice */
-	for ( unsigned long long i = 0; i < capacityLines; ++i )
+	for ( int i = 0; i < capacityLines; ++i )
 		delete array[i];
 
 	delete[] array;
@@ -216,14 +216,14 @@ void ResizableMatrix<T>::resizeLines( ) {
 
 
 template <typename T>
-void ResizableMatrix<T>::resizeCollumns( unsigned long long line ) {
+void ResizableMatrix<T>::resizeCollumns( int line ) {
 	//std::cout<<"gogonel"<<' ';
 
 	/* Aloc o linie cu numar dublu de coloane */
 	T *tmpArray = new T[ 2*capacityCollumns[ line ] ];
 
 	/* Copiez valorile din vechea linie in noua linie */
-	for ( unsigned long long i = 0; i < capacityCollumns[line]; ++i )
+	for ( int i = 0; i < capacityCollumns[line]; ++i )
 		tmpArray[i] = array[line][i];
 
 	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
@@ -237,9 +237,9 @@ void ResizableMatrix<T>::printOnScreen() {
 	
 	cout << "Continut:\n";
 
-	for ( unsigned long long i = 0; i < capacityLines; ++i ) {
+	for ( int i = 0; i < capacityLines; ++i ) {
 		
-		for ( unsigned long long j = 1; j <= array[i][0]; ++j ) {
+		for ( int j = 1; j <= array[i][0]; ++j ) {
 			cout << array[i][j] << ' ';
 		}
 
@@ -251,7 +251,7 @@ void ResizableMatrix<T>::printOnScreen() {
 
 
 template <typename T>
-void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser ) {
+void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser ) {
 
 	/* Crestem contorul pentru elemente deja vizitate din arborele curent */
 	currentArbore.NodeArbore::setNumberOfElements( currentArbore.NodeArbore::getNumberOfElements() + 1 );
@@ -263,7 +263,7 @@ void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<boo
 	infoUser auxiliar;
 
 	/* Aflam idUser */
-	unsigned long long userID = reverseIdUser[ currentNode ];
+	int userID = reverseIdUser[ currentNode ];
 
 	/* Extragem in structura auxiliar informatii despre userul curent */
 	mapUsers.get( userID, auxiliar );
@@ -276,10 +276,10 @@ void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<boo
 
 
 	/* Parcurgem lista de copii ai nodului curent */
-	for ( unsigned long long i = 1; i <= array[ currentNode ][ 0 ]; ++i ) {
+	for ( int i = 2; i <= array[ currentNode ][ 0 ]; ++i ) {
 
 		/* son - fiu al nodului curent */
-		unsigned long long son = array[ currentNode ][ i ];
+		int son = array[ currentNode ][ i ];
 
 		/* Daca intalnim unul ce nu a fost deja vizitat, apelam DFS-ul pentru el */
 		if( !visited[ son ] )
@@ -292,4 +292,3 @@ void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<boo
 
 /* Lista de template-uri acceptate */
 template class ResizableArray< int >;
-template class ResizableMatrix< unsigned long long >;

@@ -23,7 +23,7 @@ NodeArbore::NodeArbore( const NodeArbore& other ) {
 	this->root = other.root;
 	this->numberOfElements = other.numberOfElements;
 	this->maxInvites = other.maxInvites;
-	this->sumvisits = other.sumVisits;
+	this->sumVisits = other.sumVisits;
 
 }
 
@@ -32,7 +32,7 @@ void NodeArbore::operator=( const NodeArbore& other ) {
 	this->root = other.root;
 	this->numberOfElements = other.numberOfElements;
 	this->maxInvites = other.maxInvites;
-	this->sumvisits = other.sumVisits;
+	this->sumVisits = other.sumVisits;
 
 }
 
@@ -42,35 +42,35 @@ void NodeArbore::operator+=( const NodeArbore& other ) {
 }
 
 
-unsigned long long NodeArbore::getRoot() {
+int NodeArbore::getRoot() {
 	return this->root;
 }
 
-unsigned long long NodeArbore::getNumberOfElements() {
+int NodeArbore::getNumberOfElements() {
 	return this->numberOfElements;
 }
 
-unsigned long long NodeArbore::getMaxInvites() {
+int NodeArbore::getMaxInvites() {
 	return this->maxInvites;
 }
 
-unsigned long long NodeArbore::getSumVisits() {
+int NodeArbore::getSumVisits() {
 	return this->sumVisits;
 }
 
-void NodeArbore::setRoot( unsigned long long value ) {
+void NodeArbore::setRoot( int value ) {
 	this->root = value;
 }
 
-void NodeArbore::setNumberOfElements( unsigned long long value ) {
+void NodeArbore::setNumberOfElements( int value ) {
 	this->numberOfElements = value;
 }
 
-void NodeArbore::setMaxInvites( unsigned long long value ) {
+void NodeArbore::setMaxInvites( int value ) {
 	this->maxInvites = value;
 }
 
-void NodeArbore::setSumVisits( unsigned long long value ) {
+void NodeArbore::setSumVisits( int value ) {
 	this->maxInvites = value;
 }
 

@@ -38,7 +38,7 @@ struct infoUser {
 	int numarDeCumparaturi;
 	int numarDeVizite;
 	int discountAcordat;
-	unsigned long long indexUser;
+	int indexUser;
 	double userX;
 	double userY;
 

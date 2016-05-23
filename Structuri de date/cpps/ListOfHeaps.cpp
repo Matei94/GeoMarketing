@@ -12,7 +12,7 @@ void ListOfHeaps<T>::getNumberOfHeaps() {
 
 
 template <typename T>
-unsigned long long ListOfHeaps<T>::setNumberOfHeaps( unsigned long long value ) {
+int ListOfHeaps<T>::setNumberOfHeaps( int value ) {
 	this->numberOfHeaps = value;
 }
 

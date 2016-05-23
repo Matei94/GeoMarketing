@@ -7,7 +7,7 @@ using namespace std;
 int main() {
  
 	// Initializarea (alocarea vectorului intern). Presupunem ca are o dimensiune n;
-	unsigned long long n;
+	int n;
 	std::cout << "n = ";
 	std::cin >> n;
 
