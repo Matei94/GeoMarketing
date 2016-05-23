@@ -5,6 +5,7 @@
 
 #include "../../Structuri de date/headers/AvlTree.h"
 #include "../../Structuri de date/headers/Hashtable.h"
+#include "../../Structuri de date/headers/Arbore.h"
 
 using namespace std;
 
@@ -15,30 +16,37 @@ struct Array {
 
     Array(int resultSize, T* resultData) :
         resultSize(resultSize), resultData(resultData) {}
+
+    void insert( int position, T value ) {
+        resultData[ position ] = value;
+    }
+
 };
 
-    inline int sdbm( int key ) {
-        unsigned long hash = 0;
+inline int sdbm( int key ) {
+    unsigned long hash = 0;
 
-        while( key ) {
-            hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
-            key = key / 10;
-        }
-
-        return hash % 65599;
-
+    while( key ) {
+        hash = ( ( key % 10 ) + '0' ) + ( hash << 6 ) + ( hash << 16 ) - hash;
+        key = key / 10;
     }
+
+    return hash % 65599;
+
+}
 
 
 class Service {
 
-private:
+  private:
 
     AvlTree<int> t;
     Hashtable<int, infoMagazin> mapMagazine;
     Hashtable<int, infoUser> mapUsers;
+    Arbore listOfTrees;
+    ResizableMatrix<unsigned long long> adjacencyList;
 
-public:
+  public:
     void createUser(int id, double homeX, double homeY);
     void createStore(int id, double storeX, double storeY);
 

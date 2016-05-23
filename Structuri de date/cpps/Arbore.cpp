@@ -1,23 +1,32 @@
 #include "../headers/Arbore.h"
+#include "../headers/NodeArbore.h"
 #include "../headers/ResizableArray.h"
+#include "../headers/ResizableMatrix.h"
 
 
 using namespace std;
 
+unsigned long long Arbore::getNumberOfTrees() {
+	return this->numberOfTrees;
+}
 
-void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacenta ) {
+void Arbore::setNumberOfTrees( unsigned long long value ) {
+	this->numberOfTrees = value;
+}
+
+void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacenta, ResizableArray< int >& reverseIdUser ) {
 
 	/* Nodes - numarul de useri din graf */
-	unsigned long long Nodes = listaDeAdiacenta->sizeLines;
+	unsigned long long numberOfUsers = listaDeAdiacenta.ResizableMatrix< unsigned long long >::getSizeLines();
 
 	/* numberOfTrees - numarul de arbori pe care i-am gasit */
 	unsigned long long numberOfTrees = 0;
 
 	/* visited - vectorul de vizite; 0 - nodul nu a fost vizitat, 1 - nodul a fost vizitat deja */
-	ResizableArray< bool > visited( Nodes );
+	ResizableArray< bool > visited( numberOfUsers );
 	
 	/* Initializez cate un dfs din fiecare nod care nu a fost vizitat inca */
-	for( unsigned long long nod = 1; nod <= Nodes; ++nod ) {
+	for( unsigned long long nod = 1; nod <= numberOfUsers; ++nod ) {
 
 		NodeArbore currentArbore;
 
@@ -28,17 +37,16 @@ void Arbore::findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacen
 			++numberOfTrees;
 
 			/* Apelam DFS-ul pentru nodul curent */
-			DFS( nod, visited, currentArbore );
+			ResizableMatrix<T>::DFS( nod, visited, currentArbore, reverseIdUser );
 		
 			/* Adaugam arborele in lista */
-			this->ResizableArray< unsigned long long >::insert( numberOfTrees, currentArbore );
+			listaDeArbori.ResizableArray< unsigned long long >::insert( numberOfTrees, currentArbore );
 
 		}
-
 
 	}
 
 	/* Pe pozitia 0 va fi retinut numarul de elemente din lista, deci numarul de arbori din lista */
-	this->ResizableArray::insert( 0, numberOfTrees );
+	listaDeArbori.setNumberOfTrees( numberOfTrees );
 
 }

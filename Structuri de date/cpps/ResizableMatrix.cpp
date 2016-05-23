@@ -4,6 +4,7 @@
 #include "../headers/Hashtable.h"
 #include "../headers/NodeArbore.h"
 #include "../headers/ResizableMatrix.h"
+#include "../headers/Hashtable.h"
 
 
 using namespace std;
@@ -61,12 +62,6 @@ ResizableMatrix<T>::~ResizableMatrix(){
 
 	/* De-Allocate memory for the matrix itself */
 	delete[] array;
-	delete[] capacityCollumns;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e7d574b67558a0886e1793265f0fb199bc4b075d
 	delete[] capacityCollumns;
 }
 
@@ -216,17 +211,7 @@ void ResizableMatrix<T>::resizeLines( ) {
 	/* Salvez matricea nou alocata in matricea veche, si fac update la capacity */
 	array = tmpArray;
 	capacityCollumns = tmpCapacityCollumns;
-<<<<<<< HEAD
-	capacityLines = 2 * capacityLines;	
-
-=======
-<<<<<<< HEAD
-	capacityLines = 2 * capacityLines;		
-=======
 	capacityLines = 2 * capacityLines;
-	
->>>>>>> 6ad955d8f1f2848299511f5c06f4f4e691c92524
->>>>>>> e7d574b67558a0886e1793265f0fb199bc4b075d
 }
 
 
@@ -241,23 +226,9 @@ void ResizableMatrix<T>::resizeCollumns( unsigned long long line ) {
 	for ( unsigned long long i = 0; i < capacityCollumns[line]; ++i )
 		tmpArray[i] = array[line][i];
 
-<<<<<<< HEAD
-	delete[] array[line];
 	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
 	array[line] = tmpArray;
 	capacityCollumns[line] *= 2;
-
-<<<<<<< HEAD
-	delete[] tmpArray;
-=======
-=======
-		delete[] array[line];
-
-	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
-	array[line] = tmpArray;
-	capacityCollumns[line] *= 2;
->>>>>>> 6ad955d8f1f2848299511f5c06f4f4e691c92524
->>>>>>> e7d574b67558a0886e1793265f0fb199bc4b075d
 }
 
 
@@ -280,13 +251,13 @@ void ResizableMatrix<T>::printOnScreen() {
 
 
 template <typename T>
-void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore ) {
+void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser ) {
 
 	/* Crestem contorul pentru elemente deja vizitate din arborele curent */
-	currentArbore.setNumberOfElements( currentArbore.getNumberOfElements() + 1 );
+	currentArbore.NodeArbore::setNumberOfElements( currentArbore.NodeArbore::getNumberOfElements() + 1 );
 
 	/* Facem update la numarul maxim de invitatii trimise */
-	currentArbore.setMaxInvites( max( currentArbore.getMaxInvites(), array[ currentNode ][ 0 ] ) );
+	currentArbore.NodeArbore::setMaxInvites( max( currentArbore.NodeArbore::getMaxInvites(), array[ currentNode ][ 0 ] ) );
 
 	/* Structura auxiliara in care vom retine informatiile din hash pentru userul cu id-ul currentNode */
 	infoUser auxiliar;
@@ -298,21 +269,21 @@ void ResizableMatrix<T>::DFS( unsigned long long currentNode, ResizableArray<boo
 	mapUsers.get( userID, auxiliar );
 
 	/* Adunam numarul de vizite ale userului curent la total */
-	currentArbore.setSumVisits( currentArbore.getSumVisits() + auxiliar.numarDeVizite );
+	currentArbore.NodeArbore::setSumVisits( currentArbore.NodeArbore::getSumVisits() + auxiliar.numarDeVizite );
 
 	/* Marcam nodul curent din arbore ca fiind vizitat */
-	visited[ currentNode ] = true;
+	visited.ResizableArray<bool>::insert( currentNode, true );
 
 
 	/* Parcurgem lista de copii ai nodului curent */
 	for ( unsigned long long i = 1; i <= array[ currentNode ][ 0 ]; ++i ) {
 
 		/* son - fiu al nodului curent */
-		son = array[ currentNode ][ i ];
+		unsigned long long son = array[ currentNode ][ i ];
 
 		/* Daca intalnim unul ce nu a fost deja vizitat, apelam DFS-ul pentru el */
 		if( !visited[ son ] )
-			DFS( son, count, visited );
+			DFS( son, visited, currentArbore, reverseIdUser );
 
 	}
 

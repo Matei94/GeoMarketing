@@ -8,7 +8,7 @@ NodeArbore::NodeArbore() {
 	this->root = 0;
 	this->numberOfElements = 0;
 	this->maxInvites = 0;
-	this->sumVisitis = 0;
+	this->sumVisits = 0;
 
 }
 
@@ -23,7 +23,7 @@ NodeArbore::NodeArbore( const NodeArbore& other ) {
 	this->root = other.root;
 	this->numberOfElements = other.numberOfElements;
 	this->maxInvites = other.maxInvites;
-	this->sumVisitis = other.sumVisitis;
+	this->sumvisits = other.sumVisits;
 
 }
 
@@ -32,7 +32,7 @@ void NodeArbore::operator=( const NodeArbore& other ) {
 	this->root = other.root;
 	this->numberOfElements = other.numberOfElements;
 	this->maxInvites = other.maxInvites;
-	this->sumVisitis = other.sumVisitis;
+	this->sumvisits = other.sumVisits;
 
 }
 
@@ -45,12 +45,12 @@ unsigned long long NodeArbore::getNumberOfElements() {
 	return this->numberOfElements;
 }
 
-unsigned long long NodeArbore::getmaxInvites() {
+unsigned long long NodeArbore::getMaxInvites() {
 	return this->maxInvites;
 }
 
 unsigned long long NodeArbore::getSumVisits() {
-	return this->sumVisitis;
+	return this->sumVisits;
 }
 
 void NodeArbore::setRoot( unsigned long long value ) {

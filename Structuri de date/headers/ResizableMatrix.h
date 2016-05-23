@@ -79,7 +79,7 @@ class ResizableMatrix {
 	void printOnScreen();
 
 	/* DFS - Parcurgerea in adancime implementata recursiv */
-	void DFS( unsigned long long currentNode, ResizableArray< bool >& visited, NodeArbore& currentArbore );
+	void DFS( unsigned long long currentNode, ResizableArray< bool >& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser );
    	
 };
 

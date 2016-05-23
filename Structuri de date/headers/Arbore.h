@@ -9,16 +9,24 @@
 using namespace std;
 
 
-template <typename T>
 class Arbore {
 
 	/* listaDeArbori - lista de arbori de useri pe care ii folosim la taskul 3 */
 	ResizableArray< NodeArbore > listaDeArbori;
 
+	/* numberOfTrees - numarul de arbori retinuti in lista */
+	unsigned long long numberOfTrees;
+
   public:
 
+  	/* Functia care extrage numarul de arbori din lista */
+  	unsigned long long getNumberOfTrees();
+
+  	/* Functia care schimba valoarea numarului de arbori din lista */
+  	void setNumberOfTrees( unsigned long long value );
+
   	/* Functia ce gaseste toate radacinile arborilor si returneaza o lista cu toti acestia */
-  	void findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacenta );
+  	void findAllRoots( ResizableMatrix< unsigned long long >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers );
 
 };
 

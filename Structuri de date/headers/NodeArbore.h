@@ -14,7 +14,7 @@ class NodeArbore {
 	unsigned long long maxInvites;
 
 	/* sumVisitis - numarul total de vizite pe care le-au facut userii din arborele curent */
-	unsigned long long sumVisitis;
+	unsigned long long sumVisits;
 
 
   public:
@@ -38,7 +38,7 @@ class NodeArbore {
 	unsigned long long getNumberOfElements();
 
 	/* Returneaza valoarea lui maxInvites */
-	unsigned long long getmaxInvites();
+	unsigned long long getMaxInvites();
 
 	/* Returneaza valoarea lui sumVisits */
 	unsigned long long getSumVisits();
