@@ -167,23 +167,26 @@ int ResizableMatrix<T>::getSizeCollumns( int line ) {
 
 template <typename T>
 void ResizableMatrix<T>::push_back( int line, T value ) {
-	//cout<<"intra in push\n";
+	cout<<"intra in push\n";
 	/* Verific daca mai am spatiu alocat pentru insertia curenta */
 	if (array[line][0] >= capacityCollumns[line]) {
+		cout<<"pula\n, cred ca intra in resize collums\n";
  		this->resizeCollumns( line );
 	}
- 	cout<<"momentul crucial\n";
- 	cout<<array[line][0]<<"\n";
  	array[line][0] += 1;
+ 	cout<<"\n";
+ 	cout<<"size: \n";
+ 	cout<<array[line][0]<<"\n";
 
 /* Adaug elementul la finalul vectorului si incrementez size-ul de coloane pentru linia curenta */
 	array[ line ][ array[line][0] ] = value;
+	cout<<"noul vecin: "<<array[ line ][ array[line][0] ]<<"\n";
+	cout<<"a iesit din push_back\n";
 }
 
 
 template <typename T>
 void ResizableMatrix<T>::insert( int line, T value ) {
-
 	/* Daca linia la care vreau sa inserez nu exista deja, maresc numarul de linii al matricei */
 	if (line >= capacityLines) {
 		cout << "Se apeleaza resize lines.\n";
@@ -245,13 +248,16 @@ void ResizableMatrix<T>::resizeLines( ) {
 
 template <typename T>
 void ResizableMatrix<T>::resizeCollumns( int line ) {
-	std::cout<<"gogonel"<<' ';
+	cout<<"imi intra in resizeColums\n";
+	cout<< "\n";
 
 	/* Aloc o linie cu numar dublu de coloane */
 	T *tmpArray = new T[ 2*capacityCollumns[ line ] ];
 	//cout<<"ma pis pe mine\n";
-	cout<<"array[line][0]: "<<array[line][0]<<"\n";
-	cout<<"capacitycollums[line]: "<<capacityCollumns[line]<<"\n";
+	cout<<"array[line][0]inainte : "<<array[line][0]<<"\n";
+	cout<<"capacitycollums[line] inainte : "<<capacityCollumns[line]<<"\n";
+	cout<<"\n";
+
 	/* Copiez valorile din vechea linie in noua linie */
 
 	for ( int i = 0; i < capacityCollumns[line]; ++i )
@@ -260,8 +266,10 @@ void ResizableMatrix<T>::resizeCollumns( int line ) {
 	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
 	array[line] = tmpArray;
 	capacityCollumns[line] *= 2;
-	cout<<"array[line][0]: "<<array[line][0]<<"\n";
-	cout<<"capacitycollums[line]: "<<capacityCollumns[line]<<"\n";
+	cout<<"array[line][0] dupa: "<<array[line][0]<<"\n";
+	cout<<"capacitycollums[line] dupa: "<<capacityCollumns[line]<<"\n";
+	cout<<"\n";
+	cout<<"a iesit din resize collums\n";
 }
 
 
