@@ -8,15 +8,20 @@ using namespace std;
 
 template <typename T>
 ResizableArray<T>::ResizableArray() {
+	this->capacity = 1;
  	this->size = 0;
+ 	this->array = new T[ capacity ];
+
+ 	array[ size ] = T();
 }
 
 
 template <typename T>	
 ResizableArray<T>::ResizableArray( int capacity ) {
-	this->capacity = capacity;
+	this->capacity = capacity + 1;
 	this->size = 0;
 	this->array = new T[ capacity ];
+	
 	for( int i = 0; i < capacity; i++ )
 		array[i] = T();
 }
@@ -67,7 +72,7 @@ void ResizableArray<T>::operator=( const ResizableArray& other ) {
 template <typename T>
 T ResizableArray<T>::operator[]( int position ) {
 
-	if(position >= capacity) {
+	if(position > capacity) {
 		cout << "Boss, nu esti in zona de memorie buna\n";
 		return T();
 	}
@@ -142,10 +147,11 @@ void ResizableArray<T>::push_back( T value ) {
 template <typename T>
 void ResizableArray<T>::insert( int position, T value ) {
 
-	if (position >= capacity)
-		{this->resize();
+	if (position >= capacity) {
+		this->resize();
 		size = position;
-		}	
+	}	
+
 	array[ position ] = value;
 }
 

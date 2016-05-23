@@ -7,11 +7,15 @@ using namespace std;
 
 inline Array<int> Service::distinctGroupsOfUsers() {
 
+	cout << "Pizdarel, intri in functie?\n";
+
 	/* numberOfTrees - numarul de arbori din lista */
 	int numberOfTrees = listOfTrees.Arbore::getNumberOfTrees();
 
 	/* Vectorul in care vom stoca numarul de elemente din fiecare arbore */
 	Array<int> result( numberOfTrees + 1 );
+
+	cout << "Number of trees equals: " << numberOfTrees << '\n';
 
 	/* Parcurgem lista de arbori si extragem numarul de elemente din componenta fiecaruia */
 	for( int i = 1; i <= numberOfTrees; ++i ) {

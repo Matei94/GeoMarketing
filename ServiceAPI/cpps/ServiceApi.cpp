@@ -21,25 +21,45 @@ void Service::setNrMagazine( int value ) {
 
 void Service::createUser( int id, double homeX, double homeY ) {
 
+    cout << "Intra aici in create user.\n";
+
     /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
     if( mapUsers.Hashtable< int, infoUser >::getSize( ) == 0 ) {
         mapUsers.Hashtable< int, infoUser >::Initialize( 65599, sdbm );
+        
+        cout << "Intra in initialize pentru mapUsers.\n";
     }
 
     /* Daca nu a fost deja initializat, initializam reverseIdUser */
     if( reverseIdUsers.ResizableArray< int >::getSize( ) == 0 ) {
         reverseIdUsers.ResizableArray< int >::initialize();
-        reverseIdUsers.ResizableArray< int >::push_back( 0 );
-        nrUsers++;
+
+        cout << "reverseIdUsers:\n";
+        cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
+        cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
+
+        //reverseIdUsers.ResizableArray< int >::push_back( 0 );
+
+        cout << "\n";
+        cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
+        cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
+
+        //nrUsers++;
     }
+
+    /* Incrementam numarul de useri inregistrati */
+    nrUsers++;
 
     cout<<id<<'\n';
 
     /* Aplicam "functia inversa de hash" */
-    reverseIdUsers.ResizableArray< int >::push_back( id );
+    reverseIdUsers.ResizableArray< int >::insert( nrUsers, id );
 
-    /* Incrementam numarul de useri inregistrati */
-    nrUsers++;
+        cout << "\n";
+        cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
+        cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
+        cout << reverseIdUsers[ 1 ] << '\n';
+
 
     infoUser user;
 
@@ -54,8 +74,13 @@ void Service::createUser( int id, double homeX, double homeY ) {
     /* inserez in mapUsers la cheia id, informatia din user */
     mapUsers.Insert( id, user );
 
+    infoUser value;
+    cout << "Hash: " << mapUsers.get( id, value ) << " " << value << "\n";
+
     /* Initializam in lista de adiacenta linia de vecini corespunzatoare userului tocmai creat */
     adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
+
+    cout << adjacencyList.ResizableMatrix< int >::getValue( user.indexUser, 1 ) << '\n';
 
 }
 
