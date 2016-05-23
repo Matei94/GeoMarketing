@@ -82,7 +82,8 @@ void AvlNode<T>::nrVizitePerMagazin( T idStore, T t1, T t2, int &nrVizite ) {
 	}
 
 	if( t1 <= this->timestamp && t2 >= this->timestamp )
-		nrVizite += this->ra[ idStore ];
+		if( this->ra.getCapacity() > idStore )
+			nrVizite += this->ra[ idStore ];
 	
 	if( t2 > this->timestamp ){
 		if( right != NULL )

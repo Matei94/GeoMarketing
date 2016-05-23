@@ -24,8 +24,12 @@ int main( )
 	t.insert(3, t.getRoot(), 5, 1 );
 	t.insert(6, t.getRoot(), 5, 1 );
 	t.insert(6, t.getRoot(), 5, 1 );
-
-
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 1 );
+	t.insert(6, t.getRoot(), 5, 3 );
 	std::cout << "Afiseaza factorul de echilibru si discountul pentru fiecare nod:\n";
 	t.printBalance();
 
@@ -44,6 +48,8 @@ int main( )
 	value = 0;
 	t.getRoot()->nrVizitePerMagazin( 1, 1, 7, value );
 	cout<<"vizitele pe magazinul 1 "<<value<<"\n";	
+
+	cout<<t.getRoot()->right->ra[1]<<"\n";
 
 
 }
