@@ -25,7 +25,7 @@ int main () {
 	mata.invite( 1, 2 );
 	mata.invite( 2, 3 );
 
-//	mata.distinctGroupsOfUsers();
+	mata.distinctGroupsOfUsers();
 
 
 	return 0;
