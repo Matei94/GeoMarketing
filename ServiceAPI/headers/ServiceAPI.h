@@ -6,8 +6,8 @@
 #include "../../Structuri de date/headers/AvlTree.h"
 #include "../../Structuri de date/headers/Hashtable.h"
 #include "../../Structuri de date/headers/Arbore.h"
-#include "../../Structuri de date/headers/Heap.h"
 #include "../../Structuri de date/headers/ResizableArray.h"
+#include "../../Structuri de date/headers/ListOfHeaps.h"
 
 using namespace std;
 
@@ -56,6 +56,8 @@ class Service {
     Hashtable<int, infoUser> mapUsers;
     Arbore listOfTrees;
     ResizableMatrix< int > adjacencyList;
+    ListOfHeaps<int> distantePerMagazin;
+    ListOfHeaps<int> discountPerMagazin;
     int nrUsers;
     int nrMagazine;
     ResizableArray< int > reverseIdUsers;
