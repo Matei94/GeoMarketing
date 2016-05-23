@@ -54,8 +54,11 @@ class ResizableArray {
 	/* setter pentru capacity */
 	void setCapacity( int capacity );
 
-	/* Functia de redimensionare */
-	void resize();
+	/* Functia de redimensionare in care capacity devinde dubla */
+	void resize1();
+
+	/* Functia de redimensionare in care capacity devine capacity + position */
+	void resize2( int position );
 
 	/* Metoda care returneaza valoare de pe pozitie */ 
 	T getValue( int position );

@@ -109,7 +109,7 @@ void ResizableArray<T>::setCapacity( int capacity ){
 }
 
 template <typename T>
-void ResizableArray<T>::resize() {
+void ResizableArray<T>::resize1() {
 
 	/* Aloc un vector nou de dimensiune dubla */
 	T *tmpArray = new T[ 2*capacity ];
@@ -130,13 +130,34 @@ void ResizableArray<T>::resize() {
 
 }
 
+template <typename T>
+void ResizableArray<T>::resize2( int position ) {
+
+	/* Aloc un vector nou de dimensiune dubla */
+	T *tmpArray = new T[ capacity + position ];
+
+	/* Copiez elementele din vectorul curent in cel temporar */
+	for ( int i = 0; i <= size; ++i ) {
+		tmpArray[ i ] = array[ i ];
+	}
+
+	/* Eliberez memoria ocupata de vechiul vector */
+	delete[] array;
+
+	/* Salvez vectorul nou alocat in vectorul vechi, si fac update la capacity */
+	array = tmpArray;
+	capacity = capacity + position;
+	for( int i = size + 1; i < capacity; i++ )
+		array[i] = T();	
+
+}
 
 template <typename T>
 void ResizableArray<T>::push_back( T value ) {
 
 	/* Verific daca mai am spatiu alocat pentru insertia curenta */
 	if (size == capacity) {
- 		this->resize();
+ 		this->resize1();
 	}
  
 	/* Adaug elementul la finalul vectorului si incrementez size-ul */
@@ -148,7 +169,7 @@ template <typename T>
 void ResizableArray<T>::insert( int position, T value ) {
 
 	if (position >= capacity) {
-		this->resize();
+		this->resize2( position );
 		size = position;
 	}	
 
@@ -159,7 +180,7 @@ void ResizableArray<T>::insert( int position, T value ) {
 template< typename T >
 void ResizableArray<T>::insertInPlus( int position, T value ){
 	if( position >= capacity ) {
-		this->resize();
+		this->resize2( position );
 		size = position;
 	}
 	if( size < position )
@@ -201,5 +222,5 @@ void ResizableArray<T>::printOnScreen() {
 /* Lista de template-uri acceptate */
 template class ResizableArray< bool >;
 template class ResizableArray< int >;
-template class ResizableArray< NodeArbore >;
+//template class ResizableArray< NodeArbore >;
 //template class ResizableArray< Heap<int> >;
