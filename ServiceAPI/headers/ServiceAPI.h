@@ -33,6 +33,26 @@ struct Array {
         resultData[ position ] = value;
     }
 
+    Array( const Array& other ) {
+        this->resultSize = other.resultSize;
+        this->resultData = other.resultData;        
+    }
+
+    void operator=( const Array& other ) {
+        this->resultSize = other.resultSize;
+        this->resultData = other.resultData;
+    }
+
+    void operator[]( int position ) {
+
+        if( position >= resultSize ) {
+            cout << "Boss, nu esti in zona de memorie buna in Array.\n";
+            return T();
+        }
+
+        return resultData[ position ];
+    }
+
 };
 
 inline int sdbm( int key ) {

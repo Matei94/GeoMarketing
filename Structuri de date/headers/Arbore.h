@@ -34,7 +34,7 @@ class Arbore {
   	void setNumberOfTrees( int value );
 
   	/* Functia ce gaseste toate radacinile arborilor si returneaza o lista cu toti acestia */
-  	void findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers, Hashtable< int, infoUser >& mapUsers );
+  	void findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUsers, Hashtable< int, infoUser >& mapUsers, int nrUsers, ResizableArray< bool >& areParinte );
 
 };
 
