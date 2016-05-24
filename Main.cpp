@@ -33,12 +33,6 @@ int main () {
 	mata.invite( 1, 4 );
 	mata.invite( 2, 5 );
 
-	//mata.distinctGroupsOfUsers();
-
-	//cout << '\n';
-
-	//cout << mata.userWithMostInvites();
-
 /*
 	cout<<"creats\n";
 	mata.createStore( 1, 25.96966, 44.44577);
