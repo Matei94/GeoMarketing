@@ -32,8 +32,15 @@ int main () {
 	mata.invite( 1, 4 );
 	mata.invite( 2, 5 );
 
+	Array<int> raspuns;
 
-	mata.distinctGroupsOfUsers();
+	raspuns = mata.biggestKDiscounts( 2, 358);
+
+	cout<<raspuns[0]<<' ';
+	cout<<raspuns[1];
+
+
+	//mata.distinctGroupsOfUsers();
 
 	
 /*

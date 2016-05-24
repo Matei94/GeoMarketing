@@ -170,10 +170,21 @@ int Service::visitsInTimeframeOfStore(int startTime, int endTime, int storeId) {
 
 Array<int> Service::biggestKDiscounts(int K, int storeId) {
     
+    int value, indexMagazin, i = 0;
     infoMagazin currentStore;
     mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
 
-    //discountPerMagazin.( nrMagazine );
+    indexMagazin = currentStore.indexRA;    
+    Array<int> raspuns( K );
+
+    value = discountPerMagazin.getMaxim( indexMagazin );
+    while( value > -2 ) {
+        raspuns.insert( i, value );
+        i++;
+        value = discountPerMagazin.getMaxim( indexMagazin );
+    }
+
+    return raspuns;
 
 }
 
