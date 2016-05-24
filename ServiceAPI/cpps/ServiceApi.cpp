@@ -21,48 +21,23 @@ void Service::setNrMagazine( int value ) {
 
 void Service::createUser( int id, double homeX, double homeY ) {
 
-//    cout << "Intra aici in create user.\n";
-    cout<<"Userul: "<<id<<"\n";
-
     /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
     if( mapUsers.Hashtable< int, infoUser >::getSize( ) == 0 ) {
 
         nrUsers = 0;
 
         mapUsers.Hashtable< int, infoUser >::Initialize( 65599, sdbm );
-        
-     //   cout << "Intra in initialize pentru mapUsers.\n";
     }
 
     /* Daca nu a fost deja initializat, initializam reverseIdUser */
-    if( reverseIdUsers.ResizableArray< int >::getSize( ) == 0 ) {
+    if( reverseIdUsers.ResizableArray< int >::getSize( ) == 0 ) 
         reverseIdUsers.ResizableArray< int >::initialize();
-
-      //  cout << "reverseIdUsers:\n";
-       // cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
-       // cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
-
-        //reverseIdUsers.ResizableArray< int >::push_back( 0 );
-
-        //cout << "\n";
-        //cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
-        //cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
-
-        //nrUsers++;
-    }
 
     /* Incrementam numarul de useri inregistrati */
     nrUsers++;
 
-    cout<<"nr useri: "<<nrUsers<<'\n';
-
     /* Aplicam "functia inversa de hash" */
     reverseIdUsers.ResizableArray< int >::insert( nrUsers, id );
-
-        cout << "\n";
-      //  cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
-        //cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
-       // cout << reverseIdUsers[ 1 ] << '\n';
 
 
     infoUser user;
@@ -148,13 +123,12 @@ void Service::invite(int userWhichInvites, int invitedUser) {
     /* Extragem valoarea indexului asociat userului care face invitatia */
     int indexInvitedUser = value.indexUser;    
 
-    cout<<"\n";
-    cout<<"index care invita: "<<indexUserWhichInvites<<"\n";
-    cout<<"index invitat: "<<indexInvitedUser<<"\n";
     /* Adaug relatia in lista de adiacenta */
     adjacencyList.ResizableMatrix< int >::insert( indexUserWhichInvites, indexInvitedUser );
-    cout<<"indexUserWhichInvites "<<indexUserWhichInvites<<"are nr de vecini: "<<adjacencyList[indexUserWhichInvites][0]<<"\n";
-     cout<<"indexUserWhichInvites "<<indexUserWhichInvites<<"vecinul "<<adjacencyList[indexUserWhichInvites][1]<<"\n";
+    
+    /* Marchez faptul ca invitedUser are parinte in vectorul de parinti */
+    areParinte.ResizableArray< bool >::insert( invitedUser, true );
+
 }
 
 int Service::visitsInTimeframe(int startTime, int endTime) {

@@ -8,6 +8,11 @@
 using namespace std;
 
 
+Arbore::Arbore() {
+	this->numberOfTrees = 0;
+}
+
+
 ResizableArray< NodeArbore > Arbore::getListaDeArbori() {
 	return this->listaDeArbori;
 }
@@ -23,11 +28,11 @@ void Arbore::setNumberOfTrees( int value ) {
 
 void Arbore::findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser >& mapUsers ) {
 
-	/* Nodes - numarul de useri din graf */
-	int numberOfUsers = listaDeAdiacenta.ResizableMatrix< int >::getSizeLines();
+	/* numbereOfUsers - numarul de useri din graf */
+	int numberOfUsers = listaDeAdiacenta.ResizableMatrix< int >::getCapacityLines();
 
-	/* numberOfTrees - numarul de arbori pe care i-am gasit */
-	int numberOfTrees = 0;
+	/* numberOfCopaci - numarul de arbori pe care i-am gasit */
+	int numberOfCopaci = 0;
 
 	/* visited - vectorul de vizite; 0 - nodul nu a fost vizitat, 1 - nodul a fost vizitat deja */
 	ResizableArray< bool > visited( numberOfUsers );
@@ -38,7 +43,7 @@ void Arbore::findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableAr
 		NodeArbore currentArbore;
 
 		/* Nodul curent nu a fost vizitat inca => DFS */
-		if( !visited[ nod ] ) {
+		if( !visited[ nod ] &&  ) {
 
 			/* Incrementam numarul de arbori determinati */
 			++numberOfTrees;

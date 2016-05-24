@@ -21,6 +21,9 @@ class Arbore {
 
   public:
 
+    /* Constructor default */
+    Arbore();
+
     /* Functia care returneaza continutul listaDeArbori */
     ResizableArray< NodeArbore > getListaDeArbori();
 

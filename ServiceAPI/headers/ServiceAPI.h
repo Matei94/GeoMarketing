@@ -51,16 +51,38 @@ class Service {
 
   private:
 
+    /* t - AVL ul pe care il folosim pentru primele (sub)task-uri */
     AvlTree<int> t;
+
+    /* mapMagazine - hashtable-ul in care vom retine informatiile aferente magazinelor */
     Hashtable<int, infoMagazin> mapMagazine;
+
+    /* mapUsers - hashtable-ul in care vom retine informatiile aferente userilor */
     Hashtable<int, infoUser> mapUsers;
+
+    /* listOfTrees - lista in care vom retine informatii cu privire la fiecare arbore in parte */
     Arbore listOfTrees;
+
+    /* adjacencyList - lista de adiacenta aferenta grafului de useri */
     ResizableMatrix< int > adjacencyList;
+
+    /* distantePerMagazin - heap-ul in care se retin distantele de la user la magazine */
     ListOfHeaps<int> distantePerMagazin;
+
+    /* discountPerMagazin - heap-ul in care se retin discount-urile acordate la fiecare magazin */
     ListOfHeaps<int> discountPerMagazin;
+
+    /* nrUsers - numarul de utilizatori ai aplicatiei */
     int nrUsers;
+
+    /* nrMagazine - numarul de magazine  */
     int nrMagazine;
+
+    /* reverseIdUsers - vectorul in care retinem carui index ii corespunde ce idUser */
     ResizableArray< int > reverseIdUsers;
+
+    /* areParinte - vectorul de tip bool care retine daca nodul curent are sau nu parinte */
+    ResizableArray< bool > areParinte;
 
   public:
 
