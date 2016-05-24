@@ -200,7 +200,7 @@ Array<int> Service::distinctGroupsOfUsers() {
     for ( int i = 1; i <= numberOfTrees; ++i ) {
 
         /* Extragem informatiile din arborele curent */
-        NodeArbore currentArbore = listOfTrees[ i ];
+        NodeArbore currentArbore = listOfTrees.getValue( i );
 
         /* Mutam numarul de elemente din fiecare arbore in vectorul ce trebuie trimis ca rezultat - result */
         result.Array< int >::insert( i, currentArbore.getNumberOfElements() );

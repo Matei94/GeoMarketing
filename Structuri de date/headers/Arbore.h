@@ -30,6 +30,9 @@ class Arbore {
   	/* Functia care extrage numarul de arbori din lista */
   	int getNumberOfTrees();
 
+    /* Functia de extractie a elementului de la pozitia position din vectorul listaDeArbori */
+    NodeArbore getValue( int position );
+
   	/* Functia care schimba valoarea numarului de arbori din lista */
   	void setNumberOfTrees( int value );
 

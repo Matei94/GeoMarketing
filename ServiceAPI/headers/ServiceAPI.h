@@ -22,7 +22,7 @@ struct Array {
     }
 
     Array( int resultSize ) {
-        this->resultSize = resultSize;
+        this->resultSize = resultSize + 1;
         this->resultData = new T[ resultSize + 1 ];
     }
 
@@ -45,7 +45,7 @@ struct Array {
 
     void operator[]( int position ) {
 
-        if( position >= resultSize ) {
+        if( position > resultSize ) {
             cout << "Boss, nu esti in zona de memorie buna in Array.\n";
             return T();
         }
