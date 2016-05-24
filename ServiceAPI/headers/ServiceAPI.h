@@ -102,6 +102,9 @@ class Service {
     /* reverseIdUsers - vectorul in care retinem carui index ii corespunde ce idUser */
     ResizableArray< int > reverseIdUsers;
 
+    /* reverseIdMagazine - vectorul in care retinem carui index ii corespunde ce idMagazin */
+    ResizableArray< int > reverseIdMagazine;
+
     /* areParinte - vectorul de tip bool care retine daca nodul curent are sau nu parinte */
     ResizableArray< bool > areParinte;
 
