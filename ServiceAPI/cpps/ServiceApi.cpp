@@ -131,11 +131,15 @@ void Service::invite(int userWhichInvites, int invitedUser) {
 }
 
 int Service::visitsInTimeframe(int startTime, int endTime) {
-
+    int nr = 0;
+    t.getRoot()->nrVizite( startTime, endTime, nr );
+    return nr;
 }
 
 int Service::totalDiscountInTimeframe(int startTime, int endTime) {
-
+    int discount = 0;
+    t.getRoot()->discountTotal( startTime, endTime, discount );
+    return discount;
 }
 
 Array<int> Service::usersWithBestBuyToDiscountRate() {
@@ -143,7 +147,9 @@ Array<int> Service::usersWithBestBuyToDiscountRate() {
 }
 
 int Service::visitsInTimeframeOfStore(int startTime, int endTime, int storeId) {
-
+    int nr = 0;
+    t.getRoot()->nrVizitePerMagazin( storeId, startTime, endTime, nr );
+    return nr;
 }
 
 Array<int> Service::biggestKDiscounts(int K, int storeId) {
