@@ -3,7 +3,7 @@
 #include "../headers/NodeArbore.h"
 #include "../headers/ResizableArray.h"
 #include "../headers/Heap.h"
-
+#include "../headers/Hashtable.h"
 using namespace std;
 
 template <typename T>
@@ -185,7 +185,7 @@ void ResizableArray<T>::insertInPlus( int position, T value ){
 	}
 	if( size < position )
 		size = position;
-	array[ position ] += value;
+	//array[ position ] += value;
 }
 
 
@@ -223,4 +223,4 @@ void ResizableArray<T>::printOnScreen() {
 template class ResizableArray< bool >;
 template class ResizableArray< int >;
 template class ResizableArray< NodeArbore >;
-//template class ResizableArray< Heap<int> >;
+template class ResizableArray< Heap<int> >;
