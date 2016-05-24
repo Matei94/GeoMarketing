@@ -28,37 +28,39 @@ void Arbore::setNumberOfTrees( int value ) {
 
 void Arbore::findAllRoots( ResizableMatrix< int >& listaDeAdiacenta, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser >& mapUsers ) {
 
-	/* numbereOfUsers - numarul de useri din graf */
-	int numberOfUsers = listaDeAdiacenta.ResizableMatrix< int >::getCapacityLines();
-
-	/* numberOfCopaci - numarul de arbori pe care i-am gasit */
-	int numberOfCopaci = 0;
+	/* Vector in care vom retine indicii radacinilor */
+	ResizableArray< int > listOfRoots; 
 
 	/* visited - vectorul de vizite; 0 - nodul nu a fost vizitat, 1 - nodul a fost vizitat deja */
-	ResizableArray< bool > visited( numberOfUsers );
-	
-	/* Initializez cate un dfs din fiecare nod care nu a fost vizitat inca */
-	for( int nod = 1; nod <= numberOfUsers; ++nod ) {
+	ResizableArray< bool > visited( nrUseri );
 
-		NodeArbore currentArbore;
-
-		/* Nodul curent nu a fost vizitat inca => DFS */
-		if( !visited[ nod ] &&  ) {
-
-			/* Incrementam numarul de arbori determinati */
-			++numberOfTrees;
-
-			/* Apelam DFS-ul pentru nodul curent */
-			listaDeAdiacenta.ResizableMatrix< int >::DFS( nod, visited, currentArbore, reverseIdUser, mapUsers );
+	/* Parcurgem lista de useri si vedem care sunt root-urile */
+	for ( int currentUser = 1; currentUser <= nrUseri; ++currentUser ) {
 		
-			/* Adaugam arborele in lista */
-			listaDeArbori.ResizableArray< NodeArbore >::push_back( currentArbore );
-
-		}
-
+		/* Daca userul curent pare sa fie radacina, il adaugam in lista de radacini */
+		if ( !areParinte[ currentUser ] && adjacencyList[ currentUser ][ 0 ] )
+			listOfRoots.ResizableArray< int >::push_back( currentUser );
+		
 	}
 
-	/* Pe pozitia 0 va fi retinut numarul de elemente din lista, deci numarul de arbori din lista */
-	this->setNumberOfTrees( numberOfTrees );
+	/* Setam numarul de arbori din lista = numarul de radacini pe care le-am detectat */
+	this->setNumberOfTrees( listOfRoots.getSize() );
+
+	/* Parcurgem lista de radacini si construim listOfTrees */
+	for ( int i = 1; i <= numberOfTrees; ++i ) {
+
+		/* currentRoot - radacina arborelui curent pe care il vom inspecta */
+		int curentRoot = listOfRoots[ i ];
+	
+		/* Declaram un NodeArbore pentru arborele curent, pe care ulterior il vom adauga la lista de arbori */
+		NodeArbore currentNodeArbore;
+
+		/* Apelam DFS-ul pentru nodul curent */
+		listaDeAdiacenta.ResizableMatrix< int >::DFS( curentRoot, visited, currentArbore, reverseIdUser, mapUsers );
+	
+		/* Adaugam informatiile cu privire la arborele tocmai exploatat in lista de arbori */
+		listaDeArbori.ResizableArray< NodeArbore >::push_back( currentArbore );
+
+	}
 
 }
