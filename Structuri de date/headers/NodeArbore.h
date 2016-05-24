@@ -13,6 +13,9 @@ class NodeArbore {
 	/* maxInvites - numarul maxim de invitatii pe care l-a trimis unul dintre userii din arborele curent */
 	int maxInvites;
 
+	/* idUser - id-ul userului cu cei mai multi utilizatori invitati de catre el */
+	int idUser;
+
 	/* sumVisitis - numarul total de vizite pe care le-au facut userii din arborele curent */
 	int sumVisits;
 
@@ -49,6 +52,9 @@ class NodeArbore {
 	/* Returneaza valoarea lui sumVisits */
 	int getSumVisits();
 
+	/* Returneaza valoarea lui idUser */
+	int getIdUser();
+
 	/* Atribuie lui root o noua valoare */
 	void setRoot( int value );
 
@@ -60,6 +66,9 @@ class NodeArbore {
 
 	/* Atribuie lui sumVisits o noua valoare */
 	void setSumVisits( int value );
+
+	/* Atribuie lui idUser o noua valoare */
+	void setIdUser( int value );
 
 };
 

@@ -20,7 +20,8 @@ int main () {
 	mata.createUser( 4, 5, 10 );
 	mata.createUser( 5, 10, 11 );
 	mata.createUser( 6, 9, 1 );
-	
+
+
 	//cout<<"vizite\n";
 	mata.visit( 1, 1, 1, 1);
 	mata.visit( 2, 4, 358, -1 );
@@ -32,10 +33,12 @@ int main () {
 	mata.invite( 1, 4 );
 	mata.invite( 2, 5 );
 
+	//mata.distinctGroupsOfUsers();
 
-	mata.distinctGroupsOfUsers();
+	//cout << '\n';
 
-	
+	//cout << mata.userWithMostInvites();
+
 /*
 	cout<<"creats\n";
 	mata.createStore( 1, 25.96966, 44.44577);
@@ -47,8 +50,8 @@ int main () {
 	mata.createUser( 1, 2.9873094627998737, 4.1296186324496205 );
 	mata.createUser( 0, 3.208566980164757, 3.1919495083244676 );
 	mata.invite(0, 1);
-
 */
+
 	return 0;
 
 }

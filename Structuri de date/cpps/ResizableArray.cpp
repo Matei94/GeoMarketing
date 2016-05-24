@@ -73,7 +73,7 @@ template <typename T>
 T ResizableArray<T>::operator[]( int position ) {
 
 	if(position > capacity) {
-		cout << "Boss, nu esti in zona de memorie buna\n";
+		cout << "Boss, nu esti in zona de memorie buna in ResizableArray.\n";
 		return T();
 	}
 

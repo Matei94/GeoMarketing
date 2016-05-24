@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 #include "../headers/Hashtable.h"
 #include "../headers/NodeArbore.h"
 #include "../headers/ResizableMatrix.h"
@@ -128,7 +127,8 @@ template <typename T>
 T* ResizableMatrix<T>::operator[]( int line ) {
 
 	if(line >= capacityLines) {
-		cout << "Boss, nu esti in zona de memorie buna.\n";
+		cout << "Boss, nu esti in zona de memorie buna in ResizableMatrix.\n";
+		cout << "Vrei sa accesezi linia " << line << " ,dar tu esti cam prost, ca cica nu-i alocata zona asta.\n\n";
 		return T();
 	}
 
@@ -184,7 +184,7 @@ template <typename T>
 void ResizableMatrix<T>::insert( int line, T value ) {
 	
 	/* Daca linia la care vreau sa inserez nu exista deja, maresc numarul de linii al matricei */
-	if (line >= capacityLines) 
+	while (line >= capacityLines) 
 		this->resizeLines();
 
 	/* Insertia efectiva */
@@ -278,11 +278,33 @@ void ResizableMatrix<T>::printOnScreen() {
 template <typename T>
 void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser>& mapUsers ) {
 
+	//cout << "\nAcum suntem in DFS si exploatam nodul cu indicele " << currentNode << " .\n";
+
 	/* Crestem contorul pentru elemente deja vizitate din arborele curent */
 	currentArbore.NodeArbore::setNumberOfElements( currentArbore.NodeArbore::getNumberOfElements() + 1 );
 
+	//cout << "In momentul asta, avem in arborele curent " << currentArbore.NodeArbore::getNumberOfElements() << " elemente.\n";
+
+	if ( currentNode >= this->getCapacityLines() )
+		return;
+
 	/* Facem update la numarul maxim de invitatii trimise */
 	currentArbore.NodeArbore::setMaxInvites( max( currentArbore.NodeArbore::getMaxInvites(), array[ currentNode ][ 0 ] ) );
+	if ( array[ currentNode ][ 0 ] > currentArbore.NodeArbore::getMaxInvites() ) {
+
+		/* Setam noua valoarea pentru numaurl maxim de invitatii trimise */
+		currentArbore.NodeArbore::setMaxInvites( array[ currentNode ][ 0 ] );
+
+		/* Setam noua valoare pentru id-ul userului care detine cele mai multe invitatii trimise */
+		currentArbore.NodeArbore::setIdUser( currentNode );
+
+	} else if ( array[ currentNode ][ 0 ] > currentArbore.NodeArbore::getMaxInvites() && currentArbore.NodeArbore::getIdUser() > currentNode ) {
+
+		currentArbore.NodeArbore::setIdUser( currentNode );
+
+	}
+
+	//cout << "In momentul asta, numarul maxim de invitatii trimie este " << currentArbore.NodeArbore::getMaxInvites() << " .\n";
 
 	/* Structura auxiliara in care vom retine informatiile din hash pentru userul cu id-ul currentNode */
 	infoUser auxiliar;
@@ -290,25 +312,37 @@ void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, No
 	/* Aflam idUser */
 	int userID = reverseIdUser[ currentNode ];
 
+	//cout << "idUser - ul userului care este acum procesat est " << userID << " .\n";
+
 	/* Extragem in structura auxiliar informatii despre userul curent */
 	mapUsers.get( userID, auxiliar );
 
+	//cout << auxiliar << "\n";
+
 	/* Adunam numarul de vizite ale userului curent la total */
 	currentArbore.NodeArbore::setSumVisits( currentArbore.NodeArbore::getSumVisits() + auxiliar.numarDeVizite );
+
+	//cout << "Suma vizitelor din arborele curent de pana acum este " << currentArbore.NodeArbore::getSumVisits() << " .\n";
 
 	/* Marcam nodul curent din arbore ca fiind vizitat */
 	visited.ResizableArray<bool>::insert( currentNode, true );
 
 
 	/* Parcurgem lista de copii ai nodului curent */
-	for ( int i = 2; i <= array[ currentNode ][ 0 ]; ++i ) {
+	for ( int i = 1; i <= array[ currentNode ][ 0 ]; ++i ) {
 
 		/* son - fiu al nodului curent */
 		int son = array[ currentNode ][ i ];
 
+		//cout << "Fiul curent al nodului " << currentNode << " este " << son << " .\n";
+
 		/* Daca intalnim unul ce nu a fost deja vizitat, apelam DFS-ul pentru el */
-		if( !visited[ son ] )
+		if( !visited[ son ] ) {
+
+			//cout << "Se apeleaza din nou DFS-ul pentru nodul " << son << " .\n\n";
+
 			DFS( son, visited, currentArbore, reverseIdUser, mapUsers );
+		}
 
 	}
 

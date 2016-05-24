@@ -99,12 +99,28 @@ void Service::createStore(int id, double storeX, double storeY) {
 
 void Service::visit(int timestamp, int clientId, int storeId, int discount) {
     
-    /*
+ /*
     mapUsers.printTable( );
     mapMagazine.printTable( );
     reverseIdUsers.printOnScreen( );
     cout<<reverseIdUsers.getValue( 3 );
     */
+
+
+
+    /* Extragem informatia user-ului din hashtable */
+    infoUser currentUser;
+    mapUsers.Hashtable< int, infoUser >::get( clientId, currentUser );
+
+    /* prelucram informatia */
+    currentUser.numarDeVizite = currentUser.numarDeVizite + 1;
+    if( discount != -1 ) {
+        currentUser.numarDeCumparaturi = currentUser.numarDeCumparaturi + 1;
+        currentUser.discountAcordat = currentUser.discountAcordat + discount;
+    }
+
+    /* Inseram noua informatia in hashtable */    
+    mapUsers.Hashtable< int, infoUser >::Insert( clientId, currentUser );
 
     /* Extragem informatiile aferente magazinului curent din hashtable */
     infoMagazin currentStore;
@@ -143,15 +159,24 @@ void Service::invite(int userWhichInvites, int invitedUser) {
 
 }
 
+void Service::hashPrint() {
+
+    mapUsers.printTable();
+    mapMagazine.printTable();
+
+}
+
 int Service::visitsInTimeframe(int startTime, int endTime) {
     int nr = 0;
-    t.getRoot()->nrVizite( startTime, endTime, nr );
+    if( t.getRoot() != NULL )
+        t.getRoot()->nrVizite( startTime, endTime, nr );
     return nr;
 }
 
 int Service::totalDiscountInTimeframe(int startTime, int endTime) {
     int discount = 0;
-    t.getRoot()->discountTotal( startTime, endTime, discount );
+    if( t.getRoot() != NULL )
+        t.getRoot()->discountTotal( startTime, endTime, discount );
     return discount;
 }
 
@@ -164,16 +189,28 @@ int Service::visitsInTimeframeOfStore(int startTime, int endTime, int storeId) {
     infoMagazin value;
     mapMagazine.get( storeId, value );
     storeId = value.indexRA;
-    t.getRoot()->nrVizitePerMagazin( storeId, startTime, endTime, nr );
+    if( t.getRoot() != NULL )
+        t.getRoot()->nrVizitePerMagazin( storeId, startTime, endTime, nr );
     return nr;
 }
 
 Array<int> Service::biggestKDiscounts(int K, int storeId) {
     
+    int value, indexMagazin, i = 0;
     infoMagazin currentStore;
     mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
 
-    //discountPerMagazin.( nrMagazine );
+    indexMagazin = currentStore.indexRA;    
+    Array<int> raspuns( K );
+
+    value = discountPerMagazin.getMaxim( indexMagazin );
+    while( value > -2 ) {
+        raspuns.insert( i, value );
+        i++;
+        value = discountPerMagazin.getMaxim( indexMagazin );
+    }
+
+    return raspuns;
 
 }
 
@@ -190,8 +227,12 @@ Array<int> Service::distinctGroupsOfUsers() {
     /* Apelam functia de generare a listei de arbori */
     listOfTrees.Arbore::findAllRoots( adjacencyList, reverseIdUsers, mapUsers, nrUsers, areParinte );
 
+    //cout << "findAllRoots este deja apelata.\n\n";
+
     /* numberOfTrees - numar de arbori din lista tocmai formata */
     int numberOfTrees = listOfTrees.getNumberOfTrees();
+
+    //cout << "Avem " << numberOfTrees << " copacei frumosi aicisa.\n\n";
 
     /* result - vectorul de rezultate, pe care il va returna functia */
     Array< int > result( numberOfTrees );
@@ -202,10 +243,19 @@ Array<int> Service::distinctGroupsOfUsers() {
         /* Extragem informatiile din arborele curent */
         NodeArbore currentArbore = listOfTrees.getValue( i );
 
+        //cout << "Radacina arborelui curent este " << currentArbore.getRoot() << ".\n";
+        //cout << "Numarul de elemente din arborele curent este " << currentArbore.getNumberOfElements() << " .\n";
+        //cout << "Numarul maxim de invitatii din arborele curent este " << currentArbore.getMaxInvites() << " .\n";
+        //cout << "Suma vizitelor din arborele curent este " << currentArbore.getSumVisits() << " .\n";
+
         /* Mutam numarul de elemente din fiecare arbore in vectorul ce trebuie trimis ca rezultat - result */
-        result.Array< int >::insert( i, currentArbore.getNumberOfElements() );
+        result.Array< int >::insert( i, currentArbore.NodeArbore::getNumberOfElements() );
 
     }
+
+    for ( int i = 1; i <= numberOfTrees; ++i )
+        cout << result[ i ] << ' ';
+    cout << '\n';
 
     /* Returnam rezultatul */
     return result;
@@ -213,6 +263,45 @@ Array<int> Service::distinctGroupsOfUsers() {
 }
 
 int Service::userWithMostInvites() {
+
+    /* Apelam functia de generare a listei de arbori */
+    listOfTrees.Arbore::findAllRoots( adjacencyList, reverseIdUsers, mapUsers, nrUsers, areParinte );
+
+    /* numberOfTrees - numar de arbori din lista tocmai formata */
+    int numberOfTrees = listOfTrees.getNumberOfTrees(); 
+
+    //cout << "Numarul de copacei este " << numberOfTrees << ".\n";
+
+    /* userCautat - indexul userului cautat */
+    int userCautat;
+
+    /* maxim - valoarea maxima de invitatii trimise */
+    int maxim = 0;
+
+    /* Parcurgem lista de arbori */
+    for ( int i = 1; i <= numberOfTrees; ++i ) {
+
+        // cout << "Radacina ";
+
+        /* Extragem informatiile din arborele curent */        
+        NodeArbore currentArbore = listOfTrees.getValue( i );
+
+        /* Facem update la maximul de pana acum si la indexul cautat */
+        if ( maxim < currentArbore.NodeArbore::getMaxInvites() ) {
+
+            maxim = currentArbore.NodeArbore::getMaxInvites();
+            userCautat = currentArbore.NodeArbore::getIdUser();
+
+        } else if ( maxim == currentArbore.NodeArbore::getMaxInvites() && userCautat > currentArbore.NodeArbore::getIdUser() ) {
+
+            userCautat = currentArbore.NodeArbore::getIdUser();
+
+        }
+
+    }
+
+    /* Returnam id-ul userului cautat */
+    return reverseIdUsers[ userCautat ];
 
 }
 

@@ -43,7 +43,7 @@ struct Array {
         this->resultData = other.resultData;
     }
 
-    void operator[]( int position ) {
+    T operator[]( int position ) {
 
         if( position > resultSize ) {
             cout << "Boss, nu esti in zona de memorie buna in Array.\n";
@@ -164,6 +164,8 @@ class Service {
 
     // Returneaza latitudine si longitudine pentru locatia recomandata pentru un nou magazin
     pair<double, double> newStoreCoordinates();
+
+    void hashPrint();
 };
 
 #endif /* __CITIRE_H_ */

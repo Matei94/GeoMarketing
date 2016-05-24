@@ -58,6 +58,10 @@ int NodeArbore::getSumVisits() {
 	return this->sumVisits;
 }
 
+int NodeArbore::getIdUser() {
+	return this->idUser;
+}
+
 void NodeArbore::setRoot( int value ) {
 	this->root = value;
 }
@@ -71,12 +75,12 @@ void NodeArbore::setMaxInvites( int value ) {
 }
 
 void NodeArbore::setSumVisits( int value ) {
-	this->maxInvites = value;
+	this->sumVisits = value;
 }
 
-
-
-
+void NodeArbore::setIdUser( int value ) {
+	this->idUser = value;
+}
 
 
 
