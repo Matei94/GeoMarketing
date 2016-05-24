@@ -23,6 +23,7 @@ struct Array {
 
     Array( int resultSize ) {
         this->resultSize = resultSize;
+        this->resultData = new T[ resultSize + 1 ];
     }
 
     Array(int resultSize, T* resultData) :

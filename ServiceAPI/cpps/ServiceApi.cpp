@@ -116,7 +116,6 @@ void Service::invite(int userWhichInvites, int invitedUser) {
     /* Extragem valoarea indexului asociat userului care face invitatia */
     int indexUserWhichInvites = value.indexUser;
 
-
     /* Extragem valoarea obiectului user care invita */
     mapUsers.Hashtable< int, infoUser >::get( invitedUser, value );
     
