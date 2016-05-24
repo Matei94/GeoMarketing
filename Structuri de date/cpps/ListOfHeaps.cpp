@@ -45,6 +45,32 @@ void ListOfHeaps<T>::initHeap( int poz ) {
 }
 
 template <typename T>
+void ListOfHeaps<T>::topK( int poz, int k, int array[] ) {
+
+	Heap<T> copy;
+
+	if( poz >= capacity ) {
+		std::cout << " Nu exista acest heap \n";
+		return ;
+	}
+
+	int aux;
+	copy = list[ poz ];
+	for (int i = 0; i < k; ++i)	{
+		copy.getMaxim( aux );
+		cout<<aux<<' ';
+		if( aux < 0 ) {
+			array[ i ] = -1;
+		}
+		else {
+			array[ i ] = aux;
+		}
+	}
+	cout<<"\n";
+
+}
+
+template <typename T>
 void ListOfHeaps<T>::insert( int poz, T value ) {
 	
 	list[ poz ].insert( value );
