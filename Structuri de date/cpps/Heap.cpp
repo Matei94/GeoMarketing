@@ -35,8 +35,9 @@ Heap<T>::Heap( int length ) {
 template <typename T>
 Heap<T>::~Heap( ) {
 	/* Se dezaloca zona de memorie ce retinea heap-ul */
-	if( size > 1 )
+	if( size > 1 ) {
 		delete[] hip;
+	}
 }
 
 template <typename T>
@@ -175,6 +176,11 @@ bool Heap<T>::getMaxim( T& hipMaxim ) {
 	moveDown( 1 );
 
 	return true;
+}
+
+template <typename T>
+int Heap<T>::getSize( ) {
+	return this->size;
 }
 
 template class Heap<int>;

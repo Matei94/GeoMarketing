@@ -25,6 +25,8 @@ public:
 
     void newHeap(  );
 
+    void initHeap( int poz );
+
     void insert( int poz, T value );
 
     T getMaxim( int poz );
@@ -33,6 +35,8 @@ public:
   	int getNumberOfHeaps( ); 	
 
     int getCapacity( );
+
+    int getSizeHeap( int poz );
 
 };
 

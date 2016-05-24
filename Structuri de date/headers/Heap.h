@@ -50,6 +50,8 @@ class Heap {
     /* Returneaza si extrage elementul din varful heap-ului, dar verifica si daca heap-ul este sau nu gol */
     bool getMaxim( T& hipMaxim );
 
+    int getSize();
+
 };
 
 #endif /* __HEAP_H */
