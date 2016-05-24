@@ -148,6 +148,9 @@ Array<int> Service::usersWithBestBuyToDiscountRate() {
 
 int Service::visitsInTimeframeOfStore(int startTime, int endTime, int storeId) {
     int nr = 0;
+    infoMagazin value;
+    mapMagazine.get( storeId, value );
+    storeId = value.indexRA;
     t.getRoot()->nrVizitePerMagazin( storeId, startTime, endTime, nr );
     return nr;
 }
