@@ -82,10 +82,10 @@ void Service::createUser( int id, double homeX, double homeY ) {
    // cout << "Hash: " << mapUsers.get( id, value ) << " " << value << "\n";
 
     /* Initializam in lista de adiacenta linia de vecini corespunzatoare userului tocmai creat */
-    adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
+  //  adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
 
-    cout << "array[lista][0]este un cacat:"<<adjacencyList[ user.indexUser ][ 0 ] << '\n';
-
+  //  cout << "array[lista][0]este un cacat:"<<adjacencyList[ user.indexUser ][ 0 ] << '\n';
+   // cout<<"indexul: "<<user.indexUser<<"are vecin: "<<adjacencyList[user.indexUser][1]<<"\n";
 }
 
 void Service::createStore(int id, double storeX, double storeY) {
@@ -148,10 +148,13 @@ void Service::invite(int userWhichInvites, int invitedUser) {
     /* Extragem valoarea indexului asociat userului care face invitatia */
     int indexInvitedUser = value.indexUser;    
 
-
+    cout<<"\n";
+    cout<<"index care invita: "<<indexUserWhichInvites<<"\n";
+    cout<<"index invitat: "<<indexInvitedUser<<"\n";
     /* Adaug relatia in lista de adiacenta */
     adjacencyList.ResizableMatrix< int >::insert( indexUserWhichInvites, indexInvitedUser );
-
+    cout<<"indexUserWhichInvites "<<indexUserWhichInvites<<"are nr de vecini: "<<adjacencyList[indexUserWhichInvites][0]<<"\n";
+     cout<<"indexUserWhichInvites "<<indexUserWhichInvites<<"vecinul "<<adjacencyList[indexUserWhichInvites][1]<<"\n";
 }
 
 int Service::visitsInTimeframe(int startTime, int endTime) {

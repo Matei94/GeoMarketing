@@ -19,7 +19,7 @@ ResizableArray<T>::ResizableArray() {
 template <typename T>	
 ResizableArray<T>::ResizableArray( int capacity ) {
 	this->capacity = capacity + 1;
-	this->size = 0;
+	this->size = 1;
 	this->array = new T[ capacity ];
 	
 	for( int i = 0; i < capacity; i++ )
@@ -222,5 +222,5 @@ void ResizableArray<T>::printOnScreen() {
 /* Lista de template-uri acceptate */
 template class ResizableArray< bool >;
 template class ResizableArray< int >;
-//template class ResizableArray< NodeArbore >;
+template class ResizableArray< NodeArbore >;
 //template class ResizableArray< Heap<int> >;

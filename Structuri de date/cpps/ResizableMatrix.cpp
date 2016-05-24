@@ -17,7 +17,7 @@ ResizableMatrix<T>::ResizableMatrix() {
 	this->capacityCollumns = new int[ capacityLines ];
 
 	/* Set initial size for both lines and collumns */
- 	this->sizeLines = 1;
+ 	this->sizeLines = 0;
 
  	/* Allocate memory for all lines */
 	this->array = new T*[ capacityLines ];
@@ -45,7 +45,7 @@ ResizableMatrix<T>::ResizableMatrix( int capacityLines ) {
 	this->capacityCollumns = new int[ capacityLines ];
 
 	/* Set initial size for both lines and collumns */
- 	this->sizeLines = 1;
+ 	this->sizeLines = 0;
 
  	/* Allocate memory for all lines */
 	this->array = new T*[ capacityLines ];
@@ -92,7 +92,7 @@ ResizableMatrix<T>::ResizableMatrix( const ResizableMatrix& other ) {
 	this->array = other.array;
 
 	if( array ) {
-		for( int i = 0; i <= sizeLines; ++i ) {
+		for( int i = 0; i < capacityLines; ++i ) {
 			for( int j = 0; j <= array[i][0]; ++j )
 				array[i][j] = other.array[i][j];
 		}
@@ -115,7 +115,7 @@ void ResizableMatrix<T>::operator=( const ResizableMatrix& other ) {
 	this->array = other.array;
 
 	if( array ) {
-		for( int i = 0; i <= sizeLines; ++i ) {
+		for( int i = 0; i < capacityLines; ++i ) {
 			for( int j = 0; j <= array[i][0]; ++j )
 				array[i][j] = other.array[i][j];
 		}
@@ -169,7 +169,7 @@ template <typename T>
 void ResizableMatrix<T>::push_back( int line, T value ) {
 	cout<<"intra in push\n";
 	/* Verific daca mai am spatiu alocat pentru insertia curenta */
-	if (array[line][0] >= capacityCollumns[line]) {
+	if (array[line][0] + 1 == capacityCollumns[line]) {
 		cout<<"pula\n, cred ca intra in resize collums\n";
  		this->resizeCollumns( line );
 	}
@@ -213,23 +213,21 @@ void ResizableMatrix<T>::resizeLines( ) {
 	/* Copiez capacityCollumns din vechea matrice in cea noua */
 	for ( int i = 0; i < capacityLines; ++i )
 		tmpCapacityCollumns[i] = capacityCollumns[i];
-	for( int i = capacityLines; i < 2 * capacityLines; i++)
+	for( int i = capacityLines; i < 2 * capacityLines; ++i )
 		tmpCapacityCollumns[i] = 1;
 	/* Alocam numarul de coloane pentru fiecare linie in parte */
 	for( int i = 0; i < 2*capacityLines; ++i ) {
 		tmpArray[ i ] = new T[ tmpCapacityCollumns[i] ];
 	}
 
-	/* Alocam numarul de coloane pentru fiecare linie in parte */
-	for( int i = 0; i < 2*capacityLines; ++i ) {
-		tmpArray[ i ] = new T[ tmpCapacityCollumns[i] ];
-	}
-
 	/* Copiez elementele din matricea veche in cea temporara */
-	for ( int i = 0; i < sizeLines; ++i ) {
+	for ( int i = 0; i < capacityLines; ++i ) {
 		for ( int j = 0; j <= array[i][0]; ++j )
 			tmpArray[ i ][ j ] = array[ i ][ j ];
 	}
+
+	for( int i = capacityLines; i < 2* capacityLines; ++i )
+		tmpArray[ i ][ 0 ] = 0;
 
 	/* Eliberez memoria ocupata de vechea matrice */
 	for ( int i = 0; i < capacityLines; ++i )
@@ -263,6 +261,9 @@ void ResizableMatrix<T>::resizeCollumns( int line ) {
 	for ( int i = 0; i < capacityCollumns[line]; ++i )
 		tmpArray[i] = array[line][i];
 		//cout<<tmpArray[i]<<"\n";
+	
+	delete[] array[ line ];
+
 	/* Salvez linia nou alocata in vechea linie si fac update la capacity */
 	array[line] = tmpArray;
 	capacityCollumns[line] *= 2;
@@ -289,7 +290,6 @@ void ResizableMatrix<T>::printOnScreen() {
 	
 	cout << '\n';
 }
-
 
 template <typename T>
 void ResizableMatrix<T>::DFS( int currentNode, ResizableArray<bool>& visited, NodeArbore& currentArbore, ResizableArray< int >& reverseIdUser, Hashtable< int, infoUser>& mapUsers ) {
