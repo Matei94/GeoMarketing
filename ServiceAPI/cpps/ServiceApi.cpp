@@ -24,9 +24,11 @@ void Service::createUser( int id, double homeX, double homeY ) {
     /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
     if( mapUsers.Hashtable< int, infoUser >::getSize( ) == 0 ) {
 
-        nrUsers = 0;
-
         mapUsers.Hashtable< int, infoUser >::Initialize( 65599, sdbm );
+
+        nrUsers = 0;
+        reverseIdUsers.ResizableArray< int >::push_back( 0 );    
+
     }
 
     /* Daca nu a fost deja initializat, initializam reverseIdUser */
@@ -38,7 +40,6 @@ void Service::createUser( int id, double homeX, double homeY ) {
 
     /* Aplicam "functia inversa de hash" */
     reverseIdUsers.ResizableArray< int >::push_back( id );
-
 
     infoUser user;
 
@@ -68,13 +69,12 @@ void Service::createStore(int id, double storeX, double storeY) {
     /* Intializam hashtable-ul pentru magazine, in cazul in care nu s-a facut asta deja */
     if( mapMagazine.getSize() == 0 ) {
         mapMagazine.Initialize( 65599, sdbm );
-
-        nrMagazine = 0;   
         
+        nrMagazine = 0;
         reverseIdMagazine.ResizableArray< int >::push_back( 0 );
 
         discountPerMagazin.initHeap( 0 );
-        distantePerMagazin.initHeap( 0 );         
+        distantePerMagazin.initHeap( 0 );        
     }
 
     /* Incrementam numarul de magazine inregistrate */
@@ -90,11 +90,11 @@ void Service::createStore(int id, double storeX, double storeY) {
     /* Inseram in hashtable-ul de magazine, magazinul curent; cheia fiind id-ul magazinul, iar valoarea, "obiectul" mag(azin) */
     mapMagazine.Insert( id, mag );
 
-
     reverseIdMagazine.ResizableArray< int >::push_back( id );
 
-   discountPerMagazin.initHeap( nrMagazine );
-   distantePerMagazin.initHeap( nrMagazine );
+    discountPerMagazin.initHeap( nrMagazine );
+    distantePerMagazin.initHeap( nrMagazine );
+
 }
 
 void Service::visit(int timestamp, int clientId, int storeId, int discount) {
@@ -116,7 +116,8 @@ void Service::visit(int timestamp, int clientId, int storeId, int discount) {
     /* Inseram in AVL magazinul curent cu informatiile aferente */
     t.AvlTree< int >::insert( timestamp, t.getRoot(), discount, indexMagazin );
 
-    distantePerMagazin.insert( indexMagazin, discount );
+    discountPerMagazin.insert( indexMagazin, discount );
+
 }
 
 void Service::invite(int userWhichInvites, int invitedUser) {
@@ -172,7 +173,11 @@ Array<int> Service::biggestKDiscounts(int K, int storeId) {
     infoMagazin currentStore;
     mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
 
+    infoMagazin currentStore;
+    mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
+
     discountPerMagazin.( nrMagazine );
+
 }
 
 Array<double> Service::biggestKClientDistances(int K, int storeId) {

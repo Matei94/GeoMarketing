@@ -27,6 +27,8 @@ public:
 
     void initHeap( int poz );
 
+    void topK( int poz, int k, int array[] );
+
     void insert( int poz, T value );
 
     T getMaxim( int poz );
