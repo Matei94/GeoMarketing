@@ -11,7 +11,8 @@ ListOfHeaps<T>::ListOfHeaps( ) {
 
 template <typename T>
 ListOfHeaps<T>::~ListOfHeaps( ) {
-	delete[] list;
+	/*Coruperi de memorei, habar n-am sa le rezolv*/
+	//delete[] list;
 }
 
 template <typename T>
@@ -22,7 +23,8 @@ void ListOfHeaps<T>::newHeap( ) {
 		tmpList[ i ] = list[ i ];
 	}
 
-	delete[] list;
+	/*Coruperi de memorei, habar n-am sa le rezolv*/
+	//delete[] list;
 
 	list = tmpList;
 	capacity = 2 * capacity;
@@ -30,13 +32,21 @@ void ListOfHeaps<T>::newHeap( ) {
 }
 
 template <typename T>
-void ListOfHeaps<T>::insert( int poz, T value ) {
-	
+void ListOfHeaps<T>::initHeap( int poz ) {
+
 	if( poz >= capacity ) {
 		this->newHeap();
-		numberOfHeaps = poz;
 	}
 
+	numberOfHeaps++;
+
+	list[ poz ].insert( -1 );
+
+}
+
+template <typename T>
+void ListOfHeaps<T>::insert( int poz, T value ) {
+	
 	list[ poz ].insert( value );
 
 }
@@ -56,6 +66,11 @@ int ListOfHeaps<T>::getNumberOfHeaps() {
 template <typename T>
 int ListOfHeaps<T>::getCapacity() {
 	return this->capacity;
+}
+
+template <typename T>
+int ListOfHeaps<T>::getSizeHeap( int poz ){
+	return this->list[ poz ].getSize();
 }
 
 template class ListOfHeaps<int>;
