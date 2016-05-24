@@ -173,10 +173,7 @@ Array<int> Service::biggestKDiscounts(int K, int storeId) {
     infoMagazin currentStore;
     mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
 
-    infoMagazin currentStore;
-    mapMagazine.Hashtable< int, infoMagazin >::get( storeId, currentStore );
-
-    discountPerMagazin.( nrMagazine );
+    //discountPerMagazin.( nrMagazine );
 
 }
 
