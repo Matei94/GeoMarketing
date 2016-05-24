@@ -42,13 +42,13 @@ Heap<T>::~Heap( ) {
 template <typename T>
 void Heap<T>::Initialize( ) {
 	/* Se retine ce dimensiune va avea vectorul in care vom retine heap-ul */
-    capacity = 0;
+    capacity = 1;
 
     /* size - pozitia curenta din heap */
     size = 0;
 
     /* Se aloca vectorul numit anterior */
-    hip = new T[ capacity + 1 ];
+    hip = new T[ capacity ];
 }
 
 template <typename T>
@@ -109,7 +109,6 @@ template <typename T>
 void Heap<T>::moveUp( int currentIndex ) {
 	/* Indexul parintelui nodului curent din heap */
 	int parentIndex = currentIndex / 2;
-	cout<<"halajpeafa "<<currentIndex<<'\n';
 
 	/* Daca se ajunge in varful heap-ului sau valoarea curenta e bine pozitionata in heap, gata */
 	if ( currentIndex == 1 || hip[ parentIndex ] >= hip[ currentIndex ] )

@@ -21,8 +21,7 @@ void Service::setNrMagazine( int value ) {
 
 void Service::createUser( int id, double homeX, double homeY ) {
 
-//    cout << "Intra aici in create user.\n";
-    cout<<"Userul: "<<id<<"\n";
+    cout << "Intra aici in create user.\n";
 
     /* daca nu avem bucketuri in map, initializam cu 65599 nr de bucketuri */
     if( mapUsers.Hashtable< int, infoUser >::getSize( ) == 0 ) {
@@ -31,22 +30,22 @@ void Service::createUser( int id, double homeX, double homeY ) {
 
         mapUsers.Hashtable< int, infoUser >::Initialize( 65599, sdbm );
         
-     //   cout << "Intra in initialize pentru mapUsers.\n";
+        cout << "Intra in initialize pentru mapUsers.\n";
     }
 
     /* Daca nu a fost deja initializat, initializam reverseIdUser */
     if( reverseIdUsers.ResizableArray< int >::getSize( ) == 0 ) {
         reverseIdUsers.ResizableArray< int >::initialize();
 
-      //  cout << "reverseIdUsers:\n";
-       // cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
-       // cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
+        cout << "reverseIdUsers:\n";
+        cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
+        cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
 
         //reverseIdUsers.ResizableArray< int >::push_back( 0 );
 
-        //cout << "\n";
-        //cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
-        //cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
+        cout << "\n";
+        cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
+        cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
 
         //nrUsers++;
     }
@@ -54,15 +53,15 @@ void Service::createUser( int id, double homeX, double homeY ) {
     /* Incrementam numarul de useri inregistrati */
     nrUsers++;
 
-    cout<<"nr useri: "<<nrUsers<<'\n';
+    cout<<id<<'\n';
 
     /* Aplicam "functia inversa de hash" */
     reverseIdUsers.ResizableArray< int >::insert( nrUsers, id );
 
         cout << "\n";
-      //  cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
-        //cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
-       // cout << reverseIdUsers[ 1 ] << '\n';
+        cout << "Capacity este ... " << reverseIdUsers.ResizableArray< int >::getCapacity() << '\n';
+        cout << "Size este ... " << reverseIdUsers.ResizableArray< int >::getSize() << '\n';
+        cout << reverseIdUsers[ 1 ] << '\n';
 
 
     infoUser user;
@@ -79,10 +78,16 @@ void Service::createUser( int id, double homeX, double homeY ) {
     mapUsers.Insert( id, user );
 
     infoUser value;
-   // cout << "Hash: " << mapUsers.get( id, value ) << " " << value << "\n";
+    cout << "Hash: " << mapUsers.get( id, value ) << " " << value << "\n";
 
     /* Initializam in lista de adiacenta linia de vecini corespunzatoare userului tocmai creat */
+<<<<<<< HEAD
   //  adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
+=======
+    adjacencyList.ResizableMatrix< int >::insert( user.indexUser, 0 );
+
+    cout << adjacencyList[ user.indexUser ][ 1 ] << '\n';
+>>>>>>> dd4f7bab03616ce087e75604539e3ed4922dc3e1
 
   //  cout << "array[lista][0]este un cacat:"<<adjacencyList[ user.indexUser ][ 0 ] << '\n';
    // cout<<"indexul: "<<user.indexUser<<"are vecin: "<<adjacencyList[user.indexUser][1]<<"\n";
@@ -92,8 +97,7 @@ void Service::createStore(int id, double storeX, double storeY) {
 
     /* Intializam hashtable-ul pentru magazine, in cazul in care nu s-a facut asta deja */
     if( mapMagazine.getSize() == 0 ) {
-        mapMagazine.Initialize( 65599, sdbm );
-        nrMagazine = 0;            
+        mapMagazine.Initialize( 65599, sdbm );            
     }
 
     /* Incrementam numarul de magazine inregistrate */
