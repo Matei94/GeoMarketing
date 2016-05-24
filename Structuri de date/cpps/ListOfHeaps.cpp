@@ -40,7 +40,7 @@ void ListOfHeaps<T>::initHeap( int poz ) {
 
 	numberOfHeaps++;
 
-	list[ poz ].insert( -1 );
+	list[ poz ].insert( -2 );
 
 }
 

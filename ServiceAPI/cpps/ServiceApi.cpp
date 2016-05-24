@@ -68,7 +68,9 @@ void Service::createStore(int id, double storeX, double storeY) {
     /* Intializam hashtable-ul pentru magazine, in cazul in care nu s-a facut asta deja */
     if( mapMagazine.getSize() == 0 ) {
         mapMagazine.Initialize( 65599, sdbm );
-        nrMagazine = 0;            
+        nrMagazine = 0;
+        discountPerMagazin.initHeap( 0 );
+        distantePerMagazin.initHeap( 0 );            
     }
 
     /* Incrementam numarul de magazine inregistrate */
@@ -83,6 +85,9 @@ void Service::createStore(int id, double storeX, double storeY) {
 
     /* Inseram in hashtable-ul de magazine, magazinul curent; cheia fiind id-ul magazinul, iar valoarea, "obiectul" mag(azin) */
     mapMagazine.Insert( id, mag );
+
+    discountPerMagazin.initHeap( nrMagazine );
+    distantePerMagazin.initHeap( nrMagazine );
 
 }
 
@@ -104,6 +109,8 @@ void Service::visit(int timestamp, int clientId, int storeId, int discount) {
 
     /* Inseram in AVL magazinul curent cu informatiile aferente */
     t.AvlTree< int >::insert( timestamp, t.getRoot(), discount, indexMagazin );
+
+    distantePerMagazin.insert( storeId, discount );
 
 }
 
