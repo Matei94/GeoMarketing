@@ -27,12 +27,11 @@ int main () {
 	cout<<"invite\n";
 	mata.invite( 1, 2 );
 	mata.invite( 2, 3 );
-	mata.invite( 1, 3 );
 	mata.invite( 1, 4 );
-	mata.invite( 1, 6 );
 	mata.invite( 2, 5 );
 
-	mata.distinctGroupsOfUsers();
+
+//	mata.distinctGroupsOfUsers();
 
 
 	return 0;
